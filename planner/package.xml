@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>planner</name>
+  
+  <version>0.0.0</version>
+  
+  <description>The traj_control package</description>
+  
+  <maintainer email="kevin@todo.todo">kevin</maintainer>
+
+  <license>TODO</license>
+
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>actionlib </depend>
+  <depend>actionlib_msgs</depend>
+  <depend>libfranka </depend>
+  <depend>franka_hw </depend>
+  <depend>xmlrpcpp</depend>
+
+  <depend>geometry_msgs</depend>
+  <depend>moveit_msgs</depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>moveit_visual_tools</depend>
+  <depend>moveit_core</depend>
+  <depend>moveit_ros_planning_interface</depend>
+  <depend>sensor_msgs </depend>
+
+  <build_depend> message_generation </build_depend>
+
+  <depend> message_runtime </depend>
+
+  
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here 
+0.250 0.505 0.225 3.14 0 0 pass
+0.390 0.505 0.225 3.14 0 0 fix
+0.500 0.505 0.225 3.14 0 0 pass
+0.500 0.400 0.225 3.14 0 -1.57 fix
+0.500 0.120 0.225 3.14 0 -1.57 fix
+0.500 0.000 0.225 3.14 0 -1.57 pass
+-->
+
+  </export>
+</package>

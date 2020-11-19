@@ -1,0 +1,10 @@
+radius 0.02         
+heigh 0.03     
+circ_point 5           
+res 0.01               
+distance_approach 0.05  
+Ctrl_pt_d1 0.05   
+Ctrl_pt_d2 0.05         
+corner_points 20
+jump_threshold 0
+eef_step 0.5

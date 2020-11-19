@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="test" type="te" name="TrajectoryTest"  output="screen" >
+	<param name="Rescale" value="6" />
+	<param name="Offset" value ="1.2" />
+    </node>
+
+</launch>

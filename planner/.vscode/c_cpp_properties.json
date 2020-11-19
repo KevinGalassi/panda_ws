@@ -1,0 +1,41 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/kevin/ros/franka_ws/devel/include/**",
+                "/opt/ros/melodic/include/**",
+                "/home/kevin/ros/franka_ws/src/data_analysis/src/include/**",
+                "/home/kevin/ros/franka_ws/src/my_franka_ros/franka_control/include/**",
+                "/home/kevin/ros/franka_ws/src/franka_controllers/include/**",
+                "/home/kevin/ros/franka_ws/src/my_franka_ros/franka_example_controllers/include/**",
+                "/home/kevin/ros/franka_ws/src/my_franka_ros/franka_gripper/include/**",
+                "/home/kevin/ros/franka_ws/src/my_franka_ros/franka_hw/include/**",
+                "/home/kevin/ros/franka_ws/src/gripper_control/include/**",
+                "/home/kevin/ros/franka_ws/src/planner/src/include/**",
+                "/home/kevin/ros/franka_ws/src/test/include/**",
+                "/usr/include/**"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14"
+        },
+        {
+            "name": "melodic",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

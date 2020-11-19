@@ -1,0 +1,14 @@
+<launch>
+
+   <!--  <include file = "/home/kevin/panda_ws/src/panda_moveit_config/launch/demo.launch"/> -->
+
+
+    <node pkg="traj_gen" type="Super" name = "Super_node"  output="screen" />
+
+    <node pkg="traj_gen" type="Planner" name = "Planner_node" output="screen" />
+
+    <node pkg="traj_gen" type="Exec" name = "Exec_node" output="screen"/>
+
+    <node pkg="traj_gen" type="HMI" name = "HMI_node" output="screen" />
+
+</launch>

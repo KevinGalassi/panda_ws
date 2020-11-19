@@ -1,0 +1,8 @@
+<launch>
+
+    <node pkg="test" type="force" name="ForceTest"  output="screen" >
+	<param name="Force" value="10" />
+	<param name="Step" value="0.0005" />
+    </node>
+
+</launch>
