@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<launch>
+	<node name="HMI" pkg="gripper_control" type="com_gripper" output="screen" />
+
+	<node name="Control" pkg="gripper_control" type="man_gripper" output="screen" >
+		<param name="GraspForce" value = "0.01" />
+		<param name="Velocity" value = "0.01" />
+	</node>
+</launch>

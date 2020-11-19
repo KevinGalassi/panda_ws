@@ -1,0 +1,9 @@
+<library path="lib/libmy_franka_controller">
+  <class name="franka_robot_controllers/FrankaVelocityController"
+         type="franka_robot_controllers::FrankaVelocityController"
+         base_class_type="controller_interface::ControllerBase">
+    <description>
+      Franka robot velocity position controller, Kevin Galassi Bologna
+    </description>
+  </class>
+</library>

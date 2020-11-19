@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<launch>
+	<node name="GripperControl" pkg="gripper_control" type="TactileSensorGrasp" output="screen" >
+		<param name="velocity" value = "0.03" />
+		<param name="rate" value = "50"  />
+		<param name="upper_bound" value = "0.007" />
+		<param name="lower_bound" value = "0.002" />
+	</node>
+</launch>
