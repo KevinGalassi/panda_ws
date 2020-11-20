@@ -45,8 +45,9 @@ catkin_package(
 )
 
 add_library(${PROJECT_NAME}
-  src/wrench_publisher.cpp
+  src/state_publisher.cpp
   src/joint_velocity_controller.cpp
+  src/cartesian_velocity_controller.cpp
 )
 
 

@@ -222,6 +222,7 @@ bool FrankaStateController::init(hardware_interface::RobotHW* robot_hardware,
     publisher_external_wrench_.msg_.wrench.torque.y = 0.0;
     publisher_external_wrench_.msg_.wrench.torque.z = 0.0;
   }
+ 
   return true;
 }
 
