@@ -8,8 +8,8 @@ Always launch the state_publisher that provides all the structure to publish the
 To control the robot is sufficient to publish the command in the appropriate topic:
 
 
-joint_velocity_controller       -> /joint_velocity_request
-cartesian_velocity_controller   -> /cartesian_velocity_request 
+joint_velocity_controller       -> /joint_velocity_request \
+cartesian_velocity_controller   -> /cartesian_velocity_request
 
 The message to publish is ALWAYS a std_msgs::Float32MultiArray
 
