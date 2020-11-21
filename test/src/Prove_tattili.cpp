@@ -1,3 +1,7 @@
+/*
+    Test program that open and clsoe the gripper
+*/
+
 
 
 #include <moveit/robot_model_loader/robot_model_loader.h>

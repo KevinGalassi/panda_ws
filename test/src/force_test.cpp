@@ -56,12 +56,7 @@ int main(int argc, char** argv)
     int count = 0;
 
     n_step = Force/delta;
-
-    std::cout << "fjf \n";
-    std::cout << n_step << "\n";
-    std::cout << Force << "\n";
-    std::cout << delta << "\n";
-    
+        
     while(count < n_step)
     {
         count ++;

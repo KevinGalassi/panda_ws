@@ -24,16 +24,6 @@ find_package(Franka 0.5.0 REQUIRED)
 
 
 
-generate_messages(
-  DEPENDENCIES
-  actionlib_msgs
-  geometry_msgs
-  moveit_msgs
-  std_msgs
-)
-
-
-
 catkin_package(
   INCLUDE_DIRS include
   CATKIN_DEPENDS 
@@ -79,22 +69,10 @@ add_dependencies(te
   ${catkin_EXPORTED_TARGETS}
   franka_gripper) 
 
-add_executable(test2 src/test2.cpp)
-target_link_libraries(test2 ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(test2 
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-  ${catkin_EXPORTED_TARGETS}
-  franka_gripper) 
-
-add_executable(test21 src/test2_1.cpp)
-target_link_libraries(test21 ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 add_executable(force_test src/force_test.cpp)
 target_link_libraries(force_test ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
-
-add_executable(test_scaler src/test_scaler.cpp)
-target_link_libraries(test_scaler ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 add_executable(test_correlazione_sensore src/test_correlazione_sensore.cpp)
 target_link_libraries(test_correlazione_sensore ${catkin_LIBRARIES} ${Boost_LIBRARIES})
