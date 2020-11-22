@@ -79,6 +79,7 @@ public:
 
     std::string visualizer;
 
+    void PublishInputPoint(moveit_visual_tools::MoveItVisualTools& visual_tools);   
     void PublishTrajectory(moveit_visual_tools::MoveItVisualTools& visual_tools);
 
     std::vector<geometry_msgs::PoseArray> SecondaryTrajectories;

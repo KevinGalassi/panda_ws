@@ -78,7 +78,10 @@ int main(int argc, char** argv)
 
     traj_test.PlannerInit();
     traj_test.ReadFileTxt();
-    traj_test.TrajectoryPlanning2();
+    traj_test.PublishInputPoint(visual_tools);
+    visual_tools.prompt("next");
+
+    traj_test.TrajectoryPlanning();
     traj_test.FromEE2Link8();
     traj_test.PublishTrajectory(visual_tools);
 

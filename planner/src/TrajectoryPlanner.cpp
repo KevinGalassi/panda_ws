@@ -357,9 +357,9 @@ void TrajectoryPlanner::addFixPoint3(geometry_msgs::Pose fixing_point, geometry_
     waypoints.poses.push_back(target_pose);
 
     // lateral shift of the diameter of the circle
-    target_pose.position.x = fixing_point.position.x - R[0][1]*param.radius*2 + (R[0][0]*param.dist_final[0] + R[0][1]*param.dist_final[1] + R[0][2]*param.dist_final[2]);
-    target_pose.position.y = fixing_point.position.y - R[1][1]*param.radius*2 + (R[1][0]*param.dist_final[0] + R[1][1]*param.dist_final[1] + R[1][2]*param.dist_final[2]);
-    target_pose.position.z = fixing_point.position.z - R[2][1]*param.radius*2 + (R[2][0]*param.dist_final[0] + R[2][1]*param.dist_final[1] + R[2][2]*param.dist_final[2]);
+    target_pose.position.x = fixing_point.position.x - R[0][1]*param.radius*2;
+    target_pose.position.y = fixing_point.position.y - R[1][1]*param.radius*2;
+    target_pose.position.z = fixing_point.position.z - R[2][1]*param.radius*2;
     target_pose.orientation = fixing_point.orientation;
     waypoints.poses.push_back(target_pose);
        
@@ -408,7 +408,6 @@ void TrajectoryPlanner::addFixPoint3(geometry_msgs::Pose fixing_point, geometry_
     waypoints.poses.push_back(target_pose);
 
 }
-
 void TrajectoryPlanner::addFixPoint4(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints)
 {
     /**
@@ -446,9 +445,9 @@ void TrajectoryPlanner::addFixPoint4(geometry_msgs::Pose fixing_point, geometry_
     waypoints.poses.push_back(target_pose);
 
     // lateral shift of the diameter of the circle
-    target_pose.position.x = fixing_point.position.x - R[0][1]*param.radius*2 + (R[0][0]*param.dist_final[0] + R[0][1]*param.dist_final[1] + R[0][2]*param.dist_final[2]);
-    target_pose.position.y = fixing_point.position.y - R[1][1]*param.radius*2 + (R[1][0]*param.dist_final[0] + R[1][1]*param.dist_final[1] + R[1][2]*param.dist_final[2]);
-    target_pose.position.z = fixing_point.position.z - R[2][1]*param.radius*2 + (R[2][0]*param.dist_final[0] + R[2][1]*param.dist_final[1] + R[2][2]*param.dist_final[2]) - param.z_offset;
+    target_pose.position.x = fixing_point.position.x - R[0][1]*param.radius*2;
+    target_pose.position.y = fixing_point.position.y - R[1][1]*param.radius*2;
+    target_pose.position.z = fixing_point.position.z - R[2][1]*param.radius*2 - param.z_offset;
     target_pose.orientation = fixing_point.orientation;
     waypoints.poses.push_back(target_pose);
        
@@ -518,45 +517,23 @@ void TrajectoryPlanner::CornerDetection()
     }
     return;
 }
+
 void TrajectoryPlanner::addCornerFixPoint(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, geometry_msgs::Pose corner_point, geometry_msgs::Pose starting_point)
 {
-    geometry_msgs::PoseArray CornerPath;    
+    float P12, P23, P13; // new
 
-    float PP_distance;          
-    double D1, D2;
-    geometry_msgs::Pose P1,P2,P3;
-
-    float corner_length;
+    P12 = ComputeDistance(starting_point, corner_point);
+    P23 = ComputeDistance(corner_point, fixing_point);
+    P13 = ComputeDistance(starting_point, fixing_point);
+    
+    float corner_length = P12 + P23 + param.dist_final[0];
        
-    P1 = starting_point;
-    P2 = corner_point;
-    P3 = fixing_point;
-    PP_distance = ComputeDistance(P1, P2);
-    
-    if(PP_distance < param.Ctrl_pt_d1)
-        D1 = PP_distance;
-    else
-        D1 =  param.Ctrl_pt_d1;
-
-    PP_distance = ComputeDistance(P2, P3);
-    if (PP_distance < param.Ctrl_pt_d2)
-        D2 = PP_distance;
-    else 
-        D2 = param.Ctrl_pt_d2;
-    
-    // Calcolo della lunghezza totale 
-    addCornerRound(P1, P2, P3, D1, D2, CornerPath);
-    corner_length = ComputeDistance(P1,P2) + ComputeDistance(P2,P3) + param.dist_final[0];
-
-
     tf2::Quaternion quat;
     tf2::fromMsg(starting_point.orientation, quat);
     tf2::Matrix3x3 Rot;
     Rot.setRotation(quat);
-    
     geometry_msgs::Pose target_pose;
 
-    corner_length = ComputeDistance(P1,P2) + param.dist_final[0] + ComputeDistance(P2,P3);
     target_pose.position.x = starting_point.position.x + Rot[0][0]*corner_length;
     target_pose.position.y = starting_point.position.y + Rot[1][0]*corner_length;
     target_pose.position.z = starting_point.position.z + Rot[2][0]*corner_length;
@@ -565,27 +542,24 @@ void TrajectoryPlanner::addCornerFixPoint(geometry_msgs::Pose fixing_point, geom
     
     // Rotation
 
-   // corner_length = ComputeDistance(P2,P3) + dist_final;
-    corner_length = param.dist_final[0] + ComputeDistance(P2,P3); 
-    float point_numbers = (M_PI/2*corner_length)/param.res;
-    float t;
-    float a_angle = asin(param.radius/corner_length);
-
+    float angle = M_PI - acos((pow(P13,2) - pow(P12,2) - pow(P23,2)) / (-2*P12*P23));
 
     geometry_msgs::Point center;
-
     center.x = corner_point.position.x;
     center.y = corner_point.position.y;
     center.z = corner_point.position.z;
 
+    corner_length = P23 + param.dist_final[0]; 
+    float point_numbers = (angle*corner_length)/param.res;
+    float t;    
+
     for(int i=1; i < point_numbers; i++)
     {
-        t=1/point_numbers*i;
-        target_pose.position.x = center.x + corner_length*Rot[0][0]*cos(M_PI/2*t) + corner_length*Rot[0][1]*sin(M_PI/2*t);
-        target_pose.position.y = center.y + corner_length*Rot[1][0]*cos(M_PI/2*t) + corner_length*Rot[1][1]*sin(M_PI/2*t);
-        target_pose.position.z = center.z + corner_length*Rot[2][0]*cos(M_PI/2*t) + corner_length*Rot[2][1]*sin(M_PI/2*t) + param.heigh*t + param.radius*t;
+        t=i/point_numbers;
+        target_pose.position.x = center.x + corner_length*Rot[0][0]*cos(angle*t) + corner_length*Rot[0][1]*sin(angle*t);
+        target_pose.position.y = center.y + corner_length*Rot[1][0]*cos(angle*t) + corner_length*Rot[1][1]*sin(angle*t);
+        target_pose.position.z = center.z + corner_length*Rot[2][0]*cos(angle*t) + corner_length*Rot[2][1]*sin(angle*t) + param.heigh*t + 0.015*t; //param.radius
         target_pose.orientation = slerp(starting_point.orientation, fixing_point.orientation, t);
-
         waypoints.poses.push_back(target_pose);
     }
 
@@ -601,43 +575,19 @@ void TrajectoryPlanner::addCornerFixPoint(geometry_msgs::Pose fixing_point, geom
 void TrajectoryPlanner::addCornerFixPoint2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, geometry_msgs::Pose corner_point, geometry_msgs::Pose starting_point)
 {
     // modifica per evitare il piolo
+    float P12, P23, P13;
 
-    geometry_msgs::PoseArray CornerPath;    
-
-    float PP_distance;          
-    double D1;
-    double D2;
-    geometry_msgs::Pose P1,P2,P3;
-
-    float corner_length;
-        
-    P1 = starting_point;
-    P2 = corner_point;
-    P3 = fixing_point;
-    PP_distance = ComputeDistance(P1, P2);
+    P12 = ComputeDistance(starting_point, corner_point);
+    P23 = ComputeDistance(corner_point, fixing_point);
+    P13 = ComputeDistance(starting_point, fixing_point);
     
-    if(PP_distance < param.Ctrl_pt_d1)
-        D1 = PP_distance;
-    else
-        D1 = param.Ctrl_pt_d1;
-
-    PP_distance = ComputeDistance(P2, P3);
-    if (PP_distance < param.Ctrl_pt_d2)
-        D2 = PP_distance;
-    else 
-        D2 = param.Ctrl_pt_d2;
-    
-    // Calcolo della lunghezza totale 
-    addCornerRound(P1, P2, P3, D1, D2, CornerPath);
-    corner_length = ComputeDistance(P1,P2) + ComputeDistance(P2,P3) + param.dist_final[0];
+    float corner_length = P12 + P23 + param.dist_final[0];
 
     tf2::Quaternion quat;
     tf2::fromMsg(starting_point.orientation, quat);
     tf2::Matrix3x3 Rot;
     Rot.setRotation(quat);
-    
     geometry_msgs::Pose target_pose;
-    geometry_msgs::PoseArray Trajectory;
     geometry_msgs::Pose intermediate_pose;
 
     intermediate_pose.position.x = corner_point.position.x;
@@ -645,7 +595,7 @@ void TrajectoryPlanner::addCornerFixPoint2(geometry_msgs::Pose fixing_point, geo
     intermediate_pose.position.z = corner_point.position.z - 0.02;
     intermediate_pose.orientation = starting_point.orientation;
     ComputePatch(starting_point, intermediate_pose, waypoints);
-    
+
     corner_length = ComputeDistance(P1,P2) + param.dist_final[0] + ComputeDistance(P2,P3);
     target_pose.position.x = starting_point.position.x + Rot[0][0]*corner_length;
     target_pose.position.y = starting_point.position.y + Rot[1][0]*corner_length;
@@ -654,15 +604,16 @@ void TrajectoryPlanner::addCornerFixPoint2(geometry_msgs::Pose fixing_point, geo
     ComputePatch(intermediate_pose, target_pose, waypoints);
 
     // Rotation
-    corner_length = param.dist_final[0] + ComputeDistance(P2,P3); 
-    float point_numbers = (M_PI/2*corner_length)/param.res;
-    float t;
-    float a_angle = asin(param.radius/corner_length);
+    float angle = M_PI - acos((pow(P13,2) - pow(P12,2) - pow(P23,2)) / (-2*P12*P23));
 
     geometry_msgs::Point center;
     center.x = corner_point.position.x;
     center.y = corner_point.position.y;
     center.z = corner_point.position.z;
+
+    corner_length = P23 + param.dist_final[0]; 
+    float point_numbers = (angle*corner_length)/param.res;
+    float t;    
 
     for(int i=1; i < point_numbers; i++)
     {
@@ -1076,9 +1027,16 @@ void TrajectoryPlanner::CheckCornerDistance(std::vector<std::string> Traj_id, st
         distance2 = PP_distance/2;
 }
 
+
+void TrajectoryPlanner::PublishInputPoint(moveit_visual_tools::MoveItVisualTools& visual_tools)
+{
+    for(size_t i=0; i<InitPoint.poses.size(); i++ )
+        visual_tools.publishAxisLabeled(InitPoint.poses[i], InitLabel[i] , rviz_visual_tools::XXXSMALL);
+    visual_tools.trigger();        
+}
+
 void TrajectoryPlanner::PublishTrajectory(moveit_visual_tools::MoveItVisualTools& visual_tools)
 {
-    visual_tools.deleteAllMarkers();
     for(size_t i = 0; i<SecondaryTrajectories.size(); i++)
     {
         if(SecondaryTrajectories.size() > 2)
