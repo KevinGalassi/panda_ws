@@ -18,11 +18,6 @@
 #include <MyFunc.h>
 
 
-
-
-#define PLANNING_ATTEMPTS_NO 500
-#define INPUT_RPY 1
-
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "ol_tes2t2");

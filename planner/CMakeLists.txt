@@ -23,14 +23,6 @@ add_library(
   Planner src/TrajectoryPlanner.cpp
 )
 
-generate_messages(
-  DEPENDENCIES
-  actionlib_msgs
-  geometry_msgs
-  moveit_msgs
-  std_msgs
-)
-
 
 
 catkin_package(
@@ -62,6 +54,13 @@ include_directories(
 
 add_dependencies(Planner ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
+
+add_executable(test src/test.cpp)
+target_link_libraries(test Planner ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(test Planner
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+  franka_gripper) 
 
 
 

@@ -55,11 +55,10 @@ int main(int argc, char** argv)
 
     moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
     moveit::planning_interface::MoveGroupInterface hand_group("hand");
-    moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
     moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
     visual_tools.deleteAllMarkers();
 
-    std::string path1 = "/home/panda/ros/Franka-Kev/src/test/src/PointList/Test";
+    std::string path1 = "/home/kevin/ros/panda_ws/src/test/src/PointList/Test";
     std::string Log_Path = "/home/kevin/Panda_log";
     std::ofstream plan_output_c;
 

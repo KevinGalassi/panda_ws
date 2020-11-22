@@ -94,6 +94,12 @@ add_dependencies(Prove_tattili
   ${catkin_EXPORTED_TARGETS}
   franka_gripper) 
 
+add_executable(PID_test src/PID_test)
+target_link_libraries(PID_test ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(PID_test 
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+  franka_gripper) 
 
 ## Tools
 include(${CMAKE_CURRENT_LIST_DIR}/../cmake/ClangTools.cmake OPTIONAL

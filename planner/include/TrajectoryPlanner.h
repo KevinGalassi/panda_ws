@@ -5,24 +5,28 @@
 
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
+
 #include "geometry_msgs/Pose.h"
-
-#include <tf2_geometry_msgs/tf2_geometry_msgs.h>    //TF2 to convert YPR to Quaternion
-
+#include "geometry_msgs/PoseArray.h"
 
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
-#include <moveit_msgs/DisplayRobotState.h>
-#include <moveit_msgs/DisplayTrajectory.h>
-#include <moveit_msgs/AttachedCollisionObject.h>
-#include <moveit_msgs/CollisionObject.h>
+
 #include <moveit_visual_tools/moveit_visual_tools.h>
+
+
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>    //TF2 to convert YPR to Quaternion
+
 #include <math.h>
 
 #include "parameters.h"
+
+namespace rvt = rviz_visual_tools;
+
 
 struct PlannerParameter
 {
@@ -63,8 +67,8 @@ public:
     void PlannerReset();
 
     bool ReadFileTxt();             // Acquire data fom the txt file
-    void TrajectoryPlanning();      // Plan the trajectory from the starting point
-
+    void TrajectoryPlanning();      // Plan senza abbassamento
+    void TrajectoryPlanning2();     // Plan con abbassamento
     void FromEE2Link8();
     void FromLink82EE();
 
@@ -73,26 +77,33 @@ public:
     bool input_rpy = true;
     PlannerParameter param;
 
+    std::string visualizer;
+
+    void PublishTrajectory(moveit_visual_tools::MoveItVisualTools& visual_tools);
+
+    std::vector<geometry_msgs::PoseArray> SecondaryTrajectories;
+
+
 private:
 
     geometry_msgs::PoseArray InitPoint;
     std::vector<std::string> InitLabel;
 
-    std::vector<geometry_msgs::PoseArray> SecondaryTrajectories;
     geometry_msgs::PoseArray Trajectory;
     std::vector<std::string> label_list;
 
 
     void CornerDetection();
 
-    void addFixPoint1(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints);
-    void addFixPoint2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints);
-    void addFixPoint3(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints);
+    void addFixPoint1(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints);   // Non usare
+    void addFixPoint2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints);   // NON usare
+    void addFixPoint3(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints);   // semicerchio
+    void addFixPoint4(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints);   // semi cerchio con primo punto abbassato
 
     void addCornerFixPoint(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, geometry_msgs::Pose corner_point, geometry_msgs::Pose starting_point);
     void addCornerFixPoint2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, geometry_msgs::Pose corner_point, geometry_msgs::Pose starting_point);
+    
     void addCornerFixPoint_prova(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, geometry_msgs::Pose corner_point, geometry_msgs::Pose starting_point, double dis_init, double dist_final, bool orientation);
-
 
     void CheckCornerDistance(std::vector<std::string> Traj_id, std::vector<geometry_msgs::PoseArray> Traj_list, int i, double& distance1, double& distance2);
 

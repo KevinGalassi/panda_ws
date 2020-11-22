@@ -22,8 +22,6 @@ void so_F102_callback(const std_msgs::Float32MultiArray& msg);
 
 std_msgs::Float32MultiArray fo_F101_msg, fo_F102_msg, so_F101_msg, so_F102_msg;
 
-
-
 float UpdatePID(float ref_value, float actual_value, float Kp, float Ki, float Kd, float& integral, float dt, float& pre_error, float zero_width, int verse);
 float CheckBounds(float max, float min, float output);
 
@@ -224,7 +222,7 @@ int main(int argc, char** argv)
     geometry_msgs::Pose starting_pose;
 
     float distance;
-    float wire_distance;
+    float wire_pos;
 
     /*
     distance = sqrt(pow((final_pose.position.x - starting_pose.position.x ),2) + 
@@ -234,8 +232,8 @@ int main(int argc, char** argv)
     vel_pid.ref_value = 0;
     while(loop_flag)
     {
-        wire_distance = (fo_F101_msg.data[1] + fo_F102_msg.data[1])/2;
-        vel_pid.actual_value = wire_distance;
+        wire_pos = (fo_F101_msg.data[1] + fo_F102_msg.data[1])/2;
+        vel_pid.actual_value = wire_pos;
 
         vel_msg.data[0] = vel_pid.output_sat;
         vel_pub.publish(vel_msg);
@@ -305,10 +303,10 @@ int main(int argc, char** argv)
 
             while(loop_flag)
             {
-                wire_distance = (fo_F101_msg.data[1] - fo_F102_msg.data[1])/2;
-                std::cout << "wire distance " << wire_distance << "\n";
+                wire_pos = (fo_F101_msg.data[1] - fo_F102_msg.data[1])/2;
+                std::cout << "Wire distance from central position " << wire_pos << "\n";
                 reference = 0.0; 
-                actual_value = wire_distance;
+                actual_value = wire_pos;
                 
                 vel_msg.data[2] = UpdatePID(reference, actual_value, P, I, D, integral, delta_time, pre_error, offset, true);
                 vel_msg.data[2] = CheckBounds(upper_bound, lower_bound, vel_msg.data[2]);
@@ -333,7 +331,7 @@ int main(int argc, char** argv)
 
 
             // Ragigungere prossimo punto
-            if(i<PlansVector.size())
+            if(i < PlansVector.size())
             {
                 switch_req.start_controllers[0] = pos_control;
                 switch_req.stop_controllers[0] = vel_control; 

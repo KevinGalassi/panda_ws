@@ -12,7 +12,6 @@
 #include "geometry_msgs/Accel.h"
 
 #include <moveit/move_group_interface/move_group_interface.h>
-// #include <moveit_tutorials/planning_interface/move_group_interface/Plan.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 
 #include <moveit_msgs/DisplayRobotState.h>
@@ -144,8 +143,6 @@ void computeEE_Vel_Acc(geometry_msgs::PoseArray waypoints, std::vector<geometry_
 void getJointSpaceVelocity(std::vector<trajectory_msgs::JointTrajectoryPoint>& joints_configuration, std::vector<geometry_msgs::Twist> EE_velocity);
 
 void setJointSpaceVel_Acc(std::vector<trajectory_msgs::JointTrajectoryPoint>& joints_configuration, std::vector<geometry_msgs::Twist> EE_velocity, std::vector<geometry_msgs::Accel> EE_acceleration);
-
-
 
 moveit_msgs::RobotTrajectory FactorScaling(moveit_msgs::RobotTrajectory trajectory_cartesian, float scaling_factor, ros::Duration T_offset);
 
@@ -713,7 +710,6 @@ void MyTrajectoryPlanner3(TrajectoryPlanner_param param, TrajectoryVector& waypo
     }
 }
 
-
 void FromEE2Link8(geometry_msgs::PoseArray& waypoints)
 {
     /*****
@@ -1171,7 +1167,6 @@ void addFixPoint3(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& wa
         target_pose.position.z = center.z - R[2][1]*radius*cos(M_PI/res*k) - R[2][2]*radius*sin(M_PI/res*k);
         waypoints.poses.push_back(target_pose);
     }
-
 
     target_pose.position.x = fixing_point.position.x - R[0][2]*heigh + R[0][0]*dist_final_vector[0] + R[0][1]*dist_final_vector[1] + R[0][1]*dist_final_vector[2];
     target_pose.position.y = fixing_point.position.y - R[1][2]*heigh + R[1][0]*dist_final_vector[0] + R[1][1]*dist_final_vector[1] + R[1][1]*dist_final_vector[2];
@@ -1732,7 +1727,6 @@ moveit_msgs::RobotTrajectory ValidityCheck(moveit_msgs::RobotTrajectory trajecto
 
     return new_trajectory;
 }
-
 
 void FinalTrajectoryRescaling(std::vector<moveit::planning_interface::MoveGroupInterface::Plan>& PlansVector,
                             std::vector<geometry_msgs::PoseArray>& WaypointsVector,
