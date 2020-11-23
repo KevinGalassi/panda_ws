@@ -4,6 +4,8 @@
 
 #include <controller_manager_msgs/SwitchController.h>
 
+#include <std_msgs/Float32.h>
+
 #include <PID.h>
 #include <MyFunc.h>
 
@@ -21,6 +23,8 @@ void so_F101_callback(const std_msgs::Float32MultiArray& msg);
 void so_F102_callback(const std_msgs::Float32MultiArray& msg);
 
 std_msgs::Float32MultiArray fo_F101_msg, fo_F102_msg, so_F101_msg, so_F102_msg;
+
+
 
 float UpdatePID(float ref_value, float actual_value, float Kp, float Ki, float Kd, float& integral, float dt, float& pre_error, float zero_width, int verse);
 float CheckBounds(float max, float min, float output);
@@ -61,6 +65,7 @@ int main(int argc, char** argv)
     ros::Publisher width_pub = nh.advertise<std_msgs::Float32>("/My_new_input", 100);
 
     ros::Publisher vel_pub = nh.advertise<std_msgs::Float32MultiArray>("/cartesian_velocity_request", 1);
+    ros::Publisher vel_n = nh.advertise<std_msgs::Float32>("/cartesian_velocity_normal", 1);
 
     ros::Subscriber fo_F101_sub = nh.subscribe("/first_order_params_F101", 100, fo_F101_callback);
     ros::Subscriber fo_F102_sub = nh.subscribe("/first_order_params_F102", 100, fo_F102_callback);
@@ -72,6 +77,8 @@ int main(int argc, char** argv)
     std_msgs::Float32 cmd_msg;
     std_msgs::Float32MultiArray vel_msg;
 
+    std_msgs::Float32 vel_n_msg;
+
     namespace rvt = rviz_visual_tools;
 
     float T_O;
@@ -82,7 +89,7 @@ int main(int argc, char** argv)
 
     std::string path;
     if (not (nh.getParam("PathName", path)))
-        path = "/home/panda/ros/Franka-Kev/src/test/src/PointList/Test";
+        path = "/home/panda/ros/Franka-Kev/src/test/src/PointList/Active";
 
     ros::Rate(100);
 
@@ -96,8 +103,8 @@ int main(int argc, char** argv)
     nh.getParam("lower_limit", vel_pid.lower_limit);
     */
 
-    vel_pid.Kp = 0.05;
-    vel_pid.Kd = 0.005;
+    vel_pid.Kp = 0.01;
+    vel_pid.Kd = 0.002;
     vel_pid.Ki = 0;
     vel_pid.upper_limit = 0.02;
     vel_pid.lower_limit = -0.02;
@@ -105,6 +112,21 @@ int main(int argc, char** argv)
     float velocity_fix = 0.012;
     float velocity_round = 0.005;
     float velocity_pass = 0.025;
+
+
+    /* Per Filtro */
+
+    int filter_size = 3;
+    int index = 0;
+    std::vector<float> FilterVector(3);
+
+    for(int i=0; i<filter_size; i++)
+        FilterVector[i] = 0.0;
+    
+    float vel_filter = 0.0;
+
+
+
 
     moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
     moveit::planning_interface::MoveGroupInterface hand_group("hand");
@@ -118,7 +140,10 @@ int main(int argc, char** argv)
     controller_manager_msgs::SwitchController::Response switch_resp;
     switch_resp.ok = false;
     std::string pos_control = "position_joint_trajectory_controller";
-    std::string vel_control = "cartesian_velocity_example_controller";
+    // std::string vel_control = "cartesian_velocity_example_controller";
+     std::string vel_control = "joint_velocity_example_controller";
+
+
     switch_req.start_controllers.resize(1);
     switch_req.stop_controllers.resize(1);
     switch_req.start_controllers[0] = pos_control;
@@ -222,7 +247,7 @@ int main(int argc, char** argv)
     geometry_msgs::Pose starting_pose;
 
     float distance;
-    float wire_pos;
+    float wire_distance;
 
     /*
     distance = sqrt(pow((final_pose.position.x - starting_pose.position.x ),2) + 
@@ -232,8 +257,8 @@ int main(int argc, char** argv)
     vel_pid.ref_value = 0;
     while(loop_flag)
     {
-        wire_pos = (fo_F101_msg.data[1] + fo_F102_msg.data[1])/2;
-        vel_pid.actual_value = wire_pos;
+        wire_distance = (fo_F101_msg.data[1] + fo_F102_msg.data[1])/2;
+        vel_pid.actual_value = wire_distance;
 
         vel_msg.data[0] = vel_pid.output_sat;
         vel_pub.publish(vel_msg);
@@ -260,10 +285,15 @@ int main(int argc, char** argv)
 
     vel_msg.data[0] = velocity_pass;
 
+    std::cout << "Plan to execute: \n";
+    for(int i=0; i<PlansVector.size(); i++)
+        std::cout << "Plan "<< i << " : " << LabelVector[i] << "\n";
+
     visual_tools.prompt("Press 'Next' to start the execution of the trajectory");
+
     for(int i=0; i<PlansVector.size(); i++)
     {
-        if(waypoints.pt_label[i] == "pass")
+        if(LabelVector[i] == "pass")
         {
             ROS_INFO("Switch controll to velocity");
             switch_req.start_controllers[0] = vel_control;
@@ -303,17 +333,35 @@ int main(int argc, char** argv)
 
             while(loop_flag)
             {
-                wire_pos = (fo_F101_msg.data[1] - fo_F102_msg.data[1])/2;
-                std::cout << "Wire distance from central position " << wire_pos << "\n";
+                wire_distance = (fo_F101_msg.data[1] - fo_F102_msg.data[1])/2;
                 reference = 0.0; 
-                actual_value = wire_pos;
+                actual_value = wire_distance;
                 
                 vel_msg.data[2] = UpdatePID(reference, actual_value, P, I, D, integral, delta_time, pre_error, offset, true);
                 vel_msg.data[2] = CheckBounds(upper_bound, lower_bound, vel_msg.data[2]);
+                vel_pub.publish(vel_msg);
+                
 
-            //    vel_msg.data[2] = vel_pid.UpdatePID();
+                /*
+                FilterVector[index] = UpdatePID(reference, actual_value, P, I, D, integral, delta_time, pre_error, offset, true);
+                FilterVector[index] = CheckBounds(upper_bound, lower_bound, FilterVector[index]);
+                vel_n_msg.data = FilterVector[index];
+                
+                index++;
+                if(index >= filter_size);
+                    index = 0;
+
+                for(int i=0; i<filter_size; i++)
+                    vel_filter = vel_filter + FilterVector[i];
+                
+                vel_msg.data[2] = vel_filter/(double)filter_size;
+                vel_filter = 0;
+
 
                 vel_pub.publish(vel_msg);
+                vel_n.publish(vel_n_msg);
+
+                */
 
                // EE_Position = CheckEEPosition(kinematic_state);
                 EE_Position = move_group.getCurrentPose().pose;
@@ -329,9 +377,11 @@ int main(int argc, char** argv)
             loop_flag = true;
             vel_pid.Reset();
 
+            ros::Duration(1).sleep();
+
 
             // Ragigungere prossimo punto
-            if(i < PlansVector.size())
+            if(i<PlansVector.size())
             {
                 switch_req.start_controllers[0] = pos_control;
                 switch_req.stop_controllers[0] = vel_control; 
@@ -346,6 +396,7 @@ int main(int argc, char** argv)
                 else
                     ROS_ERROR("Error during the call of the client");
 
+                visual_tools.prompt("Move to next position");
                 move_group.setJointValueTarget(WaypointsVector[i+1].poses[0]);
                 move_group.move();
             }
@@ -353,6 +404,7 @@ int main(int argc, char** argv)
         }
         else
         {
+            visual_tools.prompt("Start fix");
             cmd_msg.data = 2;
             //cmd_msg.data = 3; // loop
             cmd_pub.publish(cmd_msg);
