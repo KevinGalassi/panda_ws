@@ -13,7 +13,6 @@
 #include <pluginlib/class_list_macros.h>
 #include <ros/ros.h>
 
-#include <std_msgs/Int32.h>
 
 namespace franka_example_controllers {
 
@@ -48,23 +47,9 @@ bool CartesianVelocityExampleController::init(hardware_interface::RobotHW* robot
     return false;
   }
 
-  try {
-    auto state_handle = state_interface->getHandle(arm_id + "_robot");
 
-    std::array<double, 7> q_start = {{0, -M_PI_4, 0, -3 * M_PI_4, 0, M_PI_2, M_PI_4}};
-    for (size_t i = 0; i < q_start.size(); i++) {
-      if (std::abs(state_handle.getRobotState().q_d[i] - q_start[i]) > 0.1) {
 
-      }
-    }
-  } catch (const hardware_interface::HardwareInterfaceException& e) {
-    ROS_ERROR_STREAM(
-        "CartesianVelocityExampleController: Exception getting state handle: " << e.what());
-    return false;
-  }
-
-  vel_cmd_sub = node_handle.subscribe("/cartesian_velocity_request",1, &CartesianVelocityExampleController::Velocity_callback, this);
-  echo_pub = node_handle.advertise<std_msgs::Int32>("/echo_pub",10);
+    vel_cmd_sub = node_handle.subscribe("/cartesian_velocity_request", 1, &CartesianVelocityExampleController::Velocity_callback, this);
 
 
   return true;
@@ -72,38 +57,19 @@ bool CartesianVelocityExampleController::init(hardware_interface::RobotHW* robot
 
 void CartesianVelocityExampleController::starting(const ros::Time& /* time */) {
   elapsed_time_ = ros::Duration(0.0);
-
-  for(int i=0; i<6;i ++)
-    cartesian_velocity(i) = 0;
-    
 }
 
 void CartesianVelocityExampleController::update(const ros::Time& /* time */,
                                                 const ros::Duration& period) {
-  /*
   elapsed_time_ += period;
 
-  double time_max = 4.0;
-  double v_max = 0.05;
-  double angle = M_PI / 4.0;
-  double cycle = std::floor(
-      pow(-1.0, (elapsed_time_.toSec() - std::fmod(elapsed_time_.toSec(), time_max)) / time_max));
-  double v = cycle * v_max / 2.0 * (1.0 - std::cos(2.0 * M_PI / time_max * elapsed_time_.toSec()));
-  double v_x = std::cos(angle) * v;
-  double v_z = -std::sin(angle) * v;
-  */
 
   std::array<double, 6> command;
-
   for(int i=0; i<6; i++)
     command[i] = cartesian_velocity(i);
   velocity_cartesian_handle_->setCommand(command);
-  
-  std_msgs::Int32 k;
-  k.data = 1;
-  echo_pub.publish(k);
-
 }
+
 
 void CartesianVelocityExampleController::stopping(const ros::Time& /*time*/) {
   // WARNING: DO NOT SEND ZERO VELOCITIES HERE AS IN CASE OF ABORTING DURING MOTION
@@ -113,12 +79,9 @@ void CartesianVelocityExampleController::stopping(const ros::Time& /*time*/) {
 
 void CartesianVelocityExampleController::Velocity_callback(const std_msgs::Float32MultiArray& msg)
 {
-  
     for(int i=0; i<6;i++)
       cartesian_velocity(i) = (double)msg.data[i];
-    ROS_INFO("Command received");
-  }
-  
+}
 }  // namespace franka_example_controllers
 
 PLUGINLIB_EXPORT_CLASS(franka_example_controllers::CartesianVelocityExampleController,

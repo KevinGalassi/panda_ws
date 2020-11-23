@@ -9,6 +9,7 @@
 #include <controller_interface/multi_interface_controller.h>
 #include <dynamic_reconfigure/server.h>
 #include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/Twist.h>
 #include <hardware_interface/joint_command_interface.h>
 #include <hardware_interface/robot_hw.h>
 #include <ros/node_handle.h>
@@ -18,6 +19,9 @@
 #include <franka_example_controllers/compliance_paramConfig.h>
 #include <franka_hw/franka_model_interface.h>
 #include <franka_hw/franka_state_interface.h>
+
+#include "pseudo_inversion.h"
+
 
 namespace franka_example_controllers {
 
@@ -53,6 +57,8 @@ class CartesianImpedanceExampleController : public controller_interface::MultiIn
   Eigen::Quaterniond orientation_d_;
   Eigen::Vector3d position_d_target_;
   Eigen::Quaterniond orientation_d_target_;
+  Eigen::Matrix<double, 7, 1> tau_ext_initial_;
+  Eigen::VectorXd desired_force_torque;
 
   // Dynamic reconfigure
   std::unique_ptr<dynamic_reconfigure::Server<franka_example_controllers::compliance_paramConfig>>
@@ -63,7 +69,10 @@ class CartesianImpedanceExampleController : public controller_interface::MultiIn
 
   // Equilibrium pose subscriber
   ros::Subscriber sub_equilibrium_pose_;
+  ros::Subscriber force_sub;
+  ros::Publisher external_torque;
   void equilibriumPoseCallback(const geometry_msgs::PoseStampedConstPtr& msg);
+  void force_cb(const geometry_msgs::Twist &msg);
 };
 
 }  // namespace franka_example_controllers

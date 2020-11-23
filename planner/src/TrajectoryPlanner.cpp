@@ -596,7 +596,7 @@ void TrajectoryPlanner::addCornerFixPoint2(geometry_msgs::Pose fixing_point, geo
     intermediate_pose.orientation = starting_point.orientation;
     ComputePatch(starting_point, intermediate_pose, waypoints);
 
-    corner_length = ComputeDistance(P1,P2) + param.dist_final[0] + ComputeDistance(P2,P3);
+    corner_length = P12 + P23 + param.dist_final[0];
     target_pose.position.x = starting_point.position.x + Rot[0][0]*corner_length;
     target_pose.position.y = starting_point.position.y + Rot[1][0]*corner_length;
     target_pose.position.z = starting_point.position.z + Rot[2][0]*corner_length;

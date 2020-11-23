@@ -4,13 +4,13 @@
 
 #include <cmath>
 #include <memory>
-
+#include <sensor_msgs/JointState.h>
 #include <controller_interface/controller_base.h>
 #include <franka/robot_state.h>
 #include <pluginlib/class_list_macros.h>
+#include <geometry_msgs/TwistStamped.h>
 #include <ros/ros.h>
 
-#include <franka_example_controllers/pseudo_inversion.h>
 
 namespace franka_example_controllers {
 
@@ -18,11 +18,16 @@ bool CartesianImpedanceExampleController::init(hardware_interface::RobotHW* robo
                                                ros::NodeHandle& node_handle) {
   std::vector<double> cartesian_stiffness_vector;
   std::vector<double> cartesian_damping_vector;
-
+  desired_force_torque = Eigen::VectorXd(6);
+  for (int i=0;i<6;i++){
+    desired_force_torque[i] =0;
+  }
   sub_equilibrium_pose_ = node_handle.subscribe(
       "/equilibrium_pose", 20, &CartesianImpedanceExampleController::equilibriumPoseCallback, this,
       ros::TransportHints().reliable().tcpNoDelay());
 
+  external_torque = node_handle.advertise<geometry_msgs::TwistStamped>("measured_torque",1);
+  force_sub=node_handle.subscribe("/force_command",1, &CartesianImpedanceExampleController::force_cb,this,ros::TransportHints().reliable().tcpNoDelay());
   std::string arm_id;
   if (!node_handle.getParam("arm_id", arm_id)) {
     ROS_ERROR_STREAM("CartesianImpedanceExampleController: Could not read parameter arm_id");
@@ -105,6 +110,16 @@ bool CartesianImpedanceExampleController::init(hardware_interface::RobotHW* robo
   return true;
 }
 
+void CartesianImpedanceExampleController::force_cb(const geometry_msgs::Twist &msg){
+    desired_force_torque[0] = filter_params_*msg.linear.x + (1 - filter_params_) * desired_force_torque[0];
+    desired_force_torque[1] = filter_params_*msg.linear.y + (1 - filter_params_) * desired_force_torque[1];
+    desired_force_torque[2] = filter_params_*msg.linear.z + (1 - filter_params_) * desired_force_torque[2];
+    desired_force_torque[3] = filter_params_*msg.angular.x + (1 - filter_params_) * desired_force_torque[3];
+    desired_force_torque[4] = filter_params_*msg.angular.y + (1 - filter_params_) * desired_force_torque[4];
+    desired_force_torque[5] = filter_params_*msg.angular.z + (1 - filter_params_) * desired_force_torque[5];
+
+}
+
 void CartesianImpedanceExampleController::starting(const ros::Time& /*time*/) {
   // compute initial velocity with jacobian and set x_attractor and q_d_nullspace
   // to initial configuration
@@ -112,8 +127,13 @@ void CartesianImpedanceExampleController::starting(const ros::Time& /*time*/) {
   // get jacobian
   std::array<double, 42> jacobian_array =
       model_handle_->getZeroJacobian(franka::Frame::kEndEffector);
+  std::array<double, 7> gravity_array = model_handle_->getGravity();
   // convert to eigen
+  Eigen::Map<Eigen::Matrix<double, 6, 7>> jacobian(jacobian_array.data());
+  Eigen::Map<Eigen::Matrix<double, 7, 1>> dq_initial(initial_state.dq.data());
   Eigen::Map<Eigen::Matrix<double, 7, 1>> q_initial(initial_state.q.data());
+  Eigen::Map<Eigen::Matrix<double, 7, 1>> tau_measured(initial_state.tau_J.data());
+  Eigen::Map<Eigen::Matrix<double, 7, 1>> gravity(gravity_array.data());
   Eigen::Affine3d initial_transform(Eigen::Matrix4d::Map(initial_state.O_T_EE.data()));
 
   // set equilibrium point to current state
@@ -121,6 +141,8 @@ void CartesianImpedanceExampleController::starting(const ros::Time& /*time*/) {
   orientation_d_ = Eigen::Quaterniond(initial_transform.linear());
   position_d_target_ = initial_transform.translation();
   orientation_d_target_ = Eigen::Quaterniond(initial_transform.linear());
+  tau_ext_initial_ = tau_measured - gravity;
+
 
   // set nullspace equilibrium configuration to initial q
   q_d_nullspace_ = q_initial;
@@ -133,17 +155,23 @@ void CartesianImpedanceExampleController::update(const ros::Time& /*time*/,
   std::array<double, 7> coriolis_array = model_handle_->getCoriolis();
   std::array<double, 42> jacobian_array =
       model_handle_->getZeroJacobian(franka::Frame::kEndEffector);
+  std::array<double, 7> gravity_array = model_handle_->getGravity();
 
   // convert to Eigen
   Eigen::Map<Eigen::Matrix<double, 7, 1>> coriolis(coriolis_array.data());
   Eigen::Map<Eigen::Matrix<double, 6, 7>> jacobian(jacobian_array.data());
   Eigen::Map<Eigen::Matrix<double, 7, 1>> q(robot_state.q.data());
   Eigen::Map<Eigen::Matrix<double, 7, 1>> dq(robot_state.dq.data());
+  Eigen::Map<Eigen::Matrix<double, 7, 1>> tau_measured(robot_state.tau_J.data());
+  Eigen::Map<Eigen::Matrix<double, 7, 1>> gravity(gravity_array.data());
   Eigen::Map<Eigen::Matrix<double, 7, 1>> tau_J_d(  // NOLINT (readability-identifier-naming)
       robot_state.tau_J_d.data());
   Eigen::Affine3d transform(Eigen::Matrix4d::Map(robot_state.O_T_EE.data()));
   Eigen::Vector3d position(transform.translation());
   Eigen::Quaterniond orientation(transform.linear());
+  Eigen::VectorXd tau_ext(7);
+
+  tau_ext = tau_measured - gravity - tau_ext_initial_;
 
   // compute error to desired pose
   // position error
@@ -155,14 +183,15 @@ void CartesianImpedanceExampleController::update(const ros::Time& /*time*/,
     orientation.coeffs() << -orientation.coeffs();
   }
   // "difference" quaternion
-  Eigen::Quaterniond error_quaternion(orientation.inverse() * orientation_d_);
-  error.tail(3) << error_quaternion.x(), error_quaternion.y(), error_quaternion.z();
-  // Transform to base frame
-  error.tail(3) << -transform.linear() * error.tail(3);
+  Eigen::Quaterniond error_quaternion(orientation * orientation_d_.inverse());
+  // convert to axis angle
+  Eigen::AngleAxisd error_quaternion_angle_axis(error_quaternion);
+  // compute "orientation error"
+  error.tail(3) << error_quaternion_angle_axis.axis() * error_quaternion_angle_axis.angle();
 
   // compute control
   // allocate variables
-  Eigen::VectorXd tau_task(7), tau_nullspace(7), tau_d(7);
+  Eigen::VectorXd tau_task(7), tau_nullspace(7), tau_d(7) ,tau_external(6);
 
   // pseudoinverse for nullspace handling
   // kinematic pseuoinverse
@@ -177,8 +206,19 @@ void CartesianImpedanceExampleController::update(const ros::Time& /*time*/,
                     jacobian.transpose() * jacobian_transpose_pinv) *
                        (nullspace_stiffness_ * (q_d_nullspace_ - q) -
                         (2.0 * sqrt(nullspace_stiffness_)) * dq);
+
+  tau_external << jacobian_transpose_pinv * tau_ext;
+  geometry_msgs::TwistStamped torque_msg;
+  torque_msg.twist.linear.x = tau_external(0);
+  torque_msg.twist.linear.y = tau_external(1);
+  torque_msg.twist.linear.z = tau_external(2);
+  torque_msg.twist.angular.x = tau_external(3);
+  torque_msg.twist.angular.y = tau_external(4);
+  torque_msg.twist.angular.z = tau_external(5);
+  torque_msg.header.stamp = ros::Time::now();
+  external_torque.publish(torque_msg);
   // Desired torque
-  tau_d << tau_task + tau_nullspace + coriolis;
+  tau_d << tau_task + tau_nullspace + coriolis +jacobian.transpose() * desired_force_torque;
   // Saturate torque rate to avoid discontinuities
   tau_d << saturateTorqueRate(tau_d, tau_J_d);
   for (size_t i = 0; i < 7; ++i) {
@@ -194,7 +234,13 @@ void CartesianImpedanceExampleController::update(const ros::Time& /*time*/,
   nullspace_stiffness_ =
       filter_params_ * nullspace_stiffness_target_ + (1.0 - filter_params_) * nullspace_stiffness_;
   position_d_ = filter_params_ * position_d_target_ + (1.0 - filter_params_) * position_d_;
-  orientation_d_ = orientation_d_.slerp(filter_params_, orientation_d_target_);
+  Eigen::AngleAxisd aa_orientation_d(orientation_d_);
+  Eigen::AngleAxisd aa_orientation_d_target(orientation_d_target_);
+  aa_orientation_d.axis() = filter_params_ * aa_orientation_d_target.axis() +
+                            (1.0 - filter_params_) * aa_orientation_d.axis();
+  aa_orientation_d.angle() = filter_params_ * aa_orientation_d_target.angle() +
+                             (1.0 - filter_params_) * aa_orientation_d.angle();
+  orientation_d_ = Eigen::Quaterniond(aa_orientation_d);
 }
 
 Eigen::Matrix<double, 7, 1> CartesianImpedanceExampleController::saturateTorqueRate(
@@ -215,14 +261,20 @@ void CartesianImpedanceExampleController::complianceParamCallback(
   cartesian_stiffness_target_.setIdentity();
   cartesian_stiffness_target_.topLeftCorner(3, 3)
       << config.translational_stiffness * Eigen::Matrix3d::Identity();
+  cartesian_stiffness_target_(0,0) = 0;
+  cartesian_stiffness_target_(1,1) = 0;
   cartesian_stiffness_target_.bottomRightCorner(3, 3)
       << config.rotational_stiffness * Eigen::Matrix3d::Identity();
+  cartesian_stiffness_target_(5,5) = 0;
   cartesian_damping_target_.setIdentity();
   // Damping ratio = 1
   cartesian_damping_target_.topLeftCorner(3, 3)
       << 2.0 * sqrt(config.translational_stiffness) * Eigen::Matrix3d::Identity();
   cartesian_damping_target_.bottomRightCorner(3, 3)
       << 2.0 * sqrt(config.rotational_stiffness) * Eigen::Matrix3d::Identity();
+  cartesian_damping_target_(0,0) = 0;
+  cartesian_damping_target_(1,1) = 0;
+  cartesian_damping_target_(5,5) = 0;
   nullspace_stiffness_target_ = config.nullspace_stiffness;
 }
 

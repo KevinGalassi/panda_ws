@@ -8,10 +8,14 @@
 #include <controller_interface/multi_interface_controller.h>
 #include <franka_hw/franka_cartesian_command_interface.h>
 #include <franka_hw/franka_state_interface.h>
-
 #include <hardware_interface/robot_hw.h>
 #include <ros/node_handle.h>
 #include <ros/time.h>
+
+#include <Eigen/Core>
+
+#include <std_msgs/Float32MultiArray.h>
+
 
 namespace franka_example_controllers {
 
@@ -29,6 +33,11 @@ class CartesianVelocityExampleController : public controller_interface::MultiInt
   std::unique_ptr<franka_hw::FrankaCartesianVelocityHandle> velocity_cartesian_handle_;
   ros::Duration elapsed_time_;
 
+  Eigen::Matrix<double, 6, 1> cartesian_velocity;
+
+
+  ros::Subscriber vel_cmd_sub;    // topic : "/cartesian_velocity_request"
+  void Velocity_callback(const std_msgs::Float32MultiArray& msg);
 
 };
 

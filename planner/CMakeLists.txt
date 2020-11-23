@@ -55,9 +55,9 @@ include_directories(
 add_dependencies(Planner ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 
-add_executable(test src/test.cpp)
-target_link_libraries(test Planner ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(test Planner
+add_executable(test_planner src/test.cpp)
+target_link_libraries(test_planner Planner ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(test_planner Planner
   ${${PROJECT_NAME}_EXPORTED_TARGETS}
   ${catkin_EXPORTED_TARGETS}
   franka_gripper) 
