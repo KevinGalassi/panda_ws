@@ -1,8 +1,0 @@
-prefix=/home/kevin/ros/panda_ws/src/build/devel
-
-Name: serial
-Description: Description of serial
-Version: 1.2.1
-Cflags: -I/home/kevin/ros/panda_ws/src/tactile_sensor/serial/include
-Libs: -L${prefix}/lib -lserial -lrt -lpthread
-Requires: 
