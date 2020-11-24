@@ -33,48 +33,48 @@ class JointVelocityExampleController : public controller_interface::MultiInterfa
                                            franka_hw::FrankaModelInterface,
                                            franka_hw::FrankaStateInterface> {
  public:
-  bool init(hardware_interface::RobotHW* robot_hardware, ros::NodeHandle& root_node_handle, ros::NodeHandle& controller_node_handle) override;
-  void update(const ros::Time&, const ros::Duration& period) override;
-  void starting(const ros::Time&) override;
-  void stopping(const ros::Time&) override;
+    bool init(hardware_interface::RobotHW* robot_hardware, ros::NodeHandle& root_node_handle, ros::NodeHandle& controller_node_handle) override;
+    void update(const ros::Time&, const ros::Duration& period) override;
+    void starting(const ros::Time&) override;
+    void stopping(const ros::Time&) override;
 
  private:
-  std::string arm_id;
-  franka_hw::FrankaStateInterface* franka_state_interface_{};
-  std::unique_ptr<franka_hw::FrankaStateHandle> franka_state_handle_{};
+    std::string arm_id;
+    franka_hw::FrankaStateInterface* franka_state_interface_{};
+    std::unique_ptr<franka_hw::FrankaStateHandle> franka_state_handle_{};
 
-  std::unique_ptr<franka_hw::FrankaModelHandle> model_handle_;
+    std::unique_ptr<franka_hw::FrankaModelHandle> model_handle_;
 
-  franka_hw::TriggerRate trigger_publish_;
-  franka::RobotState robot_state_;
-  uint64_t sequence_number_ = 0;
-  std::vector<std::string> joint_names_;
+    franka_hw::TriggerRate trigger_publish_;
+    franka::RobotState robot_state_;
+    uint64_t sequence_number_ = 0;
+    std::vector<std::string> joint_names_;
 
 
 
-  // Velocity handler
-  hardware_interface::VelocityJointInterface* velocity_joint_interface_;
-  std::vector<hardware_interface::JointHandle> velocity_joint_handles_;
+    // Velocity handler
+    hardware_interface::VelocityJointInterface* velocity_joint_interface_;
+    std::vector<hardware_interface::JointHandle> velocity_joint_handles_;
 
-  Eigen::Matrix<double, 6, 1> cartesian_velocity;
-  Eigen::Matrix<double, 7, 1> joint_velocity;
+    Eigen::Matrix<double, 6, 1> cartesian_velocity;
+    Eigen::Matrix<double, 7, 1> joint_velocity;
 
-  // Filtro
+    // Filtro
     Eigen::Matrix<double, 6, 1> vel_filter;
-  int filter_size;
-  int filter_index;
-  std::vector<Eigen::Matrix<double, 6, 1>> VelDataVector;
-  Eigen::Matrix<double, 6, 1> MeanMatrix;
+    int filter_size;
+    int filter_index;
+    std::vector<Eigen::Matrix<double, 6, 1>> VelDataVector;
+    Eigen::Matrix<double, 6, 1> MeanMatrix;
 
-  std_msgs::Float32MultiArray vel_msg;
-  ros::Publisher new_vel_pub;
+    std_msgs::Float32MultiArray vel_msg;
+    ros::Publisher new_vel_pub;
 
 
 
-  bool joint_cmd_start; 
+    bool joint_cmd_start; 
 
-  ros::Subscriber vel_cmd_sub;    // topic : "/cartesian_velocity_request"
-  void Velocity_callback(const std_msgs::Float32MultiArray& msg);
+    ros::Subscriber vel_cmd_sub;    // topic : "/cartesian_velocity_request"
+    void Velocity_callback(const std_msgs::Float32MultiArray& msg);
 
 };
 

@@ -12,6 +12,9 @@
 
 
 
+
+
+
 namespace franka_example_controllers {
 
 bool JointVelocityExampleController::init(hardware_interface::RobotHW* robot_hardware, 
@@ -109,17 +112,15 @@ bool JointVelocityExampleController::init(hardware_interface::RobotHW* robot_har
 
 void JointVelocityExampleController::starting(const ros::Time& /* time */) {
 
-  filter_size = 25;
-  filter_index = 0;
-  VelDataVector.resize(filter_size);
-  for(int i=0; i<filter_size; i++)
-    VelDataVector[i] << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
-  MeanMatrix << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
-  vel_msg.data.resize(6);
+    filter_size = 25;
+    filter_index = 0;
+    VelDataVector.resize(filter_size);
+    for(int i=0; i<filter_size; i++)
+        VelDataVector[i] << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+    MeanMatrix << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+    vel_msg.data.resize(6);
 
     ROS_INFO("STARTING COMPLETED");
-
-
 }
 
 void JointVelocityExampleController::update(const ros::Time& /* time */,
@@ -133,31 +134,28 @@ void JointVelocityExampleController::update(const ros::Time& /* time */,
 
     if(joint_cmd_start)
     {
+        VelDataVector[filter_index] = cartesian_velocity;
+        filter_index ++;
+        if (filter_index >= filter_size)
+            filter_index = 0;
+        for(int i=0; i< filter_size; i++)
+            MeanMatrix += VelDataVector[i];
+        vel_filter = MeanMatrix/(double)filter_size;  
+        MeanMatrix << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
 
-      VelDataVector[filter_index] = cartesian_velocity;
-      filter_index ++;
-      if (filter_index >= filter_size)
-        filter_index = 0;
-      for(int i=0; i< filter_size; i++)
-        MeanMatrix += VelDataVector[i];
-      vel_filter = MeanMatrix/(double)filter_size;  
-      MeanMatrix << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+        pseudoInverse(jacobian, jacobian_inv);
+        joint_velocity = jacobian_inv*vel_filter;
+        for(int i=0;i<7;i++)
+            velocity_joint_handles_[i].setCommand(joint_velocity(i));
 
-
-
-      pseudoInverse(jacobian, jacobian_inv);
-      joint_velocity = jacobian_inv*vel_filter;
-      for(int i=0;i<7;i++)
-        velocity_joint_handles_[i].setCommand(joint_velocity(i));
-
-      for(int i=0; i<6; i++)
-        vel_msg.data[i] = vel_filter[i];
-      new_vel_pub.publish(vel_msg);
+        for(int i=0; i<6; i++)
+            vel_msg.data[i] = vel_filter[i];
+        new_vel_pub.publish(vel_msg);
     }
     else
     {
-      for(int i=0; i<velocity_joint_handles_.size(); i++)
-        velocity_joint_handles_[i].setCommand(0.0);
+        for(int i=0; i<velocity_joint_handles_.size(); i++)
+            velocity_joint_handles_[i].setCommand(0.0);
     }
     
   }
@@ -193,6 +191,8 @@ void JointVelocityExampleController::Velocity_callback(const std_msgs::Float32Mu
   }
   
   k=0;
+
+  
 }
 
 }  // namespace franka_example_controllers
