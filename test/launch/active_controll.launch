@@ -3,17 +3,26 @@
     <node pkg="test" type="active_control" name="Active"  output="screen" >
 
 
-	<param name="P" value = "0.01" />
+	<param name="P" value = "0.04" />
 	<param name="I" value = "0.0" />
-	<param name="D" value = "0.001" />
+	<param name="D" value = "0.002" />
 	<param name="reference" value = "0.0" />
 	<param name="offset" value = "0.0"  />
 	<param name="upper_bound" value = "0.02" />
 	<param name="lower_bound" value = "-0.02" />
 
+	<param name="topic" value ="" />
+
     <param name="pos_control" value = "position_joint_trajectory_controller" />
-    <param name="vel_control" value = "joint_velocity_example_controller" />
-     <!-- <param name="vel_control" value = "cartesian_velocity_example_controller" /> -->
+    <param name="vel_control" value = "cartesian_velocity_example_controller"/>
+
+
+	<param name="radius" value = "0.02"/>
+    <param name="heigh" value = "0.02"/>
+
+
+	<!-- <param name="vel_control" value = "joint_velocity_example_controller" /> -->
+    <!-- <param name="vel_control" value = "cartesian_velocity_example_controller"/> -->
 
     </node>
 

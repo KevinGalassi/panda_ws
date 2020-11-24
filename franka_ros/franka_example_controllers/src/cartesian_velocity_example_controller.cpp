@@ -84,6 +84,16 @@ void CartesianVelocityExampleController::update(const ros::Time& , const ros::Du
     }
     else
     {
+        VelDataVector[filter_index] = cartesian_velocity;
+        filter_index ++;
+        if (filter_index >= filter_size)
+            filter_index = 0;
+        for(int i=0; i< filter_size; i++)
+            MeanMatrix += VelDataVector[i];
+        cartesian_velocity = MeanMatrix/(double)filter_size;  
+        MeanMatrix << 0.0, 0.0, 0.0, 0.0, 0.0, 0.0;
+
+
         cartesian_acc = (cartesian_velocity - last_cart_velocity)/period.toSec();
         cartesian_jerk = (cartesian_acc - last_cartesian_acc)/period.toSec();
 
