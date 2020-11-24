@@ -1,5 +1,6 @@
 joint_velocity_example_controller:
     type: franka_example_controllers/JointVelocityExampleController
+    arm_id: panda
     joint_names:
         - panda_joint1
         - panda_joint2

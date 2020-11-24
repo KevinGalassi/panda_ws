@@ -12,6 +12,8 @@
   <rosparam command="load" file="$(find franka_example_controllers)/config/franka_example_controllers.yaml" />
   <node name="controller_spawner1" pkg="controller_manager" type="spawner" respawn="false" output="screen"  args=" --stopped joint_velocity_example_controller"/>
 
+  <rosparam command="load" file="$(find franka_example_controllers)/config/franka_example_controllers.yaml" />
+  <node name="controller_spawner3" pkg="controller_manager" type="spawner" respawn="false" output="screen"  args=" --stopped cartesian_velocity_example_controller"/>
 
 
   <include file="$(find panda_moveit_config)/launch/panda_moveit.launch">
