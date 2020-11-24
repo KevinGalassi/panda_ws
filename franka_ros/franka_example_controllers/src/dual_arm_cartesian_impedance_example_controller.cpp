@@ -9,7 +9,6 @@
 #include <controller_interface/controller_base.h>
 #include <eigen_conversions/eigen_msg.h>
 #include <franka/robot_state.h>
-#include <franka_example_controllers/pseudo_inversion.h>
 #include <franka_hw/trigger_rate.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <pluginlib/class_list_macros.h>
@@ -268,8 +267,8 @@ void DualArmCartesianImpedanceExampleController::updateArm(FrankaDataContainer& 
   // pseudoinverse for nullspace handling
   // kinematic pseuoinverse
   Eigen::MatrixXd jacobian_transpose_pinv;
-  franka_example_controllers::pseudoInverse(jacobian.transpose(), jacobian_transpose_pinv);
-
+  //franka_example_controllers::pseudoInverse(jacobian.transpose(), jacobian_transpose_pinv);
+    pseudoInverse(jacobian.transpose(), jacobian_transpose_pinv);
   // Cartesian PD control with damping ratio = 1
   tau_task << jacobian.transpose() * (-arm_data.cartesian_stiffness_ * error -
                                       arm_data.cartesian_damping_ * (jacobian * dq));

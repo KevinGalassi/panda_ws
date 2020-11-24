@@ -20,6 +20,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 find_package(Franka 0.7.0 REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 catkin_package(
   INCLUDE_DIRS include
@@ -54,10 +55,12 @@ target_link_libraries(franka_state_controller
 
 target_include_directories(franka_state_controller SYSTEM PUBLIC
   ${Franka_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
 )
 target_include_directories(franka_state_controller PUBLIC
   include
+
 )
 
 ## franka_control_node
