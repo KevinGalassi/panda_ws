@@ -21,31 +21,10 @@ void fo_F101_callback(const std_msgs::Float32MultiArray& msg);
 void fo_F102_callback(const std_msgs::Float32MultiArray& msg);
 void so_F101_callback(const std_msgs::Float32MultiArray& msg);
 void so_F102_callback(const std_msgs::Float32MultiArray& msg);
-
 std_msgs::Float32MultiArray fo_F101_msg, fo_F102_msg, so_F101_msg, so_F102_msg;
-
-
 
 float UpdatePID(float ref_value, float actual_value, float Kp, float Ki, float Kd, float& integral, float dt, float& pre_error, float zero_width, int verse);
 float CheckBounds(float max, float min, float output);
-
-
-float P = 0.01;
-float I = 0.0;
-float D = 0.0;
-float reference = 0;
-float upper_bound = 0.02;
-float lower_bound = - 0.02;
-
-float integral = 0;
-float offset = 0.0;
-float actual_pos;
-float old_pos;
-float delta_time = 1.0/100.0;
-
-float pre_error = 0;
-float actual_value;
-
 
 
 int main(int argc, char** argv)
@@ -76,56 +55,43 @@ int main(int argc, char** argv)
     std_msgs::Float32 width_msg;
     std_msgs::Float32 cmd_msg;
     std_msgs::Float32MultiArray vel_msg;
-
     std_msgs::Float32 vel_n_msg;
 
     namespace rvt = rviz_visual_tools;
 
-    float T_O;
-    if (not (nh.getParam("Offset", T_O)))
-        T_O = 0.4;
+    // PARAMEERS READING FROM LAUNH FILE 
+
     ros::Duration T_offset = ros::Duration(0.4);
-    ros::Duration T_round = ros::Duration(0.4);
+
 
     std::string path;
-    if (not (nh.getParam("PathName", path)))
-        path = "/home/panda/ros/Franka-Kev/src/test/src/PointList/Active";
+    float P, I, D;
+    float reference, upper_bound, lower_bound;
+    float integral = 0;
+    float offset = 0.0;
+    float actual_pos;
+    float old_pos;
+    float delta_time = 1.0/100.0;
+    float pre_error = 0;
+    float actual_value;
+    
+    if (not (nh.getParam("/Active/PathName", path)))    path = "/home/panda/ros/Franka-Kev/src/test/src/PointList/Active";
+    if (not (nh.getParam("/Active/P", P))) P = 0.01;
+    if (not (nh.getParam("/Active/I", I))) I = 0.0;
+    if (not (nh.getParam("/Active/D", D))) D = 0.001;
+    if (not (nh.getParam("/Active/reference", reference))) reference = 0;
+    if (not (nh.getParam("/Active/upper_bound", upper_bound))) upper_bound = 0.02;
+    if (not (nh.getParam("/Active/lower_bound", lower_bound))) lower_bound = -0.02;
+
+    std::string pos_control, vel_control;
+    if (not (nh.getParam("Active/pos_control", pos_control))) pos_control = "position_joint_trajectory_controller";
+    if (not (nh.getParam("Active/vel_control", vel_control))) vel_control = "joint_velocity_example_controller";
 
     ros::Rate(100);
-
-    /* COnfigurazione PID */
-    controller::PID vel_pid;
-    /*
-    nh.getParam("Kp", vel_pid.Kp);
-    nh.getParam("Kd", vel_pid.Kd);
-    nh.getParam("Ki", vel_pid.Ki);
-    nh.getParam("upper_limit", vel_pid.upper_limit);
-    nh.getParam("lower_limit", vel_pid.lower_limit);
-    */
-
-    vel_pid.Kp = 0.01;
-    vel_pid.Kd = 0.002;
-    vel_pid.Ki = 0;
-    vel_pid.upper_limit = 0.02;
-    vel_pid.lower_limit = -0.02;
 
     float velocity_fix = 0.012;
     float velocity_round = 0.005;
     float velocity_pass = 0.025;
-
-
-    /* Per Filtro */
-
-    int filter_size = 3;
-    int index = 0;
-    std::vector<float> FilterVector(3);
-
-    for(int i=0; i<filter_size; i++)
-        FilterVector[i] = 0.0;
-    
-    float vel_filter = 0.0;
-
-
 
 
     moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
@@ -139,9 +105,7 @@ int main(int argc, char** argv)
     controller_manager_msgs::SwitchController::Request switch_req;
     controller_manager_msgs::SwitchController::Response switch_resp;
     switch_resp.ok = false;
-    std::string pos_control = "position_joint_trajectory_controller";
-    // std::string vel_control = "cartesian_velocity_example_controller";
-     std::string vel_control = "joint_velocity_example_controller";
+
 
 
     switch_req.start_controllers.resize(1);
@@ -234,7 +198,6 @@ int main(int argc, char** argv)
     robot_state::JointModelGroup* joint_model_group = kinematic_model->getJointModelGroup("panda_arm");
 
 
-
     bool loop_flag = true;
     float Vx = velocity_pass;
 
@@ -242,9 +205,7 @@ int main(int argc, char** argv)
     for(int i=0;i<6;i++)
         vel_msg.data[i] = 0;
 
-    geometry_msgs::Pose EE_Position;
-    geometry_msgs::Pose final_pose;
-    geometry_msgs::Pose starting_pose;
+    geometry_msgs::Pose EE_Position, final_pose, starting_pose;
 
     float distance;
     float wire_distance;
@@ -373,12 +334,12 @@ int main(int argc, char** argv)
             for(int i=0; i<6; i++)
                 vel_msg.data[i] = 0.0;
             vel_pub.publish(vel_msg);
-
             loop_flag = true;
-            vel_pid.Reset();
 
+            cmd_msg.data = 2;
+            //cmd_msg.data = 3; // loop
+            cmd_pub.publish(cmd_msg);
             ros::Duration(1).sleep();
-
 
             // Ragigungere prossimo punto
             if(i<PlansVector.size())
@@ -400,7 +361,6 @@ int main(int argc, char** argv)
                 move_group.setJointValueTarget(WaypointsVector[i+1].poses[0]);
                 move_group.move();
             }
-
         }
         else
         {
@@ -495,9 +455,6 @@ void so_F102_callback(const std_msgs::Float32MultiArray& msg)
     for(int i=0; i<3; i++)
         so_F102_msg.data[i] = msg.data[i];
 }
-
-
-
 
 float UpdatePID(float ref_value, float actual_value, float Kp, float Ki, float Kd, float& integral, float dt, float& pre_error, float zero_width, int verse)
 {
