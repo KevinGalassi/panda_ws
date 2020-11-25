@@ -51,6 +51,7 @@ bool CartesianVelocityExampleController::init(hardware_interface::RobotHW* robot
     trigger_publish = franka_hw::TriggerRate(publish_rate);
 
     vel_cmd_sub = node_handle.subscribe("/cartesian_velocity_request", 1, &CartesianVelocityExampleController::Velocity_callback, this);
+    filter_pub = node_handle.advertise<std_msgs::Float32MultiArray>("/velocity_filtered",1);
 
 
   return true;

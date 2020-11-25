@@ -45,7 +45,9 @@ int main(int argc, char** argv)
 
     ros::Publisher vel_pub = nh.advertise<std_msgs::Float32MultiArray>("/cartesian_velocity_request", 1);
     ros::Publisher vel_plot = nh.advertise<std_msgs::Float32MultiArray>("/plot_vel", 1);
-    ros::Publisher vel_n = nh.advertise<std_msgs::Float32>("/cartesian_velocity_normal", 1);
+
+
+    //ros::Publisher vel_n = nh.advertise<std_msgs::Float32>("/cartesian_velocity_normal", 1);
 
     ros::Subscriber fo_F101_sub = nh.subscribe("/first_order_params_F101", 100, fo_F101_callback);
     ros::Subscriber fo_F102_sub = nh.subscribe("/first_order_params_F102", 100, fo_F102_callback);
@@ -306,9 +308,10 @@ int main(int argc, char** argv)
 
             while(loop_flag)
             {
-                wire_distance = (fo_F101_msg.data[1] - fo_F102_msg.data[1])/2;
+                //wire_distance = (fo_F101_msg.data[1] - fo_F102_msg.data[1])/2;
+                
                 reference = 0.0; 
-                actual_value = wire_distance;
+                actual_value = fo_F101_msg.data[1];
                 
                 vel_msg.data[2] = UpdatePID(reference, actual_value, P, I, D, integral, delta_time, pre_error, offset, true);
                 vel_msg.data[2] = CheckBounds(upper_bound, lower_bound, vel_msg.data[2]);
@@ -341,7 +344,7 @@ int main(int argc, char** argv)
 
                 */
 
-               // EE_Position = CheckEEPosition(kinematic_state);
+                // EE_Position = CheckEEPosition(kinematic_state);
                 EE_Position = move_group.getCurrentPose().pose;
                 loop_flag = CheckExitCondition(distance, starting_pose, EE_Position);
                 
@@ -419,8 +422,11 @@ int main(int argc, char** argv)
     else
         ROS_ERROR("Error during the call of the client");
         
+    
     hand_group.setJointValueTarget(hand_ready_state);
     hand_group.move();
+    move_group.setMaxVelocityScalingFactor(0.3);
+
     move_group.setJointValueTarget(arm_ready_state);
     move_group.move();
 
