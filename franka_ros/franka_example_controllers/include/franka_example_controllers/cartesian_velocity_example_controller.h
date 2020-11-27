@@ -59,6 +59,7 @@ class CartesianVelocityExampleController : public controller_interface::MultiInt
     Eigen::Matrix<double, 6, 1> MeanMatrix;
 
     ros::Publisher new_vel_pub;
+    ros::Publisher filter_pub;
 
     std::array<double, 6> command, last_command;
 

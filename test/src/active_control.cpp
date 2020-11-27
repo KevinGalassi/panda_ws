@@ -44,7 +44,10 @@ int main(int argc, char** argv)
     ros::Publisher width_pub = nh.advertise<std_msgs::Float32>("/My_new_input", 100);
 
     ros::Publisher vel_pub = nh.advertise<std_msgs::Float32MultiArray>("/cartesian_velocity_request", 1);
-    ros::Publisher vel_n = nh.advertise<std_msgs::Float32>("/cartesian_velocity_normal", 1);
+    ros::Publisher vel_plot = nh.advertise<std_msgs::Float32MultiArray>("/plot_vel", 1);
+
+
+    //ros::Publisher vel_n = nh.advertise<std_msgs::Float32>("/cartesian_velocity_normal", 1);
 
     ros::Subscriber fo_F101_sub = nh.subscribe("/first_order_params_F101", 100, fo_F101_callback);
     ros::Subscriber fo_F102_sub = nh.subscribe("/first_order_params_F102", 100, fo_F102_callback);
@@ -84,10 +87,15 @@ int main(int argc, char** argv)
     if (not (nh.getParam("/Active/lower_bound", lower_bound))) lower_bound = -0.02;
 
     std::string pos_control, vel_control;
-    if (not (nh.getParam("Active/pos_control", pos_control))) pos_control = "position_joint_trajectory_controller";
-    if (not (nh.getParam("Active/vel_control", vel_control))) vel_control = "joint_velocity_example_controller";
+    if (not (nh.getParam("/Active/pos_control", pos_control))) pos_control = "position_joint_trajectory_controller";
+    if (not (nh.getParam("/Active/vel_control", vel_control))) vel_control = "joint_velocity_example_controller";
 
     ros::Rate(100);
+
+
+    std::cout << "P " << P << "\n";
+    std::cout << "I " << I << "\n";
+    std::cout << "D " << D << "\n";
 
     float velocity_fix = 0.012;
     float velocity_round = 0.005;
@@ -141,8 +149,14 @@ int main(int argc, char** argv)
     TrajectoryVector waypoints;
     TrajectoryPlanner_param param;
 
-    param.radius = 0.03;                // Radius of the semi-circle for fixing part
-    param.heigh = 0.03;                 // Heigh of upward movement
+
+    param.radius = 0.02;                // Radius of the semi-circle for fixing part
+    param.heigh = 0.02;   
+
+    nh.getParam("/Active/radius", param.radius);
+    nh.getParam("/Active/heigh", param.heigh);
+
+
     param.circ_point = 100;             // Point generated in the semi-circle
     param.res = 0.001;                  // Distance beetween two following points in the final trajectory
     param.distance_approach = 0.05;     // Distance from which starts the grasping operation
@@ -293,14 +307,20 @@ int main(int argc, char** argv)
 
             while(loop_flag)
             {
-                wire_distance = (fo_F101_msg.data[1] - fo_F102_msg.data[1])/2;
+                //wire_distance = (fo_F101_msg.data[1] - fo_F102_msg.data[1])/2;
+                
                 reference = 0.0; 
-                actual_value = wire_distance;
+                actual_value = fo_F101_msg.data[1];
                 
                 vel_msg.data[2] = UpdatePID(reference, actual_value, P, I, D, integral, delta_time, pre_error, offset, true);
                 vel_msg.data[2] = CheckBounds(upper_bound, lower_bound, vel_msg.data[2]);
                 vel_pub.publish(vel_msg);
-                
+
+                /*
+                for(int i=0; i<6; i++)
+                    vel_msg.data[i] = vel_msg.data[i]*1000;
+                vel_plot.publish(vel_msg);
+                */
 
                 /*
                 FilterVector[index] = UpdatePID(reference, actual_value, P, I, D, integral, delta_time, pre_error, offset, true);
@@ -323,7 +343,7 @@ int main(int argc, char** argv)
 
                 */
 
-               // EE_Position = CheckEEPosition(kinematic_state);
+                // EE_Position = CheckEEPosition(kinematic_state);
                 EE_Position = move_group.getCurrentPose().pose;
                 loop_flag = CheckExitCondition(distance, starting_pose, EE_Position);
                 
@@ -357,6 +377,7 @@ int main(int argc, char** argv)
                     ROS_ERROR("Error during the call of the client");
 
                 visual_tools.prompt("Move to next position");
+                move_group.setMaxVelocityScalingFactor(0.01);
                 move_group.setJointValueTarget(WaypointsVector[i+1].poses[0]);
                 move_group.move();
             }
@@ -400,8 +421,11 @@ int main(int argc, char** argv)
     else
         ROS_ERROR("Error during the call of the client");
         
+    
     hand_group.setJointValueTarget(hand_ready_state);
     hand_group.move();
+    move_group.setMaxVelocityScalingFactor(0.3);
+
     move_group.setJointValueTarget(arm_ready_state);
     move_group.move();
 
@@ -466,7 +490,7 @@ float UpdatePID(float ref_value, float actual_value, float Kp, float Ki, float K
     float Dout = Kd * derivative;
 
     // Calculate total output
-    float output = zero_width - (Pout + Iout + Dout);
+    float output = zero_width + (Pout + Iout + Dout);
 
     pre_error = error;
 

@@ -48,9 +48,15 @@ include_directories(
  add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
  target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
+ add_executable(${PROJECT_NAME}_node2 src/wire_params_2.cpp)
+ add_dependencies(${PROJECT_NAME}_node2 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+ target_link_libraries(${PROJECT_NAME}_node2 ${catkin_LIBRARIES})
+
+
   add_executable(${PROJECT_NAME}_node_mod src/wire_params_mod.cpp)
  add_dependencies(${PROJECT_NAME}_node_mod ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
  target_link_libraries(${PROJECT_NAME}_node_mod ${catkin_LIBRARIES})
+
 
 
 
