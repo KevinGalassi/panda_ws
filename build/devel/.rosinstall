@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/kevin/ros/panda_ws/src/build/devel/setup.sh
