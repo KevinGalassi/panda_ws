@@ -104,7 +104,6 @@ int main(int argc, char** argv)
 
     moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
     moveit::planning_interface::MoveGroupInterface hand_group("hand");
-    moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
     moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
     visual_tools.deleteAllMarkers();
 
