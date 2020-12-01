@@ -3,14 +3,9 @@
   <name>planner</name>
   
   <version>0.0.0</version>
-  
   <description>The traj_control package</description>
-  
   <maintainer email="kevin@todo.todo">kevin</maintainer>
-
   <license>TODO</license>
-
-
 
   <buildtool_depend>catkin</buildtool_depend>
 
