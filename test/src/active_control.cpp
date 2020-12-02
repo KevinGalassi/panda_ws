@@ -5,14 +5,14 @@
 #include <controller_manager_msgs/SwitchController.h>
 
 #include <std_msgs/Float32.h>
-
+#include <sensor_msgs/JointState.h>
 #include <PID.h>
 #include <MyFunc.h>
 
 
 #define INPUT_RPY 1
 
-geometry_msgs::Pose CheckEEPosition(robot_state::RobotStatePtr kinematic_state);
+geometry_msgs::Pose CheckEEPosition(robot_state::RobotStatePtr& kinematic_state);
 bool CheckExitCondition(float distance, geometry_msgs::Pose start_pose, geometry_msgs::Pose EE_Pos);
 
 
@@ -21,10 +21,14 @@ void fo_F101_callback(const std_msgs::Float32MultiArray& msg);
 void fo_F102_callback(const std_msgs::Float32MultiArray& msg);
 void so_F101_callback(const std_msgs::Float32MultiArray& msg);
 void so_F102_callback(const std_msgs::Float32MultiArray& msg);
+void joint_callback(const sensor_msgs::JointState& data);
+
 std_msgs::Float32MultiArray fo_F101_msg, fo_F102_msg, so_F101_msg, so_F102_msg;
 
 float UpdatePID(float ref_value, float actual_value, float Kp, float Ki, float Kd, float& integral, float dt, float& pre_error, float zero_width, int verse);
 float CheckBounds(float max, float min, float output);
+
+std::vector<double> joint_value;
 
 
 int main(int argc, char** argv)
@@ -35,6 +39,11 @@ int main(int argc, char** argv)
     ros::AsyncSpinner spinner(1);
     spinner.start();
 
+
+joint_value.resize(7);
+
+
+
     fo_F101_msg.data.resize(2);
     fo_F102_msg.data.resize(2);
     so_F101_msg.data.resize(3);
@@ -43,26 +52,43 @@ int main(int argc, char** argv)
     ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_command",100);
     ros::Publisher width_pub = nh.advertise<std_msgs::Float32>("/My_new_input", 100);
 
-    ros::Publisher vel_pub = nh.advertise<std_msgs::Float32MultiArray>("/cartesian_velocity_request", 1);
-    ros::Publisher vel_plot = nh.advertise<std_msgs::Float32MultiArray>("/plot_vel", 1);
+    ros::Publisher vel_pub = nh.advertise<std_msgs::Float32MultiArray>("/cartesian_velocity_output", 1);
+    ros::Publisher vel_filter_pub = nh.advertise<std_msgs::Float32MultiArray>("/cartesian_velocity_request", 1);
+
+    ros::Subscriber joint_pos_sub = nh.subscribe("/franka_state_controller/joint_states", 10, joint_callback);
+    sensor_msgs::JointState joint_msg;
+    joint_msg.position.resize(7);
+
 
 
     //ros::Publisher vel_n = nh.advertise<std_msgs::Float32>("/cartesian_velocity_normal", 1);
 
     ros::Subscriber fo_F101_sub = nh.subscribe("/first_order_params_F101", 100, fo_F101_callback);
-    ros::Subscriber fo_F102_sub = nh.subscribe("/first_order_params_F102", 100, fo_F102_callback);
+ //   ros::Subscriber fo_F102_sub = nh.subscribe("/first_order_params_F102", 100, fo_F102_callback);
 
 //    ros::Subscriber so_F101_sub = nh.subscribe("/second_order_params_F101", 1, so_F101_callback);
 //    ros::Subscriber so_F102_sub = nh.subscribe("/second_order_params_F102", 1, so_F102_callback);
     
     std_msgs::Float32 width_msg;
     std_msgs::Float32 cmd_msg;
-    std_msgs::Float32MultiArray vel_msg;
+    std_msgs::Float32MultiArray vel_msg, vel_filter_msg;
     std_msgs::Float32 vel_n_msg;
 
     namespace rvt = rviz_visual_tools;
 
     // PARAMEERS READING FROM LAUNH FILE 
+
+
+
+    int filter_size = 3;
+    int index = 0;
+    double vel_filter = 0.0;
+
+    std::vector<double> FilterVector;
+    FilterVector.resize(filter_size);
+    for(int i=0; i<filter_size; i++)
+        FilterVector[i] = 0.0;
+
 
     ros::Duration T_offset = ros::Duration(0.4);
 
@@ -77,7 +103,10 @@ int main(int argc, char** argv)
     float delta_time = 1.0/100.0;
     float pre_error = 0;
     float actual_value;
-    
+
+    int rate;
+
+
     if (not (nh.getParam("/Active/PathName", path)))    path = "/home/panda/ros/Franka-Kev/src/test/src/PointList/Active";
     if (not (nh.getParam("/Active/P", P))) P = 0.01;
     if (not (nh.getParam("/Active/I", I))) I = 0.0;
@@ -89,8 +118,9 @@ int main(int argc, char** argv)
     std::string pos_control, vel_control;
     if (not (nh.getParam("/Active/pos_control", pos_control))) pos_control = "position_joint_trajectory_controller";
     if (not (nh.getParam("/Active/vel_control", vel_control))) vel_control = "joint_velocity_example_controller";
+    if (not (nh.getParam("/Active/rate", rate))) rate = 100;
 
-    ros::Rate(100);
+    ros::Rate loop_rate(rate);
 
 
     std::cout << "P " << P << "\n";
@@ -224,6 +254,7 @@ int main(int argc, char** argv)
     float distance;
     float wire_distance;
 
+
     /*
     distance = sqrt(pow((final_pose.position.x - starting_pose.position.x ),2) + 
                 pow((final_pose.position.y - starting_pose.position.y ),2) +
@@ -259,6 +290,10 @@ int main(int argc, char** argv)
     bool command_y = false;
 
     vel_msg.data[0] = velocity_pass;
+    vel_filter_msg.data.resize(6);
+
+    for(int i=0; i<6; i++)
+        vel_filter_msg.data[i] = vel_msg.data[i];
 
     std::cout << "Plan to execute: \n";
     for(int i=0; i<PlansVector.size(); i++)
@@ -309,45 +344,43 @@ int main(int argc, char** argv)
             while(loop_flag)
             {
                 //wire_distance = (fo_F101_msg.data[1] - fo_F102_msg.data[1])/2;
-                
+                ros::spinOnce();
+
                 reference = 0.0; 
                 actual_value = fo_F101_msg.data[1];
                 
                 vel_msg.data[2] = UpdatePID(reference, actual_value, P, I, D, integral, delta_time, pre_error, offset, true);
                 vel_msg.data[2] = CheckBounds(upper_bound, lower_bound, vel_msg.data[2]);
-                vel_pub.publish(vel_msg);
+           
+                FilterVector[index] = vel_msg.data[2];
+                index = index + 1;
 
-                /*
-                for(int i=0; i<6; i++)
-                    vel_msg.data[i] = vel_msg.data[i]*1000;
-                vel_plot.publish(vel_msg);
-                */
-
-                /*
-                FilterVector[index] = UpdatePID(reference, actual_value, P, I, D, integral, delta_time, pre_error, offset, true);
-                FilterVector[index] = CheckBounds(upper_bound, lower_bound, FilterVector[index]);
-                vel_n_msg.data = FilterVector[index];
-                
-                index++;
-                if(index >= filter_size);
+                if(index >= filter_size)
                     index = 0;
 
                 for(int i=0; i<filter_size; i++)
-                    vel_filter = vel_filter + FilterVector[i];
+                {
+                    vel_filter += FilterVector[i];
+                }
+                vel_filter_msg.data[2] = vel_filter/filter_size;
+                vel_filter = 0.0;
+
+                vel_pub.publish(vel_filter_msg);
+                vel_filter_pub.publish(vel_msg);
+
+                //joint_value =  move_group.getCurrentJointValues();
                 
-                vel_msg.data[2] = vel_filter/(double)filter_size;
-                vel_filter = 0;
+                
+                
+                kinematic_state->setJointGroupPositions(joint_model_group, joint_value);
+                EE_Position = CheckEEPosition(kinematic_state);
+               // std::cout << EE_Position << "\n";
 
 
-                vel_pub.publish(vel_msg);
-                vel_n.publish(vel_n_msg);
-
-                */
-
-                // EE_Position = CheckEEPosition(kinematic_state);
-                EE_Position = move_group.getCurrentPose().pose;
+            //    EE_Position = move_group.getCurrentPose().pose;
                 loop_flag = CheckExitCondition(distance, starting_pose, EE_Position);
-                
+
+                loop_rate.sleep();
             }
 
             ROS_INFO("point reached, vel set to 0.0");
@@ -434,7 +467,7 @@ int main(int argc, char** argv)
     return 0;
 }
 
-geometry_msgs::Pose CheckEEPosition(robot_state::RobotStatePtr kinematic_state)
+geometry_msgs::Pose CheckEEPosition(robot_state::RobotStatePtr& kinematic_state)
 {
     geometry_msgs::Pose EE_Pose;
     const Eigen::Isometry3d& end_effector_state = kinematic_state->getGlobalLinkTransform("panda_link8");
@@ -506,4 +539,11 @@ float CheckBounds(float max, float min, float output)
     else if(output < min )
         output = min;
     return output;
+}
+
+
+void joint_callback(const sensor_msgs::JointState& data)
+{
+    for(int i=0; i<7; i++)
+        joint_value[i] = data.position[i];
 }

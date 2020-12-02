@@ -14,11 +14,12 @@
 	<param name="topic" value ="" />
 
     <param name="pos_control" value = "position_joint_trajectory_controller" />
-    <param name="vel_control" value = "joint_velocity_example_controller"/>
+    <param name="vel_control" value = "cartesian_velocity_controller"/>
 
 
 	<param name="radius" value = "0.02"/>
     <param name="heigh" value = "0.025"/>
+    <param name="rate" value = "100"/>
 
 
 	<!-- <param name="vel_control" value = "joint_velocity_example_controller" /> -->

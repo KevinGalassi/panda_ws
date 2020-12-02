@@ -101,6 +101,21 @@ add_dependencies(PID_test
   ${catkin_EXPORTED_TARGETS}
   franka_gripper) 
 
+
+add_executable(gripper_test src/gripper_test.cpp)
+target_link_libraries(gripper_test ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(gripper_test 
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+  franka_gripper) 
+
+
+
+
+
+
+
+
 ## Tools
 include(${CMAKE_CURRENT_LIST_DIR}/../cmake/ClangTools.cmake OPTIONAL
   RESULT_VARIABLE CLANG_TOOLS
