@@ -66,8 +66,9 @@ include_directories(
   moeit_visual_tools
 )
 
-add_dependencies(TrajectoryPlanner ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS}  ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} )
-
+# Nn necessario ricontrollare
+#add_dependencies(TrajectoryPlanner ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS}  ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} )
+# 
 
 add_executable(test_planner src/test.cpp)
 target_link_libraries(test_planner TrajectoryPlanner ${catkin_LIBRARIES} ${Boost_LIBRARIES})
@@ -77,19 +78,13 @@ add_dependencies(test_planner TrajectoryPlanner
   franka_gripper) 
 
 
-add_executable(planning_action_server src/planning_action_server.cpp)
-target_link_libraries(planning_action_server ${catkin_LIBRARIES} TrajectoryPlanner)
-add_dependencies(planning_action_server TrajectoryPlanner 
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-  ${catkin_EXPORTED_TARGETS}
-  )
+#add_executable(planning_action_server src/planning_action_server.cpp)
+#target_link_libraries(planning_action_server ${catkin_LIBRARIES} TrajectoryPlanner)
+## add_dependencies(planning_action_server TrajectoryPlanner ${${PROJECT_NAME}_EXPORTED_TARGETS}  ${catkin_EXPORTED_TARGETS}  )
 
-add_executable(test_tactile src/TactileSensorTesting.cpp)
-target_link_libraries(test_tactile Planner ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(test_tactile Planner
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-  ${catkin_EXPORTED_TARGETS}
-  franka_gripper) 
+#add_executable(test_tactile src/TactileSensorTesting.cpp)
+#target_link_libraries(test_tactile Planner ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+#add_dependencies(test_tactile Planner ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} franka_gripper) 
 
 
 
