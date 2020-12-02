@@ -15,7 +15,6 @@
 
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
-
 #include <moveit_visual_tools/moveit_visual_tools.h>
 
 
@@ -79,20 +78,18 @@ public:
 
     std::string visualizer;
 
-    void PublishInputPoint(moveit_visual_tools::MoveItVisualTools& visual_tools);   
-    void PublishTrajectory(moveit_visual_tools::MoveItVisualTools& visual_tools);
-
-    std::vector<geometry_msgs::PoseArray> SecondaryTrajectories;
-
-
-private:
-
     geometry_msgs::PoseArray InitPoint;
     std::vector<std::string> InitLabel;
 
+    std::vector<geometry_msgs::PoseArray> SecondaryTrajectories;
     geometry_msgs::PoseArray Trajectory;
     std::vector<std::string> label_list;
 
+    void PublishInputPoint(moveit_visual_tools::MoveItVisualTools& visual_tools);   
+    void PublishTrajectory(moveit_visual_tools::MoveItVisualTools& visual_tools);
+
+
+private:
 
     void CornerDetection();
 

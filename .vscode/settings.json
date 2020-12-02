@@ -3,6 +3,7 @@
         "/opt/ros/melodic/lib/python2.7/dist-packages"
     ],
     "files.associations": {
+<<<<<<< HEAD
         "cctype": "cpp",
         "clocale": "cpp",
         "cmath": "cpp",
@@ -67,5 +68,8 @@
         "set": "cpp",
         "string": "cpp",
         "string_view": "cpp"
+=======
+        "*.ipp": "cpp"
+>>>>>>> 1b77f05567e3c389e8acfd54850caf4f8583d5a0
     }
 }
