@@ -3,12 +3,12 @@
 	<node name="GripperControl" pkg="test" type="gripper_test" output="screen" >
 
 		<param name="velocity" value = "0.50" />
-		<param name="reference" value = "0.025" />
-		<param name="force" value = "20"  />
+		<param name="reference" value = "0.0040" />
+		<param name="force" value = "10"  />
         <param name="pause1" value = "5"  />
         <param name="pause2" value = "5"  />
-        <param name="inner" value = "0.05"  />
-        <param name="outer" value = "0.08"  />
+        <param name="inner" value = "0.03"  />
+        <param name="outer" value = "0.008"  />
 
 
 	</node>

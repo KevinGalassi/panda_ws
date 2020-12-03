@@ -73,6 +73,8 @@ int main(int argc, char** argv)
     actionlib::SimpleActionClient<franka_gripper::GraspAction> grasp_client("/franka_gripper/grasp", true);
     actionlib::SimpleActionClient<franka_gripper::StopAction> stop_client("/franka_gripper/stop", true);
 
+    moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
+
 
     ros::Rate loop_rate(rate);
 
@@ -122,8 +124,9 @@ int main(int argc, char** argv)
     {
         grasp_client.sendGoal(grasp_goal);
         grasp_client.waitForResult(ros::Duration(10));
-        ros::Duration(1).sleep();
 
+        visual_tools.prompt("Next");
+        
         move_client.sendGoal(move_goal);
         move_client.waitForResult(ros::Duration(10));
 
