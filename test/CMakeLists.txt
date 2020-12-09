@@ -62,9 +62,9 @@ include_directories(
 
 
 
-add_executable(te src/test.cpp)
-target_link_libraries(te ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(te 
+add_executable(cable_routing src/cable_routing.cpp)
+target_link_libraries(cable_routing ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(cable_routing 
   ${${PROJECT_NAME}_EXPORTED_TARGETS}
   ${catkin_EXPORTED_TARGETS}
   franka_gripper) 
