@@ -6,6 +6,7 @@
 
 #include <actionlib/client/simple_action_client.h>
 
+#include <schunk_pg70/set_position.h>
 
 #include <MyFunc.h>
 
@@ -17,7 +18,7 @@
 
 int main(int argc, char** argv)
 {
-    ros::init(argc, argv, "ol_tes2t2");
+    ros::init(argc, argv, "routing_app");
     ros::NodeHandle nh;
 
     ros::AsyncSpinner spinner(1);
@@ -29,45 +30,51 @@ int main(int argc, char** argv)
     std_msgs::Float32 width_msg;
     std_msgs::Float32 cmd_msg;
 
+    ros::ServiceClient set_position = nh.serviceClient<schunk_pg70::set_position>("schunk_pg70/set_position");
+        
+    schunk_pg70::set_position schunk_pos_srv;
+
+    schunk_pos_srv.request.goal_position = 60; // 69
+    schunk_pos_srv.request.goal_velocity = 60; // 82
+    schunk_pos_srv.request.goal_acceleration = 200; // 320
+
     namespace rvt = rviz_visual_tools;
 
     float T_O;
-    if (not (nh.getParam("/TrajectoryTest/Offset", T_O)))
+    if (!(nh.getParam("/cable_routing/Offset", T_O)))
         T_O = 0.4;
     ros::Duration T_offset = ros::Duration(0.4);
     ros::Duration T_round = ros::Duration(0.4);
 
-    float scaling_factor = 6;
-    float scaling_round =  8;
-    float scaling_fix = 10;
+    std::string path1;
+    if (!(nh.getParam("/cable_routing/filename", path1))) path1 = "/home/panda/ros/panda_ws/src/test/src/PointList/Routing";
 
-    /*
-    float velocity_fix = 0.17;
-    float velocity_round = 0.1;
-    float velocity_pass = 0.20;
-    */
 
-   
-    float velocity_fix = 0.02;
-    float velocity_round = 0.1;
-    float velocity_pass = 0.05;
-   
+    float velocity_fix;
+    float velocity_round;
+    float velocity_pass;
+    if (!(nh.getParam("/cable_routing/velocity_fix", velocity_fix))) velocity_fix = 0.02;
+    if (!(nh.getParam("/cable_routing/velocity_round", velocity_round))) velocity_round = 0.1;
+    if (!(nh.getParam("/cable_routing/velocity_pass", velocity_pass))) velocity_pass = 0.05;;
 
-    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
-    moveit::planning_interface::MoveGroupInterface hand_group("hand");
+
+    std::string group_name;
+    
+    if (!(nh.getParam("/cable_routing/move_group", group_name))) group_name = "panda_arm";
+    moveit::planning_interface::MoveGroupInterface move_group(group_name);
+    if(!(nh.getParam("/cable_routing/hand_grouo", group_name))) group_name = "hand";
+    //moveit::planning_interface::MoveGroupInterface hand_group("hand");
+    if(!(nh.getParam("/cable_routing/visual_tool_ref", group_name))) group_name = "panda_link0";
     moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
     visual_tools.deleteAllMarkers();
 
-    std::string path1 = "/home/kevin/ros/panda_ws/src/test/src/PointList/Test";
-    std::string Log_Path = "/home/kevin/Panda_log";
-    std::ofstream plan_output_c;
 
 
     ROS_INFO("Reach Ready Position");
     move_group.setMaxVelocityScalingFactor(0.2);
 
-    hand_group.setJointValueTarget(hand_ready_state);
-    hand_group.move();
+    //hand_group.setJointValueTarget(hand_ready_state);
+    // hand_group.move();
     move_group.setJointValueTarget(arm_ready_state);
     move_group.move();
 
@@ -77,7 +84,7 @@ int main(int argc, char** argv)
     TrajectoryVector waypoints;
     TrajectoryPlanner_param param;
 
-    param.radius = 0.05;                // Radius of the semi-circle for fixing part
+    param.radius = 0.04;                // Radius of the semi-circle for fixing part
     param.heigh = 0.03;                 // Heigh of upward movement
     param.circ_point = 1000;             // Point generated in the semi-circle
     param.res = 0.001;                  // Distance beetween two following points in the final trajectory
@@ -90,10 +97,9 @@ int main(int argc, char** argv)
 
 
     geometry_msgs::Pose grasp1;
-    geometry_msgs::PoseArray waypoints_final;
 
     ReadFileTxt(INPUT_RPY, waypoints.point, waypoints.pt_label, path1, grasp1);
-    MyTrajectoryPlanner3(param, waypoints);
+    MyTrajectoryPlanner4(param, waypoints);  // normally 3
     visual_tools.deleteAllMarkers();
     
 
@@ -110,33 +116,12 @@ int main(int argc, char** argv)
 
     visual_tools.prompt("Print Value");
     visual_tools.publishPath(waypoints.point.poses, rvt::LIME_GREEN, rvt::XXXSMALL);
-
-    for(int i=0; i<waypoints.point.poses.size(); i++)
-    {
-        visual_tools.publishAxisLabeled(waypoints.point.poses[i], "init_point" , rvt::XXXSMALL);
-    }
-
-    for(int i=0; i<waypoints.SecondaryTrajectory.size(); i++)
-    {
-        for(int k=0; k<waypoints.SecondaryTrajectory[i].poses.size(); k++)
-        {
-            visual_tools.publishAxisLabeled(waypoints.SecondaryTrajectory[i].poses[k], waypoints.pt_label[i] , rvt::XXXSMALL);
-        }
-    }
     visual_tools.trigger();
 
 
 
 /****************** MOTION INIT *****************************************/
         
-
-    moveit_msgs::RobotTrajectory trajectory_cartesian;
-
-
-    moveit::planning_interface::MoveGroupInterface::Plan Plan_Cartesian, Plan2;
-
-    bool success;
-    int final_plan_size;
 
     move_group.setNumPlanningAttempts(PLANNING_ATTEMPTS_NO); 
     move_group.setPlanningTime(10);
@@ -168,13 +153,17 @@ int main(int argc, char** argv)
             1 = PID;
             2 = MAN;
     */
+
     for(int i=0; i<PlansVector[0].trajectory_.joint_trajectory.joint_names.size(); i++ )
         std::cout << PlansVector[0].trajectory_.joint_trajectory.joint_names[PlansVector[0].trajectory_.joint_trajectory.joint_names.size()-1] << "\n";
     
     visual_tools.prompt("Start to grasp");
 
-    hand_group.setJointValueTarget(hand_closed_position);
-    hand_group.move();
+    //hand_group.setJointValueTarget(hand_closed_position);
+    //hand_group.move();
+
+    schunk_pos_srv.request.goal_position = 15;
+    set_position.call(schunk_pos_srv);
   
     visual_tools.prompt(" Next to start");
 
@@ -235,7 +224,7 @@ int main(int argc, char** argv)
             //cmd_msg.data = 3; // loop
             cmd_pub.publish(cmd_msg);
             ros::Duration(0.5).sleep();
-            width_msg.data = 0.004;
+            width_msg.data = 0.0045;
             width_pub.publish(width_msg);
         }
         move_group.execute(PlansVector[i]);
@@ -248,8 +237,8 @@ int main(int argc, char** argv)
     ros::Duration(1).sleep();
 
 
-    hand_group.setJointValueTarget(hand_ready_state);
-    hand_group.move();
+    // hand_group.setJointValueTarget(hand_ready_state);
+    // hand_group.move();
     
     move_group.setJointValueTarget(arm_ready_state);
     move_group.move();

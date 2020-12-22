@@ -119,7 +119,24 @@ int main(int argc, char** argv)
 
     ros::Duration(pause2).sleep();
 
+
+
+    ROS_INFO("Start Loop");
     move_goal.width = 0.8;
+    move_client.sendGoal(move_goal);
+
+    move_goal.width = 0.003;
+    
+    while(ros::ok())
+    {
+        move_client.cancelAllGoals();
+        move_client.sendGoal(move_goal);
+    }
+    
+    
+    
+    
+    
     while(ros::ok())
     {
         grasp_client.sendGoal(grasp_goal);

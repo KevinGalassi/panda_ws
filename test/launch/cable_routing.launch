@@ -1,0 +1,19 @@
+<launch>
+    <node pkg="test" type="cable_routing" name="TrajectoryTest"  output="screen" >
+
+
+	<param name="Rescale" value = "6" />
+	<param name="Offset" value = "1.2" />
+    <param name="filename" value = "/home/panda/ros/panda_ws/src/test/src/PointList/Routing"/>
+    
+    <param name="velocity_fix" value = "0.10" /> 
+    <param name="velocity_round" value = "0.10" />
+    <param name="velocity_pass" value = "0.70" />
+    
+    <param name="move_group" value = "panda_arm" />
+    <param name="hand_group" value = "hand" />
+    <param name="visual_tool_ref" value = "panda_link0" />
+
+    </node>
+
+</launch>

@@ -120,6 +120,12 @@ void addFixPoint(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& way
 void addFixPoint2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, double radius, double heigh, int res, double dis_init, double dist_final, bool orientation);
 void addFixPoint3(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, double radius, double heigh, int res, double dis_init, double dist_final, bool orientation);
 
+void addPreFixPoint2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, double radius, double heigh, int res, double dis_init, double dist_final, bool orientation);
+void addPostFixPoint2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, double radius, double heigh, int res, double dis_init, double dist_final, bool orientation);
+
+
+
+
 void CornerFix2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, geometry_msgs::Pose corner_point, geometry_msgs::Pose starting_point,
                              TrajectoryPlanner_param param, double dis_init, double dist_final, bool orientation);
 
@@ -710,6 +716,317 @@ void MyTrajectoryPlanner3(TrajectoryPlanner_param param, TrajectoryVector& waypo
     }
 }
 
+
+
+
+void addPreFixPoint2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, double radius, double heigh, int res, double dis_init, double dist_final, bool orientation)
+{
+
+    geometry_msgs::Pose target_pose;
+    geometry_msgs::Point center;
+
+    tf2::Matrix3x3 R;
+    tf2::Quaternion quat;
+
+    quat.setX(fixing_point.orientation.x);
+    quat.setY(fixing_point.orientation.y);
+    quat.setZ(fixing_point.orientation.z);
+    quat.setW(fixing_point.orientation.w);
+    R.setRotation(quat);
+
+    double dist_init_vector[3] = {dis_init, 0, 0};
+    double dist_final_vector[3] = {dist_final, 0 ,0};
+
+    target_pose.position.x = fixing_point.position.x - (R[0][0]*dist_init_vector[0] + R[0][1]*dist_init_vector[1] + R[0][1]*dist_init_vector[2]);
+    target_pose.position.y = fixing_point.position.y - (R[1][0]*dist_init_vector[0] + R[1][1]*dist_init_vector[1] + R[1][1]*dist_init_vector[2]);
+   // target_pose.position.z = fixing_point.position.z - (R[2][0]*dist_init_vector[0] + R[2][1]*dist_init_vector[1] + R[2][1]*dist_init_vector[2]) - 0.02;    // !!!
+    target_pose.position.z = fixing_point.position.z - (R[2][0]*dist_init_vector[0] + R[2][1]*dist_init_vector[1] + R[2][1]*dist_init_vector[2]);
+    target_pose.orientation = fixing_point.orientation;
+    waypoints.poses.push_back(target_pose);
+
+    if (orientation)
+    {
+        // lateral shift of the diameter of the circle
+        target_pose.position.x = fixing_point.position.x + R[0][1]*radius*2;
+        target_pose.position.y = fixing_point.position.y + R[1][1]*radius*2;
+      //  target_pose.position.z = fixing_point.position.z + R[2][1]*radius*2 - 0.02;
+         target_pose.position.z = fixing_point.position.z + R[2][1]*radius*2;
+        target_pose.orientation = fixing_point.orientation;
+        waypoints.poses.push_back(target_pose);
+
+        // Half-circle, the minus in the "heigh" is required since the z axies is taken pointing down
+        center.x = fixing_point.position.x + R[0][1]*radius - R[0][2]*heigh;
+        center.y = fixing_point.position.y + R[1][1]*radius - R[1][2]*heigh;
+        center.z = fixing_point.position.z + R[2][1]*radius - R[2][2]*heigh;
+
+        for(int k = 0; k < res; k++)
+        {
+            target_pose.position.x = center.x + R[0][1]*radius*cos(M_PI/res*k) - R[0][2]*radius*sin(M_PI/res*k) + (R[0][0]*dist_final_vector[0] + R[0][1]*dist_final_vector[1] + R[0][2]*dist_final_vector[2])*k/res ; // Piccolo movimento in avanti
+            target_pose.position.y = center.y + R[1][1]*radius*cos(M_PI/res*k) - R[1][2]*radius*sin(M_PI/res*k) + (R[1][0]*dist_final_vector[0] + R[1][1]*dist_final_vector[1] + R[1][2]*dist_final_vector[2])*k/res;
+            target_pose.position.z = center.z + R[2][1]*radius*cos(M_PI/res*k) - R[2][2]*radius*sin(M_PI/res*k) + (R[2][0]*dist_final_vector[0] + R[2][1]*dist_final_vector[1] + R[2][2]*dist_final_vector[2])*k/res;
+            waypoints.poses.push_back(target_pose);
+        }
+    }
+    else
+    {
+        // lateral shift of the diameter of the circle
+        target_pose.position.x = fixing_point.position.x - R[0][1]*radius*2;
+        target_pose.position.y = fixing_point.position.y - R[1][1]*radius*2;
+      //  target_pose.position.z = fixing_point.position.z - R[2][1]*radius*2 -0.02;
+        target_pose.position.z = fixing_point.position.z - R[2][1]*radius*2;
+        target_pose.orientation = fixing_point.orientation;
+        waypoints.poses.push_back(target_pose);
+
+        // Half-circle, the minus in the "heigh" is required since the z axies is taken pointing down
+        center.x = fixing_point.position.x - R[0][1]*radius - R[0][2]*heigh;
+        center.y = fixing_point.position.y - R[1][1]*radius - R[1][2]*heigh;
+        center.z = fixing_point.position.z - R[2][1]*radius - R[2][2]*heigh;
+        
+        // Upshift
+        target_pose.position.x = target_pose.position.x - R[0][2]*heigh;
+        target_pose.position.y = target_pose.position.y - R[1][2]*heigh;
+        target_pose.position.z = target_pose.position.z - R[2][2]*heigh;
+        waypoints.poses.push_back(target_pose);
+    }
+
+    return ;
+}
+
+void addPostFixPoint2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, double radius, double heigh, int res, double dis_init, double dist_final, bool orientation)
+{
+
+    geometry_msgs::Pose target_pose;
+    geometry_msgs::Point center;
+
+    tf2::Matrix3x3 R;
+    tf2::Quaternion quat;
+
+    quat.setX(fixing_point.orientation.x);
+    quat.setY(fixing_point.orientation.y);
+    quat.setZ(fixing_point.orientation.z);
+    quat.setW(fixing_point.orientation.w);
+    R.setRotation(quat);
+
+    double dist_init_vector[3] = {dis_init, 0, 0};
+    double dist_final_vector[3] = {dist_final, 0 ,0};
+
+    target_pose.position.x = fixing_point.position.x - (R[0][0]*dist_init_vector[0] + R[0][1]*dist_init_vector[1] + R[0][1]*dist_init_vector[2]);
+    target_pose.position.y = fixing_point.position.y - (R[1][0]*dist_init_vector[0] + R[1][1]*dist_init_vector[1] + R[1][1]*dist_init_vector[2]);
+   // target_pose.position.z = fixing_point.position.z - (R[2][0]*dist_init_vector[0] + R[2][1]*dist_init_vector[1] + R[2][1]*dist_init_vector[2]) - 0.02;    // !!!
+    target_pose.position.z = fixing_point.position.z - (R[2][0]*dist_init_vector[0] + R[2][1]*dist_init_vector[1] + R[2][1]*dist_init_vector[2]);
+    target_pose.orientation = fixing_point.orientation;
+
+    if (orientation)
+    {
+        for(int k = 0; k < res; k++)
+        {
+            target_pose.position.x = center.x + R[0][1]*radius*cos(M_PI/res*k) - R[0][2]*radius*sin(M_PI/res*k) + (R[0][0]*dist_final_vector[0] + R[0][1]*dist_final_vector[1] + R[0][2]*dist_final_vector[2])*k/res ; // Piccolo movimento in avanti
+            target_pose.position.y = center.y + R[1][1]*radius*cos(M_PI/res*k) - R[1][2]*radius*sin(M_PI/res*k) + (R[1][0]*dist_final_vector[0] + R[1][1]*dist_final_vector[1] + R[1][2]*dist_final_vector[2])*k/res;
+            target_pose.position.z = center.z + R[2][1]*radius*cos(M_PI/res*k) - R[2][2]*radius*sin(M_PI/res*k) + (R[2][0]*dist_final_vector[0] + R[2][1]*dist_final_vector[1] + R[2][2]*dist_final_vector[2])*k/res;
+            waypoints.poses.push_back(target_pose);
+        }
+    }
+    else
+    {
+        // Half-circle, the minus in the "heigh" is required since the z axies is taken pointing down
+        center.x = fixing_point.position.x - R[0][1]*radius - R[0][2]*heigh;
+        center.y = fixing_point.position.y - R[1][1]*radius - R[1][2]*heigh;
+        center.z = fixing_point.position.z - R[2][1]*radius - R[2][2]*heigh;
+        
+        for(int k = 0; k < res; k++)
+        {
+            target_pose.position.x = center.x - R[0][1]*radius*cos(M_PI/res*k) - R[0][2]*radius*sin(M_PI/res*k) + (R[0][0]*dist_final_vector[0] + R[0][1]*dist_final_vector[1] + R[0][2]*dist_final_vector[2])*k/res ; // Piccolo movimento in avanti
+            target_pose.position.y = center.y - R[1][1]*radius*cos(M_PI/res*k) - R[1][2]*radius*sin(M_PI/res*k) + (R[1][0]*dist_final_vector[0] + R[1][1]*dist_final_vector[1] + R[1][2]*dist_final_vector[2])*k/res;
+            target_pose.position.z = center.z - R[2][1]*radius*cos(M_PI/res*k) - R[2][2]*radius*sin(M_PI/res*k) + (R[2][0]*dist_final_vector[0] + R[2][1]*dist_final_vector[1] + R[2][2]*dist_final_vector[2])*k/res;
+            waypoints.poses.push_back(target_pose);
+        }
+    }
+    
+    target_pose.position.x = fixing_point.position.x - R[0][2]*heigh + R[0][0]*dist_final_vector[0] + R[0][1]*dist_final_vector[1] + R[0][1]*dist_final_vector[2];
+    target_pose.position.y = fixing_point.position.y - R[1][2]*heigh + R[1][0]*dist_final_vector[0] + R[1][1]*dist_final_vector[1] + R[1][1]*dist_final_vector[2];
+    target_pose.position.z = fixing_point.position.z - R[2][2]*heigh + R[2][0]*dist_final_vector[0] + R[2][1]*dist_final_vector[1] + R[2][1]*dist_final_vector[2];
+    waypoints.poses.push_back(target_pose);
+
+    // Downshift
+    target_pose.position.x = fixing_point.position.x + R[0][0]*dist_final_vector[0] + R[0][1]*dist_final_vector[1] + R[0][1]*dist_final_vector[2];
+    target_pose.position.y = fixing_point.position.y + R[1][0]*dist_final_vector[0] + R[1][1]*dist_final_vector[1] + R[1][1]*dist_final_vector[2];
+    target_pose.position.z = fixing_point.position.z + R[2][0]*dist_final_vector[0] + R[2][1]*dist_final_vector[1] + R[2][1]*dist_final_vector[2];
+    waypoints.poses.push_back(target_pose);
+
+
+    return ;
+}
+
+
+void MyTrajectoryPlanner4(TrajectoryPlanner_param param, TrajectoryVector& waypoints)
+{    
+    std::vector<geometry_msgs::PoseArray> Trajectories_list, Trajectory_list_with_patch;        // Store the trajectory of each point of the file
+
+    geometry_msgs::PoseArray Trajectory_part;    
+    std::vector<std::string> Trajectory_id;            
+    geometry_msgs::PoseArray Patch_To_Add;
+
+    float PP_distance;          
+    double new_Ctrl_Pt_d1;
+    double new_Ctrl_Pt_d2;
+
+    geometry_msgs::Pose P1,P2,P3;
+    int trajectory_size;
+    
+    CornerDetection_3(waypoints.point, waypoints.pt_label);
+    
+    for (std::size_t i = 0; i < waypoints.point.poses.size(); i ++)
+    {  
+        std::cout << i << "\n";
+        std::cout << waypoints.pt_label[i] << "\n";
+        if (waypoints.pt_label[i] == "fix")
+        {   
+            if(i > 2)
+            {
+                if(waypoints.pt_label[i-1] == "corner")
+                {
+                    std::cout << "corner fix \n";
+                    std::cout << waypoints.point.poses[i] << "\n";
+                    std::cout << waypoints.point.poses[i-1] << "\n";
+                    std::cout << Trajectories_list[Trajectories_list.size()-1].poses[Trajectories_list[Trajectories_list.size()-1].poses.size()-1] << "\n";
+
+                    CornerFix2(waypoints.point.poses[i], Trajectory_part, waypoints.point.poses[i-1], Trajectories_list[Trajectories_list.size()-1].poses[Trajectories_list[Trajectories_list.size()-1].poses.size()-1], param, 0.05, 0.05, true);
+                    std::cout << "fine corner \n";
+                    Trajectories_list.push_back(Trajectory_part);
+                    Trajectory_part.poses.clear();
+                    std::cout << "modifica \n";
+                    waypoints.pt_label[i-1] == "cornerfix";
+                    Trajectory_id.push_back("cornerfix");
+                    
+                }
+                else
+                {
+                    addPreFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.06, 0.04, false);
+                    Trajectories_list.push_back(Trajectory_part);
+                    Trajectory_part.poses.clear();
+                    Trajectory_id.push_back("pre-fix");
+
+                    addPostFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.06, 0.04, false);
+                    Trajectories_list.push_back(Trajectory_part);
+                    Trajectory_part.poses.clear();
+                    Trajectory_id.push_back("fix");
+                }
+            }
+            else
+            {
+                addPreFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.06, 0.04, false);
+                Trajectories_list.push_back(Trajectory_part);
+                Trajectory_part.poses.clear();
+                Trajectory_id.push_back("pre-fix");
+
+                addPostFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.06, 0.04, false);
+                Trajectories_list.push_back(Trajectory_part);
+                Trajectory_part.poses.clear();
+                Trajectory_id.push_back("fix");
+
+            }
+        }
+
+        if(waypoints.pt_label[i] == "pass")
+        {
+            Trajectory_part.poses.push_back(waypoints.point.poses[i]);
+            Trajectories_list.push_back(Trajectory_part);
+            Trajectory_part.poses.clear();   
+            Trajectory_id.push_back("pass");
+        }
+
+        if(waypoints.pt_label[i] == "corner")
+        {
+            if( i < waypoints.point.poses.size()-1)
+            {
+                if(waypoints.pt_label[i+1] == "fix")
+                {
+                    std::cout << "Skip";
+                }
+                else
+                {
+                    Trajectory_part.poses.push_back(waypoints.point.poses[i]);
+                    Trajectories_list.push_back(Trajectory_part);
+                    Trajectory_part.poses.clear();   
+                    Trajectory_id.push_back("corner");
+                }     
+            }
+        }
+    } 
+
+ 
+    for(size_t i = 1; i < (Trajectories_list.size()-1); i++)
+    {
+        if(Trajectory_id[i] == "corner" && Trajectory_id[i+1] != "cornerfix")
+        {
+            trajectory_size = Trajectories_list[i-1].poses.size();
+            P1 = Trajectories_list[i-1].poses[trajectory_size-1];
+            P2 = Trajectories_list[i].poses[0];
+            P3 = Trajectories_list[i+1].poses[0];
+
+            PP_distance = ComputeDistance(P1, P2);
+            if( Trajectory_id[i-1] != "corner")
+            {
+                if(PP_distance < param.Ctrl_pt_d1)
+                    new_Ctrl_Pt_d1 = PP_distance;
+                else
+                    new_Ctrl_Pt_d1 =  param.Ctrl_pt_d1;
+            }
+            else
+            {
+                new_Ctrl_Pt_d1 = PP_distance/2;
+            }
+
+            PP_distance = ComputeDistance(P2, P3);
+            if(waypoints.pt_label[i+1] != "corner")
+            {
+                if (PP_distance < param.Ctrl_pt_d2)
+                    new_Ctrl_Pt_d2 = PP_distance;
+                else 
+                    new_Ctrl_Pt_d2 =  param.Ctrl_pt_d2;
+            }
+            else
+            {
+                new_Ctrl_Pt_d2 = PP_distance/2;
+            }
+            
+            CornerRounding(P1, P2, P3, new_Ctrl_Pt_d1, new_Ctrl_Pt_d2, Trajectory_part, param.corner_points);
+            Trajectories_list[i].poses.clear();
+            Trajectories_list[i].poses = Trajectory_part.poses;
+            Trajectory_id[i] = "corner";
+            Trajectory_part.poses.clear();
+        }
+    }
+
+    std::vector<std::string> LabelVector_flag;
+
+/**************** INCLUDE PATCH ******************/  
+
+    waypoints.SecondaryTrajectory.push_back(Trajectories_list[0]);
+    LabelVector_flag.push_back(Trajectory_id[0]);
+
+    for(size_t i=1; i<Trajectories_list.size(); i++)
+    {
+        if (ComputePatch(Trajectories_list[i-1].poses.back(), Trajectories_list[i].poses[0], Patch_To_Add, param.res) > 1 )
+        {
+            waypoints.SecondaryTrajectory.push_back(Patch_To_Add);
+            LabelVector_flag.push_back("pass");
+        }    
+        waypoints.SecondaryTrajectory.push_back(Trajectories_list[i]);   
+        LabelVector_flag.push_back(Trajectory_id[i]);     
+        Patch_To_Add.poses.clear();
+    }
+
+    waypoints.pt_label.clear();
+    for(int i=0; i< LabelVector_flag.size(); i++)
+    {
+        waypoints.pt_label.push_back(LabelVector_flag[i]);
+    }
+}
+
+
+
+
 void FromEE2Link8(geometry_msgs::PoseArray& waypoints)
 {
     /*****
@@ -727,7 +1044,7 @@ void FromEE2Link8(geometry_msgs::PoseArray& waypoints)
     tf2::Quaternion quat, quat_shift, quat_new;
     tf2::Vector3 axis;
 
-    quat.setRPY(0,0,M_PI/4);
+    quat.setRPY(0,0,-M_PI/4);
     R_shift.setRotation(quat);
 
     for (size_t i=0; i < waypoints.poses.size(); i++)
@@ -1323,7 +1640,7 @@ void CornerFix2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& wayp
 
     intermediate_pose.position.x = corner_point.position.x;
     intermediate_pose.position.y = corner_point.position.y + 0.03;
-    intermediate_pose.position.z = corner_point.position.z - 0.02;
+    intermediate_pose.position.z = corner_point.position.z;
     intermediate_pose.orientation = starting_point.orientation;
     ComputePatch(starting_point, intermediate_pose, waypoints, param.res);
     
@@ -1748,6 +2065,12 @@ void FinalTrajectoryRescaling(std::vector<moveit::planning_interface::MoveGroupI
 
     robot_state::RobotState start_state(*move_group.getCurrentState());
 
+    trajectory_msgs::JointTrajectoryPoint Traj_point;
+    Traj_point.positions.resize(7);
+    Traj_point.accelerations.resize(7);
+    Traj_point.velocities.resize(7);
+
+
     std::vector<double[7] > joints_list_Cartesian;
     double joints_Cartesian[7];
     int size_plan;
@@ -1778,7 +2101,7 @@ void FinalTrajectoryRescaling(std::vector<moveit::planning_interface::MoveGroupI
                 mean_velocity = velocity_pass;
             if(waypoints.pt_label[i-1] == "round")
                 mean_velocity = velocity_round;
-            if(waypoints.pt_label[i-1] == "fix" || waypoints.pt_label[i-1] == "cornerfix")
+            if(waypoints.pt_label[i-1] == "fix" || waypoints.pt_label[i-1] == "cornerfix" || waypoints.pt_label[i-1] == "pre-fix")
                 mean_velocity = velocity_fix;
             else
                 mean_velocity = velocity_fix;
@@ -1787,11 +2110,26 @@ void FinalTrajectoryRescaling(std::vector<moveit::planning_interface::MoveGroupI
             LabelVector.push_back(waypoints.pt_label[i-1]);
             WaypointsVector.push_back(PoseFlag);
             move_group.computeCartesianPath(PoseFlag.poses, eef_step, jump_threshold, trajectory_cartesian);
+            
             if (trajectory_cartesian.joint_trajectory.points.size() == 0)
                 ROS_INFO("Skip");
             else
             {   
                 Traj_flag = VelocityScaling(trajectory_cartesian, PoseFlag,  mean_velocity, T_offset);  
+                
+                if(waypoints.pt_label[i] == "pre-fix")
+                {
+                    Traj_point = Traj_flag.joint_trajectory.points[Traj_flag.joint_trajectory.points.size()-1];
+                    
+                    for(int i=0; i<7; i++)
+                    {
+                        Traj_point.accelerations[i] = 0;
+                        Traj_point.velocities[i] = 0;
+                    }
+                    Traj_point.time_from_start += T_offset;
+                    Traj_flag.joint_trajectory.points.push_back(Traj_point);
+                }
+
                 TrajVector.push_back(Traj_flag);             
                 size_plan = trajectory_cartesian.joint_trajectory.points.size();
                 for (int j=0; j<7; j++)

@@ -3,7 +3,7 @@
 <launch>
 
   <arg name="robot_ip" value="172.16.0.2"/>
-  <arg name="load_gripper" value="true" />
+  <arg name="load_gripper" value="false" />
   <arg name="rviz_tutorial" default="false" />
   <arg name="use_gui" default="false" />
   <arg name="debug" default="false" />
@@ -20,6 +20,9 @@
     <arg name="rviz_tutorial" value="$(arg rviz_tutorial)"/>
     <arg name="debug" value="$(arg debug)"/>
   </include>
+
+
+
 
 <!-- Load all the desired controllers -->
 

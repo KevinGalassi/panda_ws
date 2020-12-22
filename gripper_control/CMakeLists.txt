@@ -130,6 +130,10 @@ add_dependencies(TactileSensorGrasp
   ${catkin_EXPORTED_TARGETS}
   franka_gripper) 
 
+add_executable(gripper_controller_schunk src/gripper_controller_schunk.cpp)
+target_link_libraries(gripper_controller_schunk ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(gripper_controller_schunk schunk_pg70)
+
 
 
 

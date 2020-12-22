@@ -33,16 +33,13 @@ std::vector<double> joint_value;
 
 int main(int argc, char** argv)
 {
-    ros::init(argc, argv, "test2");
+    ros::init(argc, argv, "Active_controller");
     ros::NodeHandle nh;
 
     ros::AsyncSpinner spinner(1);
     spinner.start();
 
-
-joint_value.resize(7);
-
-
+    joint_value.resize(7);
 
     fo_F101_msg.data.resize(2);
     fo_F102_msg.data.resize(2);
@@ -79,20 +76,6 @@ joint_value.resize(7);
     // PARAMEERS READING FROM LAUNH FILE 
 
 
-
-    int filter_size = 3;
-    int index = 0;
-    double vel_filter = 0.0;
-
-    std::vector<double> FilterVector;
-    FilterVector.resize(filter_size);
-    for(int i=0; i<filter_size; i++)
-        FilterVector[i] = 0.0;
-
-
-    ros::Duration T_offset = ros::Duration(0.4);
-
-
     std::string path;
     float P, I, D;
     float reference, upper_bound, lower_bound;
@@ -120,6 +103,22 @@ joint_value.resize(7);
     if (not (nh.getParam("/Active/vel_control", vel_control))) vel_control = "joint_velocity_example_controller";
     if (not (nh.getParam("/Active/rate", rate))) rate = 100;
 
+
+    int filter_size = 3;
+    int index = 0;
+    double vel_filter = 0.0;
+
+    if (not (nh.getParam("/Active/filter_size", filter_size))) filter_size = 10;
+
+    ROS_INFO("Filter size: %d", filter_size );
+
+    std::vector<double> FilterVector;
+    FilterVector.resize(filter_size);
+    for(int i=0; i<filter_size; i++)
+        FilterVector[i] = 0.0;
+
+
+    ros::Duration T_offset = ros::Duration(0.4);
     ros::Rate loop_rate(rate);
 
 
@@ -254,30 +253,9 @@ joint_value.resize(7);
     float wire_distance;
 
 
-    /*
-    distance = sqrt(pow((final_pose.position.x - starting_pose.position.x ),2) + 
-                pow((final_pose.position.y - starting_pose.position.y ),2) +
-                pow((final_pose.position.z - starting_pose.position.z ),2));
-    
-    vel_pid.ref_value = 0;
-    while(loop_flag)
-    {
-        wire_distance = (fo_F101_msg.data[1] + fo_F102_msg.data[1])/2;
-        vel_pid.actual_value = wire_distance;
 
-        vel_msg.data[0] = vel_pid.output_sat;
-        vel_pub.publish(vel_msg);
 
-     //   EE_Position = CheckEEPosition(kinematic_state);
-        EE_Position = move_group.getCurrentPose().pose;
-        loop_flag = CheckExitCondition(distance, starting_pose, EE_Position);
-        ros::spin();
-    }
 
-    for(int i=0; i<6; i++)
-        vel_msg.data[i] = 0.0;
-    vel_pub.publish(vel_msg);
-    */
    
 /*** ESECUZIONE ***/
 
@@ -364,12 +342,10 @@ joint_value.resize(7);
                 vel_filter_msg.data[2] = vel_filter/filter_size;
                 vel_filter = 0.0;
 
-                vel_pub.publish(vel_filter_msg);
-                vel_filter_pub.publish(vel_msg);
+                vel_pub.publish(vel_msg);
+                vel_filter_pub.publish(vel_filter_msg); // published
 
                 //joint_value =  move_group.getCurrentJointValues();
-                
-                
                 
                 kinematic_state->setJointGroupPositions(joint_model_group, joint_value);
                 EE_Position = CheckEEPosition(kinematic_state);
