@@ -1,8 +1,0 @@
-prefix=/home/kvn/ros/panda_ws/devel
-
-Name: gripper_control
-Description: Description of gripper_control
-Version: 0.0.0
-Cflags: -I/home/kvn/ros/panda_ws/devel/include -I/home/kvn/ros/panda_ws/src/gripper_control/include -I/home/kvn/libfranka/include
-Libs: -L${prefix}/lib -lfranka_gripper /home/kvn/libfranka/build/libfranka.so.0.8.0
-Requires: moveit_core moveit_visual_tools moveit_ros_planning_interface franka_hw geometry_msgs roscpp rospy std_msgs message_runtime control_msgs actionlib actionlib_msgs sensor_msgs xmlrpcpp

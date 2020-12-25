@@ -1,8 +1,0 @@
-prefix=/home/kvn/ros/panda_ws/devel
-
-Name: schunk_pg70
-Description: Description of schunk_pg70
-Version: 1.3.7
-Cflags: -I/home/kvn/ros/panda_ws/devel/include -I/home/kvn/ros/panda_ws/src/schunk_pg70/include
-Libs: -L${prefix}/lib 
-Requires: roscpp serial tf

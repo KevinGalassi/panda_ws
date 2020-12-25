@@ -1,8 +1,0 @@
-prefix=/home/kvn/ros/panda_ws/install
-
-Name: read_sensor
-Description: Description of read_sensor
-Version: 0.0.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib 
-Requires: 

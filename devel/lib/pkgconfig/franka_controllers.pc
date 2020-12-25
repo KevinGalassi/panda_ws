@@ -1,8 +1,0 @@
-prefix=/home/kvn/ros/panda_ws/devel
-
-Name: franka_controllers
-Description: Description of franka_controllers
-Version: 0.7.0
-Cflags: -I/home/kvn/ros/panda_ws/src/franka_driver/franka_controllers/include -I/home/kvn/libfranka/include
-Libs: -L${prefix}/lib -lfranka_controllers /home/kvn/libfranka/build/libfranka.so.0.8.0
-Requires: controller_interface dynamic_reconfigure eigen_conversions franka_hw geometry_msgs hardware_interface tf tf_conversions message_runtime pluginlib realtime_tools roscpp

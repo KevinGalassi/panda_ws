@@ -1,8 +1,0 @@
-prefix=/home/kvn/ros/panda_ws/devel
-
-Name: ros_toon
-Description: Description of ros_toon
-Version: 0.0.0
-Cflags: -I/home/kvn/ros/panda_ws/devel/include
-Libs: -L${prefix}/lib /usr/lib/x86_64-linux-gnu/liblapack.so /usr/lib/x86_64-linux-gnu/libblas.so
-Requires: 

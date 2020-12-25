@@ -1,2 +1,0 @@
-franka_driver/franka_control:franka_driver/franka_controllers:franka_driver/franka_description:franka_driver/franka_gripper:franka_driver/franka_hw:franka_driver/franka_msgs:franka_driver/panda_moveit_config:gripper_control:planner:schunk_pg70:tactile_sensor/read_sensor:tactile_sensor/serial:tactile_sensor/wire_params_pkg/ros_toon:tactile_sensor/wire_params_pkg/wire_params:test
--DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/home/kvn/libfranka/build -DCATKIN_DEVEL_PREFIX=/home/kvn/ros/panda_ws/devel -DCMAKE_INSTALL_PREFIX=/home/kvn/ros/panda_ws/install -G Unix Makefiles
