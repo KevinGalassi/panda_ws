@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>planner</name>
+  
+  <version>0.0.0</version>
+  <description>The traj_control package</description>
+  <maintainer email="kevin@todo.todo">kevin</maintainer>
+  <license>TODO</license>
+
+  <build_depend> message_generation </build_depend>
+  <depend> message_runtime </depend>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>actionlib </depend>
+  <depend>actionlib_msgs</depend>
+  <depend>libfranka </depend>
+  <depend>franka_hw </depend>
+  <depend>xmlrpcpp</depend>
+
+  <depend>geometry_msgs</depend>
+  <depend>moveit_msgs</depend>
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>moveit_visual_tools</depend>
+  <depend>moveit_core</depend>
+  <depend>moveit_ros_planning_interface</depend>
+  <depend>sensor_msgs </depend>
+
+  
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+
+  </export>
+</package>

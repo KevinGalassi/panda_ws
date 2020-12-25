@@ -1,0 +1,8 @@
+prefix=/home/kvn/ros/panda_ws/install
+
+Name: wire_params
+Description: Description of wire_params
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

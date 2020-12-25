@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,libTrajectoryPlanner.so -o /home/kvn/ros/panda_ws/devel/lib/libTrajectoryPlanner.so CMakeFiles/TrajectoryPlanner.dir/src/TrajectoryPlanner.cpp.o 
