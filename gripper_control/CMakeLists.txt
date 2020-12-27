@@ -85,50 +85,16 @@ include_directories(include)
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS})
 include_directories(${catkin_INCLUDE_DIRS})
 
-if (false)
-
-	# Manual regulated gripper
-	add_executable(man_gripper src/manual_gripper_node.cpp)
-	target_link_libraries(man_gripper ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-	add_dependencies(man_gripper 
-	  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-	  ${catkin_EXPORTED_TARGETS}
-	  franka_gripper)
-
-	add_executable(com_gripper src/GripperUserInterface.cpp)
-	target_link_libraries(com_gripper ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-	add_dependencies(com_gripper 
-	  ${${PROJECT_NAME}_EXPORTED_TARGETS}  
-	# Missing this two lines to compile the action correctly
-	  ${catkin_EXPORTED_TARGETS}
-	  franka_gripper)
-
-	# PID regulated gripper
-
-	add_executable(pid src/PID_gripper_control_node.cpp)
-	target_link_libraries(pid ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-	add_dependencies(pid 
-	  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-	  ${catkin_EXPORTED_TARGETS}
-	  franka_gripper)
-endif()
 
 
 # Auto Switching gripper-control
-add_executable(auto_gripper_control_node src/auto_gripper_control_node.cpp)
-target_link_libraries(auto_gripper_control_node ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(auto_gripper_control_node 
+add_executable(gripper_controller_franka src/gripper_controller_franka.cpp)
+target_link_libraries(gripper_controller_franka ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(gripper_controller_franka 
   ${${PROJECT_NAME}_EXPORTED_TARGETS}
   ${catkin_EXPORTED_TARGETS}
   franka_gripper) 
 
-#Grasp Test
-add_executable(TactileSensorGrasp src/TactileSensorGrasp.cpp)
-target_link_libraries(TactileSensorGrasp ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(TactileSensorGrasp 
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-  ${catkin_EXPORTED_TARGETS}
-  franka_gripper) 
 
 add_executable(gripper_controller_schunk src/gripper_controller_schunk.cpp)
 target_link_libraries(gripper_controller_schunk ${catkin_LIBRARIES} ${Boost_LIBRARIES})

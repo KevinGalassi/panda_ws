@@ -46,8 +46,8 @@ int main(int argc, char** argv)
     so_F101_msg.data.resize(3);
     so_F102_msg.data.resize(3);
 
-    ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_command",100);
-    ros::Publisher width_pub = nh.advertise<std_msgs::Float32>("/My_new_input", 100);
+    ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_state_request",100);
+    ros::Publisher width_pub = nh.advertise<std_msgs::Float32>("/gripper_width_request", 100);
 
     ros::Publisher vel_pub = nh.advertise<std_msgs::Float32MultiArray>("/cartesian_velocity_output", 1);
     ros::Publisher vel_filter_pub = nh.advertise<std_msgs::Float32MultiArray>("/cartesian_velocity_request", 1);

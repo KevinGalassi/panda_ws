@@ -264,7 +264,7 @@ int main(int argc, char** argv)
     n.getParam("/GripperControl/lower_bound", lower_bound);
     n.getParam("/GripperControl/offset", offset);
     n.getParam("/GripperControl/filter_size", filter_size);
-    n.getParam("/GripperControl/topic", TopicName); 
+    n.getParam("/GripperControl/control_topic", TopicName); 
     n.getParam("/GripperControl/tactile_ref", tactile_ref);    
 
  //   reference = tactile_ref;        // !!
@@ -276,8 +276,8 @@ int main(int argc, char** argv)
 
     ros::Subscriber GripperPos_sub  = n.subscribe("/joint_states", 100, ReadStatus_cb);
     ros::Subscriber Wrench_sub      = n.subscribe(TopicName, 1, ReadWrench_cb);
-    ros::Subscriber user_sub        = n.subscribe("/My_new_input", 100, new_width_cb);
-    ros::Subscriber command_sub     = n.subscribe("/gripper_command", 100, new_command_cb);
+    ros::Subscriber user_sub        = n.subscribe("/gripper_width_request", 100, new_width_cb);
+    ros::Subscriber command_sub     = n.subscribe("/gripper_state_request", 100, new_command_cb);
     ros::Subscriber tactile_sub     = n.subscribe("/TactileFeedback", 100, ReadTactile_cb);    
 
     ros::Publisher control_output_pub = n.advertise<gripper_control::ControlOutput>("/gripper_control/ControlOutput", 100);

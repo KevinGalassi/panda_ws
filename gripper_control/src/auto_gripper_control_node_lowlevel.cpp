@@ -279,8 +279,8 @@ int main(int argc, char** argv)
 
     ros::Subscriber GripperPos_sub  = n.subscribe("/joint_states", 100, ReadStatus_cb);
     ros::Subscriber Wrench_sub      = n.subscribe(TopicName, 1, ReadWrench_cb);
-    ros::Subscriber user_sub        = n.subscribe("/My_new_input", 100, new_width_cb);
-    ros::Subscriber command_sub     = n.subscribe("/gripper_command", 100, new_command_cb);
+    ros::Subscriber user_sub        = n.subscribe("/gripper_width_request", 100, new_width_cb);
+    ros::Subscriber command_sub     = n.subscribe("/gripper_state_request", 100, new_command_cb);
     ros::Subscriber tactile_sub     = n.subscribe("/TactileFeedback", 100, ReadTactile_cb);    
 
     ros::Publisher control_output_pub = n.advertise<gripper_control::ControlOutput>("/gripper_control/ControlOutput", 100);

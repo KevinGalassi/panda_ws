@@ -26,8 +26,8 @@ int main(int argc, char** argv)
     ros::AsyncSpinner spinner(1);
     spinner.start();
 
-    ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_command",100);
-    ros::Publisher width_pub = nh.advertise<std_msgs::Float32>("/My_new_input", 100);
+    ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_state_request",100);
+    ros::Publisher width_pub = nh.advertise<std_msgs::Float32>("/gripper_width_request", 100);
 
     std_msgs::Float32 width_msg;
     std_msgs::Float32 cmd_msg;

@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+
+	<arg name="schunk" 			default="true"/>
+	<arg name="franka_gripper" default="false" />
+  	<arg name="P" 					default = "0.00075" />
+	<arg name="I" 					default = "0" />
+	<arg name="D" 					default = "0" />
+	<arg name="velocity" 		default = "0.50" />
+	<arg name="reference" 		default = "7" />
+	<arg name="offset" 			default = "0.005"  />
+	<arg name="upper_bound" 	default = "0.007" />
+	<arg name="lower_bound" 	default = "0.003" />
+	<arg name="control_topic" 			default = "/franka_state_controller/External_Wrench_Filter" />
+	<arg name="tactile_ref" 	default = "0.065" />
+
+	<group if="$(arg schunk)">
+		<launch>
+			<node name="GripperControl" pkg="gripper_control" type="gripper_controller_schunk" output="screen"  pass_all_args="true" />
+		</launch>
+	</group>
+
+	<group if="$(arg franka_gripper)">
+		<launch>
+			<node name="GripperControl" pkg="gripper_control" type="auto_gripper_control_node" output="screen" pass_all_args="true" />
+		</launch>
+	</group>
+
+
+<!--
+	<group if="$(arg schunk)">
+		<launch>
+			<node name="GripperControl" pkg="gripper_control" type="gripper_controller_schunk" output="screen" >
+				<param name="P" value = "0.00075" />
+				<param name="I" value = "0" />
+				<param name="D" value = "0" />
+				<param name="velocity" value = "0.50" />
+				<param name="reference" value = "7" />
+				<param name="offset" value = "0.005"  />
+				<param name="upper_bound" value = "0.007" />
+				<param name="lower_bound" value = "0.003" />
+				<param name="topic" value = "/franka_state_controller/External_Wrench_Filter" />
+				<param name="tactile_ref" value = "0.065" />
+			</node>
+		</launch>
+	</group>
+
+	<group if="$(arg franka_gripper)">
+		<launch>
+			<node name="GripperControl" pkg="gripper_control" type="auto_gripper_control_node" output="screen" >
+				<param name="P" value = "0.00075" />
+				<param name="I" value = "0" />
+				<param name="D" value = "0" />
+				<param name="velocity" value = "0.50" />
+				<param name="reference" value = "7" />
+				<param name="offset" value = "0.005"  />
+				<param name="upper_bound" value = "0.007" />
+				<param name="lower_bound" value = "0.003" />
+				<param name="topic" value = "/franka_state_controller/External_Wrench_Filter" />
+				<param name="tactile_ref" value = "0.065" />
+			</node>
+		</launch>
+	</group>
+-->
