@@ -47,7 +47,7 @@ int main(int argc, char** argv)
     ros::Duration T_round = ros::Duration(0.4);
 
     std::string path1;
-    if (!(nh.getParam("/cable_routing/filename", path1))) path1 = "/home/panda/ros/panda_ws/src/test/src/PointList/Routing";
+    if (!(nh.getParam("/TrajectoryTest/filename", path1))) path1 = "/home/panda/ros/panda_ws/src/test/src/PointList/Routing";
 
 
     float velocity_fix;
@@ -97,6 +97,8 @@ int main(int argc, char** argv)
 
 
     geometry_msgs::Pose grasp1;
+
+    std::cout << "Path: " << path1 << "\n";
 
     ReadFileTxt(INPUT_RPY, waypoints.point, waypoints.pt_label, path1, grasp1);
     MyTrajectoryPlanner4(param, waypoints);  // normally 3

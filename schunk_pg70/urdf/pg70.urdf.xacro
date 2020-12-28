@@ -24,7 +24,7 @@
         <geometry>
           <mesh filename="package://schunk_pg70/meshes/pg70.dae" />
         </geometry>
-	<material name="blue"/>
+	      <material name="blue"/>
       </collision>
     </link>
 
