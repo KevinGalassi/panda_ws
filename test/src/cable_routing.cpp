@@ -41,30 +41,30 @@ int main(int argc, char** argv)
     namespace rvt = rviz_visual_tools;
 
     float T_O;
-    if (!(nh.getParam("/cable_routing/Offset", T_O)))
+    if (!(nh.getParam("/cableRouting/Offset", T_O)))
         T_O = 0.4;
     ros::Duration T_offset = ros::Duration(0.4);
     ros::Duration T_round = ros::Duration(0.4);
 
     std::string path1;
-    if (!(nh.getParam("/TrajectoryTest/filename", path1))) path1 = "/home/panda/ros/panda_ws/src/test/src/PointList/Routing";
+    if (!(nh.getParam("/cableRouting/filename", path1))) path1 = "/home/panda/ros/panda_ws/src/test/src/PointList/Routing";
 
 
     float velocity_fix;
     float velocity_round;
     float velocity_pass;
-    if (!(nh.getParam("/cable_routing/velocity_fix", velocity_fix))) velocity_fix = 0.02;
-    if (!(nh.getParam("/cable_routing/velocity_round", velocity_round))) velocity_round = 0.1;
-    if (!(nh.getParam("/cable_routing/velocity_pass", velocity_pass))) velocity_pass = 0.05;;
+    if (!(nh.getParam("/cableRouting/velocity_fix", velocity_fix))) velocity_fix = 0.02;
+    if (!(nh.getParam("/cableRouting/velocity_round", velocity_round))) velocity_round = 0.1;
+    if (!(nh.getParam("/cableRouting/velocity_pass", velocity_pass))) velocity_pass = 0.05;;
 
 
     std::string group_name;
     
-    if (!(nh.getParam("/cable_routing/move_group", group_name))) group_name = "panda_arm";
+    if (!(nh.getParam("/cableRouting/move_group", group_name))) group_name = "panda_arm";
     moveit::planning_interface::MoveGroupInterface move_group(group_name);
-    if(!(nh.getParam("/cable_routing/hand_grouo", group_name))) group_name = "hand";
+    if(!(nh.getParam("/cableRouting/hand_grouo", group_name))) group_name = "hand";
     //moveit::planning_interface::MoveGroupInterface hand_group("hand");
-    if(!(nh.getParam("/cable_routing/visual_tool_ref", group_name))) group_name = "panda_link0";
+    if(!(nh.getParam("/cableRouting/visual_tool_ref", group_name))) group_name = "panda_link0";
     moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
     visual_tools.deleteAllMarkers();
 
