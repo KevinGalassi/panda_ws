@@ -1,0 +1,6 @@
+geometry_msgs/Pose pose 
+string ef_frame
+sensor_msgs/JointState seed_pose
+------------
+sensor_msgs/JointState solution
+bool success

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="tf" type="static_transform_publisher" name="gearbox_rf" args="0.1865 -0.285 0 0 0 -1.57 base_link gearbox_rf 10" />
+</launch>  

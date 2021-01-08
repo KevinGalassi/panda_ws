@@ -1,0 +1,1060 @@
+<data>
+    <code name="SIEMENS 3RV2901-1E" commercial="6503373" xdim="0.045" ydim="0.011" zdim="0.039" parent="child">
+        <child name="1">
+            <subitem name="relative">
+                <pos name="x">0</pos>
+                <pos name="y">0.0708295</pos>
+                <pos name="z">0.036754</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </child>
+        <couple name="21">
+            <subitem name="screw">
+                <pos name="x">0.0078</pos>
+                <pos name="y">0.0048</pos>
+                <pos name="z">0.0362</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0078</pos>
+                <pos name="y">0.0100</pos>
+                <pos name="z">0.0279</pos>
+                <rot name="R">1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">3.1428</rot>
+            </subitem>
+        </couple>
+        <couple name="22">
+            <subitem name="screw">
+                <pos name="x">0.0165</pos>
+                <pos name="y">0.0048</pos>
+                <pos name="z">0.0362</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0165</pos>
+                <pos name="y">0.0100</pos>
+                <pos name="z">0.0279</pos>
+                <rot name="R">1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">3.1428</rot>
+            </subitem>
+        </couple>
+        <couple name="13">
+            <subitem name="screw">
+                <pos name="x">0.0290</pos>
+                <pos name="y">0.0048</pos>
+                <pos name="z">0.0362</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0290</pos>
+                <pos name="y">0.0100</pos>
+                <pos name="z">0.0279</pos>
+                <rot name="R">1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">3.1428</rot>
+            </subitem>
+        </couple>
+        <couple name="14">
+            <subitem name="screw">
+                <pos name="x">0.0371</pos>
+                <pos name="y">0.0048</pos>
+                <pos name="z">0.0362</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0371</pos>
+                <pos name="y">0.0100</pos>
+                <pos name="z">0.0279</pos>
+                <rot name="R">1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">3.1428</rot>
+            </subitem>
+        </couple>
+    </code>
+    <code name="SIEMENS 3RV2011-0JA10" commercial="6503372" xdim="0.045" ydim="0.0974" zdim="0.0969" parent="root">
+        <couple name="2">
+            <subitem name="screw">
+                <pos name="x">0.0081</pos>
+                <pos name="y">0.0106</pos>
+                <pos name="z">0.0541</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0081</pos>
+                <pos name="y">0.0037</pos>
+                <pos name="z">0.0398</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="4">
+            <subitem name="screw">
+                <pos name="x">0.0225</pos>
+                <pos name="y">0.0106</pos>
+                <pos name="z">0.0541</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0225</pos>
+                <pos name="y">0.0037</pos>
+                <pos name="z">0.0398</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="6">
+            <subitem name="screw">
+                <pos name="x">0.0369</pos>
+                <pos name="y">0.0106</pos>
+                <pos name="z">0.0541</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0369</pos>
+                <pos name="y">0.0037</pos>
+                <pos name="z">0.0398</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="1">
+            <subitem name="screw">
+                <pos name="x">0.0081</pos>
+                <pos name="y">0.0860</pos>
+                <pos name="z">0.0541</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0081</pos>
+                <pos name="y">0.0932</pos>
+                <pos name="z">0.0398</pos>
+                <rot name="R">1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">3.14</rot>
+            </subitem>
+        </couple>
+        <couple name="3">
+            <subitem name="screw">
+                <pos name="x">0.0225</pos>
+                <pos name="y">0.0860</pos>
+                <pos name="z">0.0541</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0225</pos>
+                <pos name="y">0.0932</pos>
+                <pos name="z">0.0398</pos>
+                <rot name="R">1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">3.14</rot>
+            </subitem>
+        </couple>
+        <couple name="5">
+            <subitem name="screw">
+                <pos name="x">0.0369</pos>
+                <pos name="y">0.0860</pos>
+                <pos name="z">0.0541</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0369</pos>
+                <pos name="y">0.0932</pos>
+                <pos name="z">0.0398</pos>
+                <rot name="R">1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">3.141593</rot>
+            </subitem>
+        </couple>        
+    </code>
+    <code name="SIEMENS 5SY4102-7" commercial="6502083" xdim="0.0177" ydim="0.0898" zdim="0.0764" parent="root">
+        <couple name="1">
+            <subitem name="screw">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0812</pos>
+                <pos name="z">0.0449</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0898</pos>
+                <pos name="z">0.0223</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="2">
+            <subitem name="screw">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0084</pos>
+                <pos name="z">0.0449</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0000</pos>
+                <pos name="z">0.0223</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>                
+    </code>
+    <code name="SIEMENS 5ST3010" commercial="6502088" xdim="0.0132" ydim="0.0898" zdim="0.0754" parent="child">
+        <child name="1">
+            <subitem name="relative">
+                <pos name="x">0.0132968</pos>
+                <pos name="y">0</pos>
+                <pos name="z">0</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </child>
+        <couple name="13">
+            <subitem name="screw">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0842</pos>
+                <pos name="z">0.0461</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0898</pos>
+                <pos name="z">0.0344</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="21">
+            <subitem name="screw">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0759</pos>
+                <pos name="z">0.0461</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0898</pos>
+                <pos name="z">0.0246</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="22">
+            <subitem name="screw">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0138</pos>
+                <pos name="z">0.0461</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0000</pos>
+                <pos name="z">0.0246</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>                
+        <couple name="14">
+            <subitem name="screw">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0055</pos>
+                <pos name="z">0.0461</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0088</pos>
+                <pos name="y">0.0000</pos>
+                <pos name="z">0.0344</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+    </code>
+    <code name="SIEMENS 3RT2017-1BB42" commercial="6503923" xdim="0.0450" ydim="0.0575" zdim="0.0730" parent="root">
+        <couple name="1">
+            <subitem name="screw">
+                <pos name="x">0.0053</pos>
+                <pos name="y">0.0467</pos>
+                <pos name="z">0.0679</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0053</pos>
+                <pos name="y">0.0538</pos>
+                <pos name="z">0.0587</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="3">
+            <subitem name="screw">
+                <pos name="x">0.0139</pos>
+                <pos name="y">0.0467</pos>
+                <pos name="z">0.0679</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0139</pos>
+                <pos name="y">0.0538</pos>
+                <pos name="z">0.0587</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="5">
+            <subitem name="screw">
+                <pos name="x">0.0225</pos>
+                <pos name="y">0.0467</pos>
+                <pos name="z">0.0679</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0225</pos>
+                <pos name="y">0.0538</pos>
+                <pos name="z">0.0587</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="21">
+            <subitem name="screw">
+                <pos name="x">0.0311</pos>
+                <pos name="y">0.0467</pos>
+                <pos name="z">0.0679</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0311</pos>
+                <pos name="y">0.0538</pos>
+                <pos name="z">0.0587</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="A1">
+            <subitem name="screw">
+                <pos name="x">0.0397</pos>
+                <pos name="y">0.0467</pos>
+                <pos name="z">0.0679</pos>
+                <rot name="R">3.141593</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0397</pos>
+                <pos name="y">0.0538</pos>
+                <pos name="z">0.0587</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="2">
+            <subitem name="screw">
+                <pos name="x">0.0053</pos>
+                <pos name="y">0.0107</pos>
+                <pos name="z">0.0679</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0053</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0587</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="4">
+            <subitem name="screw">
+                <pos name="x">0.0139</pos>
+                <pos name="y">0.0107</pos>
+                <pos name="z">0.0679</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0139</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0587</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="6">
+            <subitem name="screw">
+                <pos name="x">0.0225</pos>
+                <pos name="y">0.0107</pos>
+                <pos name="z">0.0679</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0225</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0587</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>     
+        <couple name="22">
+            <subitem name="screw">
+                <pos name="x">0.0311</pos>
+                <pos name="y">0.0107</pos>
+                <pos name="z">0.0679</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0311</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0587</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="A2">
+            <subitem name="screw">
+                <pos name="x">0.0397</pos>
+                <pos name="y">0.0107</pos>
+                <pos name="z">0.0679</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0397</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0587</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>         
+    </code>
+    <code name="SIEMENS 6EP1334-3BA10" commercial="6032224" xdim="0.0700" ydim="0.1346" zdim="0.1262">
+        <couple name="+1">
+            <subitem name="screw">
+                <pos name="x">0.0055</pos>
+                <pos name="y">0.0173</pos>
+                <pos name="z">0.1067</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0055</pos>
+                <pos name="y">0.0145</pos>
+                <pos name="z">0.0963</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="+2">
+            <subitem name="screw">
+                <pos name="x">0.0106</pos>
+                <pos name="y">0.0173</pos>
+                <pos name="z">0.1067</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0106</pos>
+                <pos name="y">0.0145</pos>
+                <pos name="z">0.0963</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="-1">
+            <subitem name="screw">
+                <pos name="x">0.0157</pos>
+                <pos name="y">0.0173</pos>
+                <pos name="z">0.1067</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0157</pos>
+                <pos name="y">0.0145</pos>
+                <pos name="z">0.0963</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="-2">
+            <subitem name="screw">
+                <pos name="x">0.0208</pos>
+                <pos name="y">0.0173</pos>
+                <pos name="z">0.1067</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0208</pos>
+                <pos name="y">0.0145</pos>
+                <pos name="z">0.0963</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L">
+            <subitem name="screw">
+                <pos name="x">0.0437</pos>
+                <pos name="y">0.0154</pos>
+                <pos name="z">0.1084</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0437</pos>
+                <pos name="y">0.0135</pos>
+                <pos name="z">0.0970</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="N">
+            <subitem name="screw">
+                <pos name="x">0.0537</pos>
+                <pos name="y">0.0154</pos>
+                <pos name="z">0.1084</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0537</pos>
+                <pos name="y">0.0135</pos>
+                <pos name="z">0.0970</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="PE">
+            <subitem name="screw">
+                <pos name="x">0.0637</pos>
+                <pos name="y">0.0154</pos>
+                <pos name="z">0.1084</pos>
+                <rot name="R">0</rot>
+                <rot name="P">3.141593</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0637</pos>
+                <pos name="y">0.0135</pos>
+                <pos name="z">0.0970</pos>
+                <rot name="R">-1.57</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+    </code>
+    <code name="WEIDMULLER ZDU6" commercial="6013050" xdim="0.0080" ydim="0.0660" zdim="0.0450" parent="terminal">
+        <couple name="a">
+            <subitem name="screw">
+                <pos name="x">0.0040</pos>
+                <pos name="y">0.0212</pos>
+                <pos name="z">0.0330</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0040</pos>
+                <pos name="y">0.0090</pos>
+                <pos name="z">0.0330</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="b">
+            <subitem name="screw">
+                <pos name="x">0.0040</pos>
+                <pos name="y">0.0422</pos>
+                <pos name="z">0.0330</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0040</pos>
+                <pos name="y">0.0542</pos>
+                <pos name="z">0.0330</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+    </code>
+    <code name="WEIDMULLER ZPE10" commercial="6013280" xdim="0.0100" ydim="0.0753" zdim="0.0497" parent="terminal">
+        <couple name="a">
+            <subitem name="screw">
+                <pos name="x">0.0050</pos>
+                <pos name="y">0.0218</pos>
+                <pos name="z">0.0344</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0050</pos>
+                <pos name="y">0.0086</pos>
+                <pos name="z">0.0344</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="b">
+            <subitem name="screw">
+                <pos name="x">0.0050</pos>
+                <pos name="y">0.0502</pos>
+                <pos name="z">0.0344</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0050</pos>
+                <pos name="y">0.0626</pos>
+                <pos name="z">0.0344</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+    </code>
+    <code name="WEIDMULLER ZPE2.5" commercial="6012971" xdim="0.0051" ydim="0.0664" zdim="0.0383" parent="terminal">
+        <couple name="1">
+            <subitem name="screw">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0190</pos>
+                <pos name="z">0.0276</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0098</pos>
+                <pos name="z">0.0276</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="2">
+            <subitem name="screw">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0427</pos>
+                <pos name="z">0.0276</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0500</pos>
+                <pos name="z">0.0276</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+    </code>
+    <code name="WEIDMULLER ZDU6/3AN" commercial="6013277" xdim="0.0081" ydim="0.0908" zdim="0.0447" parent="terminal">
+        <couple name="a1">
+            <subitem name="screw">
+                <pos name="x">0.0040</pos>
+                <pos name="y">0.0214</pos>
+                <pos name="z">0.0336</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0040</pos>
+                <pos name="y">0.0088</pos>
+                <pos name="z">0.0336</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="b2">
+            <subitem name="screw">
+                <pos name="x">0.0040</pos>
+                <pos name="y">0.0448</pos>
+                <pos name="z">0.0336</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0040</pos>
+                <pos name="y">0.0340</pos>
+                <pos name="z">0.0336</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="b1">
+            <subitem name="screw">
+                <pos name="x">0.0040</pos>
+                <pos name="y">0.0656</pos>
+                <pos name="z">0.0336</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0040</pos>
+                <pos name="y">0.0792</pos>
+                <pos name="z">0.0336</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+    </code>
+    <code name="WEIDMULLER ZDU2.5/4AN" commercial="6012958" xdim="0.0051" ydim="0.0795" zdim="0.0384" parent="terminal">
+        <couple name="a">
+            <subitem name="screw">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0162</pos>
+                <pos name="z">0.0283</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0072</pos>
+                <pos name="z">0.0283</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="a1">
+            <subitem name="screw">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0307</pos>
+                <pos name="z">0.0283</pos>
+                <rot name="R">0</rot>orig
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0223</pos>
+                <pos name="z">0.0283</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="b">
+            <subitem name="screw">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0630</pos>
+                <pos name="z">0.0283</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0715</pos>
+                <pos name="z">0.0283</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="a2">
+            <subitem name="screw">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0471</pos>
+                <pos name="z">0.0283</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0559</pos>
+                <pos name="z">0.0283</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+    </code>
+    <code name="WEIDMULLER ZT2.5/2AN/1" commercial="6012993" xdim="0.0051" ydim="0.0579" zdim="0.0343" parent="terminal">
+        <couple name="a">
+            <subitem name="screw">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0426</pos>
+                <pos name="z">0.0276</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0491</pos>
+                <pos name="z">0.0276</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+    </code>
+    <code name="WEIDMULLER ZTPE2.5/2AN/1" commercial="6013000" xdim="0.0050" ydim="0.0582" zdim="0.0345" parent="terminal">
+        <couple name="a">
+            <subitem name="screw">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0430</pos>
+                <pos name="z">0.0248</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0025</pos>
+                <pos name="y">0.0494</pos>
+                <pos name="z">0.0248</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+    </code>
+    <code name="SIEMENS 6EP1334-3BA10" commercial="6032224" xdim="0.0700" ydim="0.1250" zdim="0.1268" parent="root">
+        <couple name="+2">
+            <subitem name="screw">
+                <pos name="x">0.0050</pos>
+                <pos name="y">0.0075</pos>
+                <pos name="z">0.1050</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0050</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0966</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="+1">
+            <subitem name="screw">
+                <pos name="x">0.0091</pos>
+                <pos name="y">0.0075</pos>
+                <pos name="z">0.1050</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0091</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0966</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="-1">
+            <subitem name="screw">
+                <pos name="x">0.0150</pos>
+                <pos name="y">0.0075</pos>
+                <pos name="z">0.1050</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0150</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0966</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="-2">
+            <subitem name="screw">
+                <pos name="x">0.0195</pos>
+                <pos name="y">0.0075</pos>
+                <pos name="z">0.1050</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0195</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0966</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L">
+            <subitem name="screw">
+                <pos name="x">0.0424</pos>
+                <pos name="y">0.0046</pos>
+                <pos name="z">0.1060</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0424</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0966</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="N">
+            <subitem name="screw">
+                <pos name="x">0.0526</pos>
+                <pos name="y">0.0046</pos>
+                <pos name="z">0.1060</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0526</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0966</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="PE">
+            <subitem name="screw">
+                <pos name="x">0.0620</pos>
+                <pos name="y">0.0046</pos>
+                <pos name="z">0.1060</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0620</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0966</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+    </code>
+    <code name="WEIDMULLER ZEW" commercial="6012928" xdim="0.0079" ydim="0.0564" zdim="0.0406" parent="terminal">
+    <couple name="a">
+            <subitem name="screw">
+                <pos name="x">0.0040</pos>
+                <pos name="y">0.0424</pos>
+                <pos name="z">0.1050</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="hole">
+                <pos name="x">0.0050</pos>
+                <pos name="y">0.0035</pos>
+                <pos name="z">0.0966</pos>
+                <rot name="R">0</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+    </code>
+</data>

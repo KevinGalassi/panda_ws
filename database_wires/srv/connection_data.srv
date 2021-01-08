@@ -1,0 +1,9 @@
+
+------------
+bool end
+bool missing_pin_data
+int32 list_position
+string source
+string label
+string pin
+geometry_msgs/Pose component_pose

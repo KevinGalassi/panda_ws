@@ -65,12 +65,11 @@ int main(int argc, char** argv)
    visual_tools.deleteAllMarkers();
 
 
-
    ROS_INFO("Reach Ready Position");
    move_group.setMaxVelocityScalingFactor(0.2);
 
-   //hand_group.setJointValueTarget(hand_ready_state);
-   // hand_group.move();
+   hand_group.setJointValueTarget(hand_ready_state);
+   hand_group.move();
    move_group.setJointValueTarget(arm_ready_state);
    move_group.move();
 
@@ -218,10 +217,12 @@ int main(int argc, char** argv)
    cmd_msg.data = 2;
    cmd_pub.publish(cmd_msg);
    ros::Duration(1).sleep();
-
+   
+   ROS_INFO("Open gripper");
    hand_group.setJointValueTarget(hand_ready_state);
    hand_group.move();
    
+   ROS_INFO("Reaching ready state");
    move_group.setJointValueTarget(arm_ready_state);
    move_group.move();
 

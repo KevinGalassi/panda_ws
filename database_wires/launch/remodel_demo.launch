@@ -1,0 +1,12 @@
+<?xml version="2.0"?>
+<launch>
+    <node pkg="tf" type="static_transform_publisher" name="gearbox_rf" args="0.1865 -0.285 0 0 0 -1.57 base_link gearbox_rf 10" />
+    <node name="gearbox_handler_wires" pkg="database_wires" type="gearbox_handler_remodel.py" output="screen">
+        <param name="demo_type" value="remodel"/>
+        <param name="output_stl" value="false" />
+        <param name="gearbox_display" value="true" />
+        <param name="files_path" value="/home/davide/ros/ur_ws/src/wires_robotic_platform/database_wires/data/remodel/" />
+        <param name="cad_name" value="Q1_simplified" />
+        <param name="wiring_file" value="TEST1_REMODEL_KOMAX.csv" />
+    </node>
+</launch>  

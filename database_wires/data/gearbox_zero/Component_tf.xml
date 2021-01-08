@@ -1,0 +1,977 @@
+<data>
+    <code name="3RV2011-1GA20">
+        <couple name="T1_H1">
+            <subitem name="hole">
+                <pos name="x">0.004075
+</pos>
+                <pos name="y">0.0046
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+            <subitem name="screw">
+                <pos name="x">0.004075</pos>
+                <pos name="y">0.0046</pos>
+                <pos name="z">0.05835</pos>
+                <rot name="R">3.1428</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">3.1428</rot>
+            </subitem>
+        </couple>
+        <couple name="T1_H2">
+            <subitem name="hole">
+                <pos name="x">0.007975
+</pos>
+                <pos name="y">0.0046
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T1_S1">
+            <subitem name="hole">
+                <pos name="x">0.004075
+</pos>
+                <pos name="y">0.0137
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T1_S2">
+            <subitem name="hole">
+                <pos name="x">0.007975
+</pos>
+                <pos name="y">0.0137
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T2_H1">
+            <subitem name="hole">
+                <pos name="x">0.02035
+</pos>
+                <pos name="y">0.0046
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T2_H2">
+            <subitem name="hole">
+                <pos name="x">0.02425
+</pos>
+                <pos name="y">0.0046
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T2_S1">
+            <subitem name="hole">
+                <pos name="x">0.02035
+</pos>
+                <pos name="y">0.0137
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T2_S2">
+            <subitem name="hole">
+                <pos name="x">0.02425
+</pos>
+                <pos name="y">0.0137
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T3_H1">
+            <subitem name="hole">
+                <pos name="x">0.0346
+</pos>
+                <pos name="y">0.0046
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T3_H2">
+            <subitem name="hole">
+                <pos name="x">0.0385
+</pos>
+                <pos name="y">0.0046
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T3_S1">
+            <subitem name="hole">
+                <pos name="x">0.0346
+</pos>
+                <pos name="y">0.0137
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T3_S2">
+            <subitem name="hole">
+                <pos name="x">0.0385
+</pos>
+                <pos name="y">0.0137
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L1_H1">
+            <subitem name="hole">
+                <pos name="x">0.004075
+</pos>
+                <pos name="y">0.1016
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L1_H2">
+            <subitem name="hole">
+                <pos name="x">0.004075
+
+
+</pos>
+                <pos name="y">0.0914
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L1_S1">
+            <subitem name="hole">
+                <pos name="x">0.004075
+
+
+</pos>
+                <pos name="y">0.0914
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L1_S2">
+            <subitem name="hole">
+                <pos name="x">0.007975
+
+</pos>
+                <pos name="y">0.0914
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L2_H1">
+            <subitem name="hole">
+                <pos name="x">0.02035
+</pos>
+                <pos name="y">0.1016
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L2_H2">
+            <subitem name="hole">
+                <pos name="x">0.02425
+</pos>
+                <pos name="y">0.1016
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L2_S1">
+            <subitem name="hole">
+                <pos name="x">0.02035
+</pos>
+                <pos name="y">0.0914
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L2_S2">
+            <subitem name="hole">
+                <pos name="x">0.02425
+</pos>
+                <pos name="y">0.0914
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L3_H1">
+            <subitem name="hole">
+                <pos name="x">0.0346
+</pos>
+                <pos name="y">0.1016
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L3_H2">
+            <subitem name="hole">
+                <pos name="x">0.0385
+</pos>
+                <pos name="y">0.1016
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L3_S1">
+            <subitem name="hole">
+                <pos name="x">0.0346
+</pos>
+                <pos name="y">0.0914
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="L3_S2">
+            <subitem name="hole">
+                <pos name="x">0.0385
+</pos>
+                <pos name="y">0.0914
+</pos>
+                <pos name="z">0.05835
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <item name="marker">
+            <pos name="x">0.035575
+</pos>
+            <pos name="y">0.069
+</pos>
+            <pos name="z">0.08275
+</pos>
+            <rot name="R">1.570796
+</rot>
+            <rot name="P">3.141593
+</rot>
+            <rot name="Y">0</rot>
+        </item>
+        <item name="visual">
+            <pos name="x">0.020475
+</pos>
+            <pos name="y">0.0225
+</pos>
+            <pos name="z">0.18275
+</pos>
+            <rot name="R">1.570796
+</rot>
+            <rot name="P">3.141593
+</rot>
+            <rot name="Y">0</rot>
+        </item>
+    </code>
+    <code name="3RT2015-1BB41">
+        <couple name="T1">
+            <subitem name="hole">
+                <pos name="x">0.005275
+
+</pos>
+                <pos name="y">0.0105
+</pos>
+                <pos name="z">0.0736
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T2">
+            <subitem name="hole">
+                <pos name="x">0.013825
+
+</pos>
+                <pos name="y">0.0105
+</pos>
+                <pos name="z">0.0736
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="T3">
+            <subitem name="hole">
+                <pos name="x">0.020375
+
+</pos>
+                <pos name="y">0.0105
+</pos>
+                <pos name="z">0.0736
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="14NO">
+            <subitem name="hole">
+                <pos name="x">0.030925
+
+</pos>
+                <pos name="y">0.0105
+</pos>
+                <pos name="z">0.0736
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="A2-">
+            <subitem name="hole">
+                <pos name="x">0.039475
+
+
+</pos>
+                <pos name="y">0.0105
+</pos>
+                <pos name="z">0.0736
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="TH1">
+            <subitem name="hole">
+                <pos name="x">0.00525
+</pos>
+                <pos name="y">0.001125
+</pos>
+                <pos name="z">0.05641
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">-1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="TH2">
+            <subitem name="hole">
+                <pos name="x">0.0139
+</pos>
+                <pos name="y">0.001125
+</pos>
+                <pos name="z">0.05641
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">-1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="TH3">
+            <subitem name="hole">
+                <pos name="x">0.02255
+</pos>
+                <pos name="y">0.001125
+</pos>
+                <pos name="z">0.05641
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">-1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="TH4">
+            <subitem name="hole">
+                <pos name="x">0.0312
+
+</pos>
+                <pos name="y">0.001125
+</pos>
+                <pos name="z">0.05641
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">-1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="TH5">
+            <subitem name="hole">
+                <pos name="x">0.03985
+</pos>
+                <pos name="y">0.001125
+</pos>
+                <pos name="z">0.05641
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">-1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="L1">
+            <subitem name="hole">
+                <pos name="x">0.005275
+</pos>
+                <pos name="y">0.0463
+</pos>
+                <pos name="z">0.0736
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0
+</rot>
+            </subitem>
+        </couple>
+        <couple name="L2">
+            <subitem name="hole">
+                <pos name="x">0.013825
+</pos>
+                <pos name="y">0.0463
+</pos>
+                <pos name="z">0.0736
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0
+</rot>
+            </subitem>
+        </couple>
+        <couple name="L3">
+            <subitem name="hole">
+                <pos name="x">0.020375
+</pos>
+                <pos name="y">0.0463
+</pos>
+                <pos name="z">0.0736
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0
+</rot>
+            </subitem>
+        </couple>
+        <couple name="13NO">
+            <subitem name="hole">
+                <pos name="x">0.030925
+</pos>
+                <pos name="y">0.0463
+</pos>
+                <pos name="z">0.0736
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0
+</rot>
+            </subitem>
+        </couple>
+        <couple name="A1+">
+            <subitem name="hole">
+                <pos name="x">0.039475
+
+</pos>
+                <pos name="y">0.0463
+</pos>
+                <pos name="z">0.0736
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0
+</rot>
+            </subitem>
+        </couple>
+        <couple name="LH1">
+            <subitem name="hole">
+                <pos name="x">0.00525
+</pos>
+                <pos name="y">0.056375
+
+</pos>
+                <pos name="z">0.05641
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="LH2">
+            <subitem name="hole">
+                <pos name="x">0.0139
+</pos>
+                <pos name="y">0.056375
+
+
+</pos>
+                <pos name="z">0.05641
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="LH3">
+            <subitem name="hole">
+                <pos name="x">0.02255
+</pos>
+                <pos name="y">0.056375
+
+
+
+</pos>
+                <pos name="z">0.05641
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="LH4">
+            <subitem name="hole">
+                <pos name="x">0.0312
+
+</pos>
+                <pos name="y">0.056375
+
+
+
+</pos>
+                <pos name="z">0.05641
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="LH5">
+            <subitem name="hole">
+                <pos name="x">0.03985
+</pos>
+                <pos name="y">0.056375
+
+
+
+</pos>
+                <pos name="z">0.05641
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">1.570796
+</rot>
+            </subitem>
+        </couple>
+        <item name="marker">
+            <pos name="x">0.0334
+</pos>
+            <pos name="y">0.029525
+
+
+</pos>
+            <pos name="z">0.0736
+</pos>
+            <rot name="R">1.570796
+</rot>
+            <rot name="P">3.141593
+</rot>
+            <rot name="Y">0</rot>
+        </item>
+        <item name="visual">
+            <pos name="x">0.022425
+</pos>
+            <pos name="y">0.02875
+
+</pos>
+            <pos name="z">0.1736
+</pos>
+            <rot name="R">1.570796
+</rot>
+            <rot name="P">3.141593
+</rot>
+            <rot name="Y">0</rot>
+        </item>
+    </code>
+    <code name="GWRHN24">
+        <couple name="15mm_screw1&#10;">
+            <subitem name="hole">
+                <pos name="x">0.00745
+</pos>
+                <pos name="y">0.0049
+</pos>
+                <pos name="z">0.05035
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="14_screw&#10;">
+            <subitem name="hole">
+                <pos name="x">0.02225
+
+</pos>
+                <pos name="y">0.005175
+</pos>
+                <pos name="z">0.05035
+
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="22_screw&#10;">
+            <subitem name="hole">
+                <pos name="x">0.02225
+
+</pos>
+                <pos name="y">0.013675
+</pos>
+                <pos name="z">0.05035
+
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="15mm_hole1&#10;">
+            <subitem name="hole">
+                <pos name="x">0.0089
+</pos>
+                <pos name="y">0
+
+</pos>
+                <pos name="z">0.02615
+
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">-1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="14_hole&#10;">
+            <subitem name="hole">
+                <pos name="x">0.021788
+</pos>
+                <pos name="y">0
+
+</pos>
+                <pos name="z">0.0341
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">-1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="22_hole&#10;">
+            <subitem name="hole">
+                <pos name="x">0.021788
+</pos>
+                <pos name="y">0
+
+</pos>
+                <pos name="z">0.0247
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">-1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="15mm_screw2&#10;">
+            <subitem name="hole">
+                <pos name="x">0.00745
+</pos>
+                <pos name="y">0.0824
+</pos>
+                <pos name="z">0.05035
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="13_screw&#10;">
+            <subitem name="hole">
+                <pos name="x">0.02225
+</pos>
+                <pos name="y">0.08456
+</pos>
+                <pos name="z">0.05035
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="21_screw&#10;">
+            <subitem name="hole">
+                <pos name="x">0.02225
+</pos>
+                <pos name="y">0.07575
+</pos>
+                <pos name="z">0.05035
+</pos>
+                <rot name="R">-1.570796
+</rot>
+                <rot name="P">3.141593
+</rot>
+                <rot name="Y">0</rot>
+            </subitem>
+        </couple>
+        <couple name="15mm_hole2&#10;">
+            <subitem name="hole">
+                <pos name="x">0.0089
+</pos>
+                <pos name="y">0.0897
+</pos>
+                <pos name="z">0.02615
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="13_hole&#10;">
+            <subitem name="hole">
+                <pos name="x">0.021788
+</pos>
+                <pos name="y">0.0897
+</pos>
+                <pos name="z">0.0341
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">1.570796
+</rot>
+            </subitem>
+        </couple>
+        <couple name="21_hole&#10;">
+            <subitem name="hole">
+                <pos name="x">0.021788
+</pos>
+                <pos name="y">0.0897
+</pos>
+                <pos name="z">0.0247
+</pos>
+                <rot name="R">1.570796
+</rot>
+                <rot name="P">0</rot>
+                <rot name="Y">1.570796
+</rot>
+            </subitem>
+        </couple>
+        <item name="marker">
+            <pos name="x">0.00685
+</pos>
+            <pos name="y">0.061
+
+</pos>
+            <pos name="z">0.07065
+</pos>
+            <rot name="R">1.570796
+</rot>
+            <rot name="P">3.141593
+</rot>
+            <rot name="Y">0</rot>
+        </item>
+        <item name="visual">
+            <pos name="x">0.013325
+</pos>
+            <pos name="y">0.04485
+</pos>
+            <pos name="z">0.17065
+</pos>
+            <rot name="R">1.570796
+</rot>
+            <rot name="P">3.141593
+</rot>
+            <rot name="Y">0</rot>
+        </item>
+    </code>
+</data>

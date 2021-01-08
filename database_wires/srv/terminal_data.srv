@@ -1,0 +1,10 @@
+string label
+
+---------------
+bool success
+string[] pins
+geometry_msgs/Pose terminal_start
+geometry_msgs/Pose[] screws
+geometry_msgs/Pose[] holes
+std_msgs/Float64 length
+std_msgs/Float64 height

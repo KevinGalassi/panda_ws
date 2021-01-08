@@ -1,0 +1,8 @@
+string label
+geometry_msgs/Pose cad_pose
+
+---------------
+bool success
+string[] pins
+geometry_msgs/Pose[] screws
+geometry_msgs/Pose[] holes

@@ -1,0 +1,486 @@
+# Database wires: A ROS package for gearbox/switchgears database handling.
+
+This package handles the full database of a switchgear by providing information cad information and manipulation capability of several data of interest
+
+
+# INSTALLATION
+The package requires two python libraries not available in the default in the standard linux distributions and can be obtained by:
+
+- pip install xmltodict
+- pip install pyexcel_ods
+
+:warning: **Last version of pip not required for download to succeed** The version provided by standard repositories should work correctly
+
+When all dependencies are met the package can be compiled in a standard catkin_workspace
+
+:warning: **Do remember to source the workspace in all terminal windows for service messages to be correctly recognized by the core**
+- source $(path_to_catkin_workspace)/devel/setup.bash
+
+
+# DATABASE FILE CHARACTERIZATION
+
+In the wires database each component is characterized by three different names(**The relation between the three names can be checked in the .wri file**)
+
+1) The component cad name: the cad file name is unique for each single item in the gearbox. (e.g. ID000064 **Each tf in Rviz is associated to the cad name**)
+2) The component label: a different label is associated to each component. A component is usually composed by two or more items. (e.g. F1500.1)
+3) The component commercial: a commercial characterizes the topology of the component. Multiple components having the same characteristic will have the same commercial (e.g 6012928)
+
+The database handler requires 5 data file describing the characteristics of the gearbox. These files are described in the next section, considering the example files that can be found in data/gearbox_demo directory:
+
+# SUMMARY OF THE MAIN SCRIPT (gearbox_handler_wires_2.py)
+
+In this section we will describe all the main script code. For this, we will follow the order of the code, from the beginning to the end.
+
+## Database activation
+
+The main script of the CAD platform is launched by `wires_demo.launch` that is also defining an static transform between the robot and the gearbox and several parameters for the simulation:
+
+* **<output_stl> :** When true the database exploits cad data to create mesh files for visualization in Rviz of all the components. **Usually required only in the first run**.
+The stl files for all the components will be saved in the data/gearobx_demo/out directory
+
+* **<gearbox_display>** When true the database automatically broadcasts all gearbox tf for visualization in Rviz 
+
+* **<files_path>** The path to the directory with all database files
+
+* **<cad_name>** Name of the cad file
+
+* **<component_file>** Name of the component file
+
+* **<wiring_file>** Name of the connection file
+
+* **<terminal_file>** Name of the file describing terminal topology
+
+With these paths the code can access to different input files, described below:
+
+* **gearbox_demo_cad.x3d:** 3D model of the gearbox. It gives an ID for every element of the gearbox and describes its shape and its transform to its parent’s frame (if it is a main component the transform is to the base of the gearbox, but if it is a component inside another element, the transform is to the frame of the component that contains it).
+
+* **gearbox_demo_ids.wri:** This has three columns, the first one is the ID assigned in the previous 3D file (each component has a different ID), the second one is the label of the element in which this component is located (for example a terminal block is composed by many elements and all of them have the same label), and the last column is the commercial number (each different component model has its own commercial number, components that are equal have the same commercial number). Therefore, relates each ID of the 3D file with its label and commercial number. The image in the `gearbox_distribution.pdf` file shows the label of each element of the gearbox.
+
+* **component_tf.xml:** This file describes each different component (all the elements with different commercial numbers). This description gives information of the measures of the component, the frame of the screw and the hole for each screw-hole couple in the component and the type of component, that can be root (component that can stand alone), child (component that needs to be connected to another one) or terminal (one fo the many components that build a terminal block).
+
+* **PROGETTO_WIRES_SCHEMA_MORSETTI.ods:** This file indicates which components are composing each terminal block and its pin (it follows the same order as the wri file).
+
+* **cablaggio.csv:** This file gives information about all the connections in the gearbox: origin pin, destination pin, cable reference, length of the cable, path of the cable (wire channels) …
+
+* **out/ folder:** The path sent as an argument is also used to access to this folder where there are stl files for all the components of the gearbox, that will be used for the RVIZ visualization. This stl files are generated by the code from the x3d file. The ID00… files are components represented inside the main CAD file, the ‘boxed’ ones are components represented in the bounding box and the reference frame is in the middle of its top face and the ‘corrected’ ones are the same but the reference frame is its left down corner.
+
+## Import modules
+
+The code starts importing several modules, msgs and svrs, some of them are python libraries but other ones are files in the directory scripts/ database_wiress/ of this package, the most important ones, that are later explained are: `partdb/cad.py` and `partdb/data_dictionaries.py`.
+
+## Definition of the states of the system
+
+* STAND_BY = 1 #idle system
+
+* VISUAL = 2 #visualization of component in list
+
+* CONNECTION = 3 #visualization of connection in list
+
+* TARGET = 4 #visualization of target cad
+
+* FULL_TARGET = 5
+
+* SCREW = 6 #visualization of screws w.r.t. target
+
+* SCREW_CORRECTED = 7 #visualization of screws adapted w.r.t. visual servoing control of the robot
+
+## Initialization
+
+Creates a publisher for the visualization_marker_array topic.
+
+Initialize the ROS node (‘gearbox_handler’).
+
+Creates a TransformBroadcaster and TransformListener
+
+Defines some functions for transforming frames, broadcast tfs…
+
+Loads the stl files if they were not loaded.
+
+## Collect all the data of the input files creating dictionaries
+
+Creates an object of the class **Gearbox** (explained later in the `cad.py section`).
+
+Creates an object of the class **GearboxPartsData** (explained later in the `data_dictionaries.py section`).
+
+**def create_gearbox_struct:** This function creates and returns a dictionary (**complete_dict**) with information about the all the components of the gearbox. It has the following structure is:
+
+**key:** label of the component (for example X0005.2).
+
+**values:**
+
+{
+
+- **‘pin’:** {couple name (for example 21): { ‘screw’: screw 21 frame, ‘hole’: hole 21 frame}, 22: { ‘screw’: screw 22 frame, ‘hole’: hole 22 frame}, 13: { ‘screw’: screw 13 frame, ‘hole’: hole 13 frame}, 14: {…}}
+
+> Dictionary of dictionaries with the screws and holes frames (of each screw-hole couple of the actual label element), transformed with the corner_pose, so referred to the rf_gearbox.
+> This includes all the components: the root components, its children elements: screw and hole frames (seen from the child corner) transformed with the child frame (seen from the corner of the parent element), transformed with the corner_pose (seen from the rf_gearbox).
+> The screws and holes of the terminal elements are also included: Position of the screws and hole of the terminal items referred to the gearbox_rf. The position of the screws of the terminal item referred to its own corner are multiplied by the transform frame between its corner and the corner of the whole terminal block and then it is multiplied by the transform between the corner of the whole block and the gearbox_rf frame.
+
+- **‘corner_pose’:** the corner_pose is the pose of the down left corner of an element (the whole element identified with a label). In case it is a terminal block, this is the corner_pose of the initial terminal item of the actual terminal block.
+
+- **‘target_pose’:** The target pose is a point in the middle of the element (the whole element identified with a label) and 0.15m from the element in the ‘z’ axis.
+
+- **‘terminal_height’:** This value is only for terminal block elements. Dimension ‘z’ of the initial terminal item + position ‘z’ of the corner_pose.
+
+- **‘terminal_length’:** This value is only for terminal block elements. Sum of the ‘x’ dimension of all the terminal items of this terminal block.
+
+}
+
+## RVIZ visualization
+
+We sent visualization_msgs/marker messages to the rviz. The marker array contains a mesh_resource for every stl file and also arrows from the terminals of those elements:
+
+MarkerArray=(mesh ID0001.stl, arrow terminal ID0001_1, arrow terminal ID0001_2, arrow terminal ID0001_3, mesh ID0002.stl, arrow terminal ID0002_1, arrow terminal ID0002_2, arrow terminal ID0002_3, ...).
+
+We will obtain the representation of all the stl elements and arrows going out of each screw.
+
+## Services provided by the database
+
+The database handler provides several services to access the database data:
+
+:warning: **Some services can become unavailable if some of the database files are missing**
+
+### Activation/deactivation of full database visualization
+*gearbox_handler/gearbox_display* allows to enable/disable full visualization of the gearbox in Rviz
+
+### Cad information on single component (the call cause the reference frame provided to be broadcasted in Rviz until next service call)
+*gearbox_handler/cad_reference* provides reference frame information (target reference pose and corner reference pose) based on the requested label
+
+*gearbox_handler/cad_service* provides full reference frame information (target_pose, corner_pose, screws and holes pose) based on the requested label
+
+*gearbox_handler/full_cad_service* provides all known information(target_pose + all known screw/holes in connection list) on the cad component requested based on cad name. Each element of the connection list saves a connection in which the component required is involved, as origin or as destination pin.
+
+### Connection list information
+
+*gearbox_handler/group_connection_provider* provides at each call all the informations regarding the connection of a cable in the connections list (origin/destination pin characteristics, cable type and path)
+
+*gearbox_handler/connection_provider_service* provides at each call the information of the next connection to check/perform as a couple component/pin (some component have been made inactive for the application)
+
+*gearbox_handler/full_connection_provider* provides at each call the information of the next connection to check/perform as a couple component/pin
+
+*gearbox_handler/reset_connection_list* resets the connection list to the beginning
+
+*gearbox_handler/reset_to_connection_list* resets the connection list to the requested item
+
+### Screw/holes corrected information (the call cause the reference frame provided to be broadcasted in Rviz until next service call)
+
+*gearbox_handler/get_item_screw_targets* provides the new holes/screws tf of a component according to the new target pose provided
+
+
+
+## Database tests
+
+All the services available can be seen from terminal:
+- rosservice list
+
+Here are proposed some examples of service call to check the data provided by the database:
+
+### CAD info on single component
+
+- rosservice call /gearbox_handler/cad_reference "label: 'F1500.1'" (**Only target and corner pose**)
+
+- rosservice call /gearbox_handler/cad_service "label: 'F1500.1'" (**Full target description**)
+
+- rosservice call /gearbox_handler/full_cad_service "cad_item: 'ID000064'" (**All cad info**)
+
+### Screw/holes corrected pose
+
+- rosservice call /gearbox_handler/get_item_screw_targets "label: 'Q1500.1'
+cad_pose:
+  position:
+    x: 0.3
+    y: 0.00498
+    z: 0.2362
+  orientation:
+    x: 1.0
+    y: 0.0
+    z: 0.0
+    w: 0.0" 
+**The reference frame should be traslated w.r.t. to the new pose**
+
+### Connection service test
+
+-  rosservice call /gearbox_handler/full_connection_provider "{}"
+
+## Broadcast the TFs
+
+This part of the code is continuously executed while the program is running. It broadcasts the TFs between all the elements in the gearbox (following all the chain of transforms through the parents of each element until getting to the gearbox base), and also between the gearbox base (gearbox_rf) and the base of the robot (base_link) (However the gearbox is now static, so the system is working with a static transform send in the launcher file). It also sends some broadcasts depending on the system state.
+
+# SUMMARY OF THE MODULE database_wiress/partdb/datadictionaries.py
+
+This module creates several dictionaries to store the data from the input files, below these files are described and between brackets we can see the format of the input file from which that dictionary is taken information:
+
+- **dict_board (wri):** Creates a dictionary with the wri file info, the ID is the key and the component code and name are the values. We will see one example with one element of the dictionary:
+
+   **key**: ID000002
+
+   **value**: {
+
+   - label: CN1
+
+   - product: BOCCH.40X100G
+
+   - pose: None
+
+   }
+
+- **component_dict (xml):** It creates a dictionary of dictionaries; the keys of the dictionary are the commercial name of that components and the values are one dictionary for each. This subdictionaires have the following structure (we will see it with an example of one element of the big dictionary):
+
+   **key**: 6503373
+
+   **value**: {
+
+   - name: SIEMENS 3RV2901-E
+
+   - xdim: 0.045
+
+   - ydim: 0.011
+
+   - zdim: 0.039
+
+   - itemName (None): Frame (x,y,z,R,P,Y) of that item
+
+   - screw: {
+
+      21 (couple name): Frame (x,y,z,R,P,Y) of that screw
+
+      22 (couple name): Frame (x,y,z,R,P,Y) of that screw
+
+      13 (couple name): Frame (x,y,z,R,P,Y) of that screw
+
+      14 (couple name): Frame (x,y,z,R,P,Y) of that screw
+
+   }
+
+   - hole: {
+
+      21 (couple name): Frame (x,y,z,R,P,Y) of that hole
+
+      22 (couple name): Frame (x,y,z,R,P,Y) of that hole
+
+      13 (couple name): Frame (x,y,z,R,P,Y) of that hole
+
+      14 (couple name): Frame (x,y,z,R,P,Y) of that hole
+
+      }
+
+   - child: Frame (x,y,z,R,P,Y) of that item
+
+   }
+
+- **connection_dict (csv):**
+
+   **key**: F1500.1 (origin element)
+
+   **value**: {
+
+   - 14 (pin of the origin element): Q1500.1 (final element), A1 (pin of the final element), 1500.51 (wire);
+
+   - 13: X1600, 3:a, 1500.50;
+
+   - 2: Q1500.1, 1, 1500.01;
+
+   - 6: Q1500.1, 5, 1500.03;
+
+   - 1: F1500.2, 1, 0005L1;
+
+   - 3: F1500.2, 3, 0005L2;
+
+   - 5: F1500.2, 5, 0005L3
+
+   }
+
+- **connection_list (csv):** It saves the information of the csv file in a list composed by dictionaires, we will show one element of the list (one dictionary) an example (the empty fields (part_commercial, part_cadID and the screw and hole frames) are also filled:
+
+   {
+
+   - orig: {part_label: F1500.1, part_commercial: , part_cadID: , pin: 14, screw: , hole: },
+
+   - dest: {part_label: Q1500.A1, part_commercial: , part_cadID: , pin: A1, screw: , hole:},
+
+   - wire: 1500.51,
+
+   - path: 746 (length)
+
+   }
+
+- **terminal_dict (ods):** It returns a dictionary with the numbers of the pins of the terminal blocks (only with the pins located in the Q zone):
+
+   {
+
+   - X0005.1: [start, L1, L2, L3, N, PE, end];
+
+   - X0005.2: [start, 0005L1, 0005L2, 0005L3, 0005N, PE1, end];
+
+   - X0030.1: [start, 0V.1, 0V.2, 1L+.1, 1L+.2, PE1, PE3, end];
+
+   - X1500: [start, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, end];
+
+   - X1600: [start, 1, 2, 3, 4, 5, division, end]
+
+   }
+
+# SUMMARY OF THE MODULE database_wiress/partdb/cad.py
+
+**1. class Gearbox:**
+
+This class collects all the information about the Gearbox. It has the following attributes:
+
+- files: {cad: gearbox_demo_cad.x3d, ids: gearbox_demo_ids.wri, pins: gearbox_demo_pins.xml}  #Dictionary with the names of the files.
+
+- scene: object from the class Scene.
+
+- parts (*): object from the class PartCollection (* version).
+
+- base: it saves the transform object of the BASE item (the one that its value in the second column of the wri file is '-PE' and has no value in the 3rd column).
+
+The linkPartsWithCad() method links the Parts of the pins.xml file with the Transforms of the cad.x3d file (see * version in PartCollection).
+
+**1.1 class Scene:**
+
+This class creates the ‘Transform’ objects and have the information of all of them. It has the attributes:
+
+- transforms: Saves a list of all the 'transform' objects, going all levels deeper and collecting all the 'transform' objects. E.g.:
+
+> [Trans_Obj1, Trans_Obj1_child1, Trans_Obj1_child1_child1, Trans_Obj1_child1_child2, Trans_Obj1_child2, Trans_Obj1_child3, Trans_Obj1_child3_child1, ...]
+
+**1.1.1 class Transform:**
+
+This class extracts the information of the x3d file and creates the ‘Shape’ objects with the information of the ‘shape’ tags. It has the following attributes:
+
+- shapes: list with information between 'Shape' tags (of the highest level in the x3d tree that is receiving as an argument, because there are some shape tags inside lower level transform tags).
+
+- shape: a variable that concatenates the elements of the shapes list one after the other.
+
+- children_transforms: list of Transform objects for each code between 'Transform' tags, in a recursive way, until it goes as deep as needed. Each time it calls the class again, it goes one level deeper in the x3d tree.
+
+- parent: The transform object in which this one is inside, so the current transform object is in the children_transforms list attribute of its parent transform object.
+
+- translation: float array of the 'translation' attribute of the node that is being analyzed (after the first level (that is for the 'Scene' tag), when it goes deeper, this node is always for a 'Transform' tag).
+
+- rotation: the same that translation for the 'rotation' attribute, first three numbers are the axis of rotation and the fourth is the angle to rotate.
+
+- id_string: saves the 'DEF' attribute of that node (the ID of that 'Transform' tag).
+
+- item_id: saves the itemID object for the ID of that node (of that 'Transform' tag). This object has this attribute: id_list=[ID000002, -CN1, BOCCH.40X100G].
+
+- p: PyKDL vector with the translation of the 'Transform' object.
+
+- M: PyKDL rotation in quaternions of the 'Transform' object.
+
+**1.1.1.1 class Shape:**
+
+This class saves the information between ‘shape’ tags of the x3d file. This information is about the appearance and geometry of the different elements. It has the following attributes:
+
+#### Appearance info #####
+
+- color: It saves the color in a 3 element numpy array (An RGB from 0 to 1), e.g.:
+
+> (0, 0, 1)
+
+#### Geometry info ####
+
+- face_indices= Numpy array of the numbers of the attribute coordIndex of the tag IndexedFaceSet, e.g:
+
+> (0, 1, 2, -1, 0, 2, 3, -1, 3, 4, 5, -1 ...)
+
+- faces= List of 3 element numpy arrays formed by the face_indices array removing the elements in positions multiple of 4, that are always a '-1', so in the previous example:
+
+> [(0, 1, 2), (0, 2, 3), (3, 4, 5), ...]
+
+- coordinates= Numpy array of the numbers of the attribute point of the tag Coordinate, e.g:
+
+> (-1, -1, 1, -1, 1, 1, -1, 1, -1, ...)
+
+- points= List of 3 element numpy arrays formed by the coordinates array, so in the previous example:
+
+> [(-1, -1, 1), (-1, 1, 1), (-1, 1, -1), ...]
+
+**1.1.2 class ItemID:**
+
+This class saves the information of the wri file, it has the following attributes:
+
+- id_list= [ID000002, -CN1, BOCCH.40X100G]
+
+**1.2 class PartCollection**
+
+This class creates a dictionary with all the Part objects of the pins.xml file, identifying each one using the commercial number as key:
+
+- part_map= {650337: Part object 1,  6503798: Part object 2, ...}
+
+- part_list(*)= [Part clone object 1*, Part clone object 2*, …]  #The * is because this Part object is not exactly like the ones in the part_map dictionary. These Part objects include an argument called transform in which it saves the transform object of that commercial number element.
+
+**1.2.1 class Parts**
+
+Each object of the class Part collects the information between a 'terminal' tag that receives as an argument. It has the following attributes:
+
+- node: The xml tree structure between its 'terminal' tag
+
+- part_id: information of the attribute "P_PART_TERMINAL_NAME", in this case = 6503377 (I think this is the commercial number of the component in the wri file).
+
+- terminals: A list with all the 'Terminal' objects (one per each 'terminalPosition' tag) within its 'terminal' tag.
+
+- transform*: The '*' is because the value of this argument is None in the part_map attribute of the PartCollection class, but in the part_list attribute it saves the transform object of that commercial number element.
+
+- gearbox (from superclass): has a copy of the information of this gearbox object (with information of everything in the Gearbox object). This attribute is of the superclass GearboxItem and it is applied to all the components of the gearbox, not only the parts, also the Channels.
+
+**1.2.1.1 class Terminal**
+
+Each object of this class collects the information between the 'terminalPosition' tag that it receives as an argument (node). This class has the following attributes (example values):
+
+- xdir: 0
+
+- ydir: 1
+
+- zdir: 0
+
+- az: Unitary vector defined by (xdir, ydir, zdir), this is the direction perpendicular to this terminal. (0, 1, 0)
+
+- ax: Unitary vector perpendicular to az (1, 0, 0)
+
+- ay: Unitary vector perpendicular to ax and az (0,0,1)
+
+- M: PyKDL rotation element defined by ax, ay, az.
+
+- xpos: 5.3
+
+- ypos: 46.749998
+
+- zpos: 57
+
+- p: PyKDL vector opf the position of the element, defined by (xpos, ypos, zpos) --> (5.3, 46.749998, 57)
+
+- name: 1
+
+- typeofterminal: 1
+
+- direction: 1
+
+- dir_toward_z: False (because zdir<0.5)
+
+- part*: The '*' in this attribute is because its value is None for the Terminal objects of the Part objects saved in the part_map attribute of the class PartCollection. But in the attribute part_list of that PartCollection class, the Terminal objects saves in this attribute the value of the part that contains it (only including in its terminals attribute the Terminal objects previous to the current one).
+
+**1.3 class ChannelCollection**
+
+This class has the argument channel_map, that is a dictionary that collects all the channel items of the gearbox. It knows that it is a channel item because it evaluates the type of the itemID of each useful_transform (the ones that have an ID, that are the ones that have the attribute 'DEF' in which that is specified):
+
+- channel_map: {-CN1: Channel object 1, -CN2: Channel object 2, ...}
+
+**1.3.1 class Channel**
+
+Channels are the wire collectors of the switchgear, we can identify them with the word ‘-CN’ in the second column of the wri file. This class has the following attributes:
+
+- name: The name of that channel, it extracts it from the second column of the wri file (-CN1, -CN2, -CN3, ...)
+
+- transform: The transform object of that item
+
+- transform_poi: A list of the transform object of all the channel_poi items with the same name as the actual Channel object (-CN1, -CN2, ...). A Channel_poi item has '-CN' in his second wri column but nothing in his third, (while a channel item has something that includes the text 'BOCCH' in its third wri file column).
+
+- gearbox (from superclass): has a copy of the information of this gearbox object (with information of everything in the Gearbox object). This attribute is of the superclass GearboxItem and it is applied to all the components of the gearbox, not only the parts, also the Channels.
+
+**1.3.2 class ItemType**
+
+This class tells us the type of each item. For example, the ones that in its second column includes '-CN' are channels (wire collectors), the ones that include any of the following characters: '-X', '-T', '-Q', '-F', are parts (terminal blocks or whatever)...
+
+
+   

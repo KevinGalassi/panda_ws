@@ -1,0 +1,8 @@
+string label
+
+---------------
+bool success
+geometry_msgs/Pose target_pose
+geometry_msgs/Pose corner_pose
+geometry_msgs/Pose original_pose
+cad_pins[] pins

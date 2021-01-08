@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<partsmanagement count="7" length-unit="mm" type="EPLAN.PartsManagement" build="132.8" database="Y:\EPLAN_P8\Electric P8_SYS\Articoli\IMA\P8_IMA_Articoli_244.mdb">
+ <part P_PART_TERMINAL_NAME="6503377" P_PART_TERMINAL_ADDITIONALLENGTHDEFAULT="0" P_PART_TERMINAL_CREATE="cevolani / 14.03.2017 15:01:31" P_PART_TERMINAL_DIRECTION="0" P_PART_TERMINAL_LASTCHANGE="cevolani / 14.03.2017 15:01:38" P_PART_TERMINAL_TYPEDEFAULT="0" P_PART_TERMINAL_TYPEOFTERMINAL_DEFAULT="0" xdim="45.0" ydim="57.5" zdim="73.0">
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="1" pos="1" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="1" ypos="46.749998088025" zdir="0" zpos="57">
+    <screw name="1" type="screw" version="" >      
+      <pose>5.3 10.5 73.0 0 3.14 0</pose>
+      <dim>8</dim>
+      <depth>8</depth>
+      <shape type="cylinder"/>      
+    </screw>
+    <hole name="1">
+      <pose>5.3 46.75 57.0 1.57 0 1.57</pose>
+      <dim>7.1</dim>
+      <depth>13.7</depth>
+      <shape type="box"/>
+    </hole>
+  </terminal>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="3" pos="2" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="5" pos="3" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="13" pos="4" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="A1" pos="5" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="2" pos="6" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="4" pos="7" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="6" pos="8" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="14" pos="9" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="A2" pos="10" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+ </part>
+ <part P_PART_TERMINAL_NAME="6503798" P_PART_TERMINAL_ADDITIONALLENGTHDEFAULT="0" P_PART_TERMINAL_CREATE="cevolani / 14.03.2017 15:16:11" P_PART_TERMINAL_DIRECTION="0" P_PART_TERMINAL_LASTCHANGE="cevolani / 14.03.2017 15:16:20" P_PART_TERMINAL_TYPEDEFAULT="0" P_PART_TERMINAL_TYPEOFTERMINAL_DEFAULT="0" xdim="45.0" ydim="57.5" zdim="73.0">
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="1" pos="1" targetinfo="0" twinsleeve="0" type="0" typeofterminal="3" xdir="0" xpos="8.2" ydir="0" ypos="98.9137679671433" zdir="1" zpos="56.9779734612567"/>
+    <screw name="1" type="screw" version="" >      
+      <pose>5.3 10.5 73.0 0 3.14 0</pose>
+      <dim>8</dim>
+      <depth>8</depth>
+      <shape type="cylinder"/>      
+    </screw>
+    <hole name="1">
+      <pose>5.3 46.75 57.0 1.57 0 1.57</pose>
+      <dim>7.1</dim>
+      <depth>13.7</depth>
+      <shape type="box"/>
+    </hole>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="3" pos="2" targetinfo="0" twinsleeve="0" type="0" typeofterminal="3" xdir="0" xpos="22.6000000000114" ydir="0" ypos="98.9137679671433" zdir="1" zpos="56.9779734225706"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="5" pos="3" targetinfo="0" twinsleeve="0" type="0" typeofterminal="3" xdir="0" xpos="37" ydir="0" ypos="98.9137679671433" zdir="1" zpos="56.9779734612567"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="2" pos="4" targetinfo="0" twinsleeve="0" type="0" typeofterminal="3" xdir="0" xpos="8.2" ydir="0" ypos="7.0862787944321" zdir="1" zpos="56.9780085090193"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="4" pos="5" targetinfo="0" twinsleeve="0" type="0" typeofterminal="3" xdir="0" xpos="22.6000000000114" ydir="0" ypos="7.0862787944321" zdir="1" zpos="56.9780085090193"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="6" pos="6" targetinfo="0" twinsleeve="0" type="0" typeofterminal="3" xdir="0" xpos="37" ydir="0" ypos="7.0862787944321" zdir="1" zpos="56.9780085090193"/>
+ </part>
+ <part P_PART_TERMINAL_NAME="Nuovo_1" P_PART_TERMINAL_CREATE="cevolani / 24.01.2017 11:25:50" P_PART_TERMINAL_LASTCHANGE="cevolani / 24.01.2017 11:25:50">
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="1" pos="1" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="3" pos="2" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="5" pos="3" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="13" pos="4" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="A1" pos="5" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="2" pos="6" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="4" pos="7" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="6" pos="8" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="14" pos="9" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="A2" pos="10" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+ </part>
+ <part P_PART_TERMINAL_NAME="Nuovo_2" P_PART_TERMINAL_CREATE="cevolani / 14.03.2017 12:29:38" P_PART_TERMINAL_LASTCHANGE="cevolani / 14.03.2017 12:29:38">
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="1" pos="1" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="3" pos="2" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="5" pos="3" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="13" pos="4" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="A1" pos="5" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="2" pos="6" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="4" pos="7" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="6" pos="8" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="14" pos="9" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="A2" pos="10" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+ </part>
+ <part P_PART_TERMINAL_NAME="PROVA VITI" P_PART_TERMINAL_ADDITIONALLENGTHDEFAULT="0" P_PART_TERMINAL_CREATE="cevolani / 11.11.2016 16:51:05" P_PART_TERMINAL_DESCRIPTION="??_??@GG;" P_PART_TERMINAL_DIRECTION="0" P_PART_TERMINAL_LASTCHANGE="cevolani / 24.01.2017 11:26:44" P_PART_TERMINAL_TYPEDEFAULT="0" P_PART_TERMINAL_TYPEOFTERMINAL_DEFAULT="0">
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="1" pos="1" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="3" pos="2" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="5" pos="3" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="13" pos="4" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="A1" pos="5" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="2" pos="6" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="4" pos="7" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="6" pos="8" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="14" pos="9" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="A2" pos="10" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="@1" pos="11" targetinfo="0" terminalsize="6" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="0" ypos="46.75" zdir="-1" zpos="71"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="@3" pos="12" targetinfo="0" terminalsize="6" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="0" ypos="46.75" zdir="-1" zpos="71"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="@5" pos="13" targetinfo="0" terminalsize="6" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="0" ypos="46.75" zdir="-1" zpos="71"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="@13" pos="14" targetinfo="0" terminalsize="6" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="0" ypos="46.75" zdir="-1" zpos="71"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="@A1" pos="15" targetinfo="0" terminalsize="6" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="0" ypos="46.75" zdir="-1" zpos="71"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="@2" pos="16" targetinfo="0" terminalsize="6" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="0" ypos="10.75" zdir="-1" zpos="71"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="@4" pos="17" targetinfo="0" terminalsize="6" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="0" ypos="10.75" zdir="-1" zpos="71"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="@6" pos="18" targetinfo="0" terminalsize="6" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="0" ypos="10.75" zdir="-1" zpos="71"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="@14" pos="19" targetinfo="0" terminalsize="6" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="0" ypos="10.75" zdir="-1" zpos="71"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="@A2" pos="20" targetinfo="0" terminalsize="6" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="0" ypos="10.75" zdir="-1" zpos="71"/>
+ </part>
+ <part P_PART_TERMINAL_NAME="RIT.SZ4138190" P_PART_TERMINAL_ADDITIONALLENGTHDEFAULT="0" P_PART_TERMINAL_CREATE="EDP / 04.01.2017 15:45:10" P_PART_TERMINAL_DIRECTION="0" P_PART_TERMINAL_LASTCHANGE="EDP / 04.01.2017 15:45:10" P_PART_TERMINAL_TYPEDEFAULT="0" P_PART_TERMINAL_TYPEOFTERMINAL_DEFAULT="0">
+  <terminal additionallength="0" devicetag="XI" direction="3" level="0" maxcrosssection="1.5" maxwirecount="1" mincrosssection="1.5" name="L" pos="1" targetinfo="0" twinsleeve="0" type="0" typeofterminal="7" xdir="0" xpos="31.5" ydir="0" ypos="65" zdir="1" zpos="102.5"/>
+  <terminal additionallength="0" devicetag="XI" direction="3" level="0" maxcrosssection="1.5" maxwirecount="1" mincrosssection="1.5" name="PE" pos="2" targetinfo="0" twinsleeve="0" type="0" typeofterminal="7" xdir="0" xpos="31.5" ydir="0" ypos="56.5" zdir="1" zpos="102.5"/>
+  <terminal additionallength="0" devicetag="XI" direction="3" level="0" maxcrosssection="1.5" maxwirecount="1" mincrosssection="1.5" name="N" pos="3" targetinfo="0" twinsleeve="0" type="0" typeofterminal="7" xdir="0" xpos="31.5" ydir="0" ypos="48" zdir="1" zpos="102.5"/>
+  <terminal additionallength="0" devicetag="XO" direction="4" level="0" maxcrosssection="1.5" maxwirecount="1" mincrosssection="1.5" name="L" pos="4" targetinfo="0" twinsleeve="0" type="0" typeofterminal="7" xdir="0" xpos="671" ydir="0" ypos="65" zdir="1" zpos="102.5"/>
+  <terminal additionallength="0" devicetag="XO" direction="4" level="0" maxcrosssection="1.5" maxwirecount="1" mincrosssection="1.5" name="PE" pos="5" targetinfo="0" twinsleeve="0" type="0" typeofterminal="7" xdir="0" xpos="671" ydir="0" ypos="56.5" zdir="1" zpos="102.5"/>
+  <terminal additionallength="0" devicetag="XO" direction="4" level="0" maxcrosssection="1.5" maxwirecount="1" mincrosssection="1.5" name="N" pos="6" targetinfo="0" twinsleeve="0" type="0" typeofterminal="7" xdir="0" xpos="671" ydir="0" ypos="48" zdir="1" zpos="102.5"/>
+  <terminal additionallength="0" devicetag="XSW" direction="3" level="0" maxcrosssection="1" maxwirecount="1" mincrosssection="1" name="1" pos="7" targetinfo="0" twinsleeve="0" type="0" typeofterminal="7" xdir="0" xpos="10.5" ydir="0" ypos="60.75" zdir="1" zpos="82.3"/>
+  <terminal additionallength="0" devicetag="XSW" direction="3" level="0" maxcrosssection="1" maxwirecount="1" mincrosssection="1" name="2" pos="8" targetinfo="0" twinsleeve="0" type="0" typeofterminal="7" xdir="0" xpos="10.5" ydir="0" ypos="52.25" zdir="1" zpos="82.3"/>
+  <attributeposition pos="1" P_ARTICLE_ATTRIBUTE_VALUE="Rittal"/>
+ </part>
+ <part P_PART_TERMINAL_NAME="teleruttore_001" P_PART_TERMINAL_ADDITIONALLENGTHDEFAULT="0" P_PART_TERMINAL_CREATE="cevolanim / 24.10.2016 16:36:0" P_PART_TERMINAL_DIRECTION="0" P_PART_TERMINAL_LASTCHANGE="cevolani / 24.10.2016 16:36:17" P_PART_TERMINAL_TYPEDEFAULT="0" P_PART_TERMINAL_TYPEOFTERMINAL_DEFAULT="0">
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="A1" pos="1" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="13" pos="2" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="23" pos="3" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="33" pos="4" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="1" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="43" pos="5" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="1" ypos="46.749998088025" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="A2" pos="6" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="5.3" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="14" pos="7" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="13.9" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="24" pos="8" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="22.5" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="34" pos="9" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="31.1" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+  <terminal additionallength="0" direction="2" level="0" maxcrosssection="0" maxwirecount="0" mincrosssection="0" name="55" pos="10" targetinfo="0" twinsleeve="0" type="0" typeofterminal="1" xdir="0" xpos="39.7" ydir="-1" ypos="10.75" zdir="0" zpos="57"/>
+ </part>
+</partsmanagement>

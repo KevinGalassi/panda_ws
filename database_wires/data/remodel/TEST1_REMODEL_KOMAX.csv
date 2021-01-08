@@ -1,0 +1,133 @@
+X:\EPLAN_P8\Electric P8_SYS\Etichette						Nome Progetto:	TEST1_REMODEL							Option (iema001)																	
+						Commessa:	99.TEST1							Stripping length=	10.0	SPELATURA Stripping length=	8.0														
+														Welding Length=	9.0	SPELATURA PullOFF=	4.0														
+														Article Bundling Side=	1																
+														N. fili per mazzetto=	15	L. min. filo 1 marcatura	230														
+														Ripetibilita Lavoro=	1	L. min. filo 2 marcature	330														
+														!!! NON TOCCARE !!!!!																	
+																															
+	ORIGINE	Marking END 1		DESTINAZIONE	Marking END 2		Section (mm²)	Color			Lenght		Type of terminal END 1	Type of terminal END 2		DIREZIONE	DIREZIONE		Article	STRIPP. LENGTH	STRIPP. LENGTH		WELD. LENGTH	WELD. LENGTH		ORIENTATION	ORIENTATION		PullOFF	PullOFF	"Number 
+OF LeadSets"
+N. Pagina	Zona	Componente:pin	N. Pagina	Zona	Componente:pin	Numero filo	Sezione	Colore	Tipo pot.	Nome pot.	L filo (mm)	Traccia collegamenti	Terminazione Origine	Terminazione Destinazione	Nome Cavo	END 1	END 2	JOB KEY	BUNDLING SIDE	END 1	END 2	FONT KEY	END 1	END 2	Progressivo	END 1	END 2	RIPETIBILITA'	END 1	END 2	
+=SSB+0001/8	QE	-X0V:1:a2	=SSB+0001/10	QE	-10F1:X4:A2	0V	0,75	BU	-	0VDC	1155	=-CN2;=-CN3;=-CN4	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/10	QE	-10F1:X4:A2	=SSB+0001/10	QE	-10F1:X4:0V	0V	0,75	BU	-	0VDC	326	=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/10	QE	-10F1:X4:0V	=SSB+0001/10	QE	-10KA1:A2	0V	0,75	BU	-	0VDC	910	=-CN4;=-CN3;=-CN2	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/10	QE	-10KA1:A2	=SSB+0001/10	QE	-10KA2:A2	0V	0,75	BU	-	0VDC	358	=-CN2	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/10	QE	-10KA2:A2	=SSB+0001/10	QE	-10KA3:A2	0V	0,75	BU	-	0VDC	726	=-CN2;=-CN3;=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:1:a2	=SSB+0001/10	QE	-10F1:X4:24V	24V	0,75	BU	+	24VDC	1206	=-CN2;=-CN3;=-CN4	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:1:b1	=SSB+0001/10	QE	-10F1:X4:A1	24V	0,75	BU	+	24VDC	1342	=-CN1;=-CN3;=-CN4	Welding 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X0V:2:a1	=SSB+0001/40	QE	-40A1:M	0V	0,75	BU	-	0VDC	272	=-CN2	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso il basso, verso destra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:2:a1	=SSB+0001/15	QE	-10KA1:53	24V	0,75	BU	+	24VDC	894	=-CN2;=-CN3;=-CN4	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/15	QE	-10KA1:53	=SSB+0001/30	QE	-10KA3:11	24V	0,75	BU	+	24VDC	721	=-CN4;=-CN3;=-CN5	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/12	QE	-10KA1:21	=SSB+0001/30	QE	-10KA3:11	24V	0,75	BU	+	24VDC	677	=-CN4;=-CN3;=-CN5	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X0V:2:a2	=SSB+0001/41	QE	-41MOD2:X10:M	0V	0,75	BU	-	0VDC	1085	=-CN2;=-CN3;=-CN4	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:2:a2	=SSB+0001/40	QE	-40A1:L+	24V	0,75	BU	+	24VDC	323	=-CN2	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso il basso, verso destra	99.TEST1	1												
+=SSB+0001/8	QE	-X0V:3:a1	=SSB+0001/44	QE	-44KA1:A2	0V	0,75	BU	-	0VDC	994	=-CN2;=-CN3;=-CN4	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/44	QE	-44KA1:A2	=SSB+0001/44	QE	-44KA3:A2	0V	0,75	BU	-	0VDC	289	=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/44	QE	-44KA3:A2	=SSB+0001/44	QE	-44KA4:A2	0V	0,75	BU	-	0VDC	274	=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/44	QE	-44KA4:A2	=SSB+0001/44	QE	-44KA2:A2	0V	0,75	BU	-	0VDC	289	=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso destra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:3:a1	=SSB+0001/41	QE	-41MOD2:X10:L+	24V	0,75	BU	+	24VDC	1111	=-CN2;=-CN3;=-CN4	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:3:a2	=SSB+0001/44	QE	-41MOD2:X12:3L+	24V	0,75	BU	+	24VDC	278	=-CN2	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X0V:4:a1	=SSB+0001/40	QE	-40I1:2	0V	0,75	BU	-	0VDC	895	=-CN2;=-9;=-10;=-13;=-12;=-11;=-CN10;=-38;=-37	Welding 0,75	Welding 0,75	=	Verso l'alto, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:4:a1	=SSB+0001/35	QE	-XEXT:1.1:a1	24V	0,75	BU	+	24VDC	348	=-CN2	Welding 0,75	Welding 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/8	QE	-X0V:4:a2	=SSB+0001/42	QE	-41MOD2:X10:1M	0V	0,75	BU	-	0VDC	1100	=-CN2;=-CN3;=-CN4	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:4:a2	=SSB+0001/35	QE	-XEXT:5.1:a1	24V	0,75	BU	+	24VDC	346	=-CN2	Welding 0,75	Welding 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/8	QE	-X0V:5:a1	=SSB+0001/44	QE	-41MOD2:X12:3M	0V	0,75	BU	-	0VDC	296	=-CN2	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:5:a1	=SSB+0001/40	QE	-40I1:1	24V	0,75	BU	+	24VDC	854	=-CN2;=-9;=-10;=-13;=-12;=-11;=-CN10;=-38;=-37	Welding 0,75	Welding 0,75	=	Verso l'alto, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X0V:5:a2	=SSB+0001/33	QE	-33X1:7	0V	0,75	BU	-	0VDC	847	=-CN2;=-CN3;=-CN1	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X0V:6:a1	=SSB+0001/33	QE	-33X1:25	0V	0,75	BU	-	0VDC	882	=-CN2;=-CN3;=-CN1	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-XS:1.1:a1	=SSB+0001/8	QE	-X24V:6:a1	24V	0,75	BU	+	24VDC	378	=-CN2	Welding 0,75	Welding 0,75	=	Verso l'alto, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X0V:6:a2	=SSB+0001/8	QE	-08H1:X2	0V	0,75	BU	-	0VDC	995	=-CN2;=-9;=-10;=-13;=-12;=-11;=-CN10;=-39;=-35;=-33	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-08H1:X2	=SSB+0001/15	QE	-12S1:X2	0V	0,75	BU	-	0VDC	750	=-33;=-35;=-39;=-CN10	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-XS:2.1:a1	=SSB+0001/8	QE	-X24V:6:a2	24V	0,75	BU	+	24VDC	389	=-CN2	Welding 0,75	Welding 0,75	=	Verso l'alto, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:6:b1	=SSB+0001/33	QE	-33X1:9	24V	0,75	BU	+	24VDC	380	=-CN1	Welding 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso destra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:6:b2	=SSB+0001/33	QE	-33X1:13	24V	0,75	BU	+	24VDC	414	=-CN1	Welding 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso destra	99.TEST1	1												
+=SSB+0001/8	QE	-X24V:7:a2	=SSB+0001/8	QE	-08H1:X1	24V	0,75	BU	+	24VDC	885	=-CN2;=-9;=-10;=-13;=-12;=-11;=-CN10;=-39;=-34	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/8	QE	-08H1:X1	=SSB+0001/12	QE	-12S1:3	24V	0,75	BU	+	24VDC	759	=-34;=-39;=-CN10;=-32;=-4;=-3	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/10	QE	-10F1:X2:O0	=SSB+0001/10	QE	-10KA1:A1	10.01	0,75	BU	+	24VDC	670	=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/10	QE	-10KA1:A1	=SSB+0001/10	QE	-10KA2:A1	10.01	0,75	BU	+	24VDC	342	=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso l'alto, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/10	QE	-10F1:X2:T0M20	=SSB+0001/15	QE	-15S1:11	10.04	0,75	BU	+	24VDC	1850	=-CN4;=-CN3;=-CN2;=-9;=-10;=-13;=-12;=-11;=-CN10;=-31;=-2;=-1	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso destra	99.TEST1	1												
+=SSB+0001/10	QE	-10F1:X2:T1M21	=SSB+0001/15	QE	-15S1:21	10.05	0,75	BU	+	24VDC	1834	=-CN4;=-CN3;=-CN2;=-9;=-10;=-13;=-12;=-11;=-CN10;=-31;=-2;=-1	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso destra	99.TEST1	1												
+=SSB+0001/10	QE	-10F1:X2:O2	=SSB+0001/10	QE	-10KA3:A1	10.03	0,75	BU	+	24VDC	421	=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso destra	99.TEST1	1												
+=SSB+0001/11	QE	-10F1:X3:I4	=SSB+0001/15	QE	-XC:1.2:b2	15.04	0,75	BU	+	24VDC	1221	=-CN5;=-CN3;=-CN1	PUNTALINO 0,75	PullOFF 0,75	=	Verso l'alto, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/11	QE	-10F1:X3:I5	=SSB+0001/15	QE	-XC:2.2:b2	15.06	0,75	BU	+	24VDC	1231	=-CN5;=-CN3;=-CN1	PUNTALINO 0,75	PullOFF 0,75	=	Verso l'alto, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/11	QE	-10F1:X3:I6	=SSB+0001/20	QE	-XC:3.1:a1	20.01	0,75	BU	+	24VDC	1103	=-CN5;=-CN3;=-CN2	PUNTALINO 0,75	Welding 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/11	QE	-10F1:X3:I7	=SSB+0001/20	QE	-XC:3.2:a2	20.02	0,75	BU	+	24VDC	1095	=-CN5;=-CN3;=-CN2	PUNTALINO 0,75	PullOFF 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/11	QE	-10F1:X1:I8	=SSB+0001/20	QE	-XC:4.1:a1	20.03	0,75	BU	+	24VDC	1104	=-CN5;=-CN3;=-CN2	PUNTALINO 0,75	Welding 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/11	QE	-10F1:X1:I9	=SSB+0001/20	QE	-XC:4.2:a2	20.04	0,75	BU	+	24VDC	1096	=-CN5;=-CN3;=-CN2	PUNTALINO 0,75	PullOFF 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/11	QE	-10F1:X1:I10	=SSB+0001/20	QE	-XC:5.1:a1	20.05	0,75	BU	+	24VDC	1120	=-CN5;=-CN3;=-CN2	PUNTALINO 0,75	Welding 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/11	QE	-10F1:X1:I11	=SSB+0001/20	QE	-XC:6.1:a1	20.07	0,75	BU	+	24VDC	1131	=-CN5;=-CN3;=-CN2	PUNTALINO 0,75	Welding 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/12	QE	-XS:1.2:a2	=SSB+0001/12	QE	-10F1:X1:I12	12.01	0,75	BU	+	24VDC	1296	=-CN2;=-CN3;=-CN5	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/12	QE	-XS:2.2:a2	=SSB+0001/12	QE	-10F1:X1:I13	12.02	0,75	BU	+	24VDC	1307	=-CN2;=-CN3;=-CN5	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/12	QE	-12S1:4	=SSB+0001/12	QE	-10F1:X1:I14	12.03	0,75	BU	+	24VDC	2068	=-CN10;=-11;=-12;=-13;=-10;=-9;=-CN2;=-CN3;=-CN5	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/12	QE	-10KA2:22	=SSB+0001/12	QE	-10F1:X1:I15	12.05	0,75	BU	+	24VDC	1187	=-CN2;=-CN3;=-CN5	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/12	QE	-10KA1:22	=SSB+0001/12	QE	-10KA2:21	12.04	0,75	BU	+	24VDC	635	=-CN2;=-CN3;=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/12	QE	-10F1:X4:IM17	=SSB+0001/42	QE	-41MOD2:X10:DIa.2	I0.2	0,75	BU			284	=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/12	QE	-10F1:X4:IM18	=SSB+0001/42	QE	-41MOD2:X10:DIa.0	I0.0	0,75	BU	+	24VDC	271	=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/12	QE	-10F1:X4:IM19	=SSB+0001/42	QE	-41MOD2:X10:DIa.1	I0.1	0,75	BU	+	24VDC	272	=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/15	QE	-10KA2:54	=SSB+0001/15	QE	-12S1:X1	15.02	0,75	BU	+	24VDC	1314	=-CN2;=-9;=-10;=-13;=-12;=-11;=-CN10;=-32;=-4;=-3	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso destra	Verso destra	99.TEST1	1												
+=SSB+0001/15	QE	-10KA1:54	=SSB+0001/15	QE	-10KA2:53	15.01	0,75	BU	+	24VDC	722	=-CN2;=-CN3;=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/15	QE	-XC:1.1:a1	=SSB+0001/15	QE	-XC:1.2:a2	BRIDGE1	0,75	BU	+	24VDC	213	=-CN2	Welding 0,75	PullOFF 0,75	=	Verso l'alto	Verso l'alto	99.TEST1	1												
+=SSB+0001/15	QE	-15S1:12	=SSB+0001/15	QE	-XC:1.1:b1	15.03	0,75	BU	+	24VDC	1313	=-CN10;=-11;=-12;=-13;=-10;=-9;=-CN2;=-CN3;=-CN1	PUNTALINO 0,75	PullOFF 0,75	=	Verso l'alto, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/15	QE	-XC:2.1:a1	=SSB+0001/15	QE	-XC:2.2:a2	BRIDGE2	0,75	BU	+	24VDC	213	=-CN2	Welding 0,75	PullOFF 0,75	=	Verso l'alto	Verso l'alto	99.TEST1	1												
+=SSB+0001/15	QE	-15S1:22	=SSB+0001/15	QE	-XC:2.1:b1	15.05	0,75	BU	+	24VDC	1339	=-CN10;=-11;=-12;=-13;=-10;=-9;=-CN2;=-CN3;=-CN1	PUNTALINO 0,75	PullOFF 0,75	=	Verso l'alto, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/30	QE	-XC:7.1:a1	=SSB+0001/30	QE	-10KA3:14	30.01	0,75	BU	+	24VDC	933	=-CN2;=-CN3;=-CN5	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/30	QE	-XC:7.2:a2	=SSB+0001/44	QE	-41MOD2:X12:DQa.0	Q0.0	0,75	BU	+	24VDC	499	=-CN2	PullOFF 0,75	PUNTALINO 0,75	=	Verso l'alto, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/31	QE	-10KA3:21	=SSB+0001/31	QE	-XC:8.2:a2	31.02	0,75	BU	+	24VDC	890	=-CN5;=-CN3;=-CN2	PUNTALINO 0,75	PullOFF 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/31	QE	-XC:8.1:a1	=SSB+0001/31	QE	-10KA3:24	31.01	0,75	BU	+	24VDC	932	=-CN2;=-CN3;=-CN5	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/31	QE	-44KA1:11	=SSB+0001/31	QE	-XC:10.2:a2	31.12	0,75	BU	+	24VDC	1047	=-CN5;=-CN3;=-CN2	PUNTALINO 0,75	Welding 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/31	QE	-XC:9.1:a1	=SSB+0001/31	QE	-44KA1:14	31.04	0,75	BU	+	24VDC	1035	=-CN2;=-CN3;=-CN5	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/31	QE	-XC:11.1:a1	=SSB+0001/31	QE	-XC:11.2:a2	31.05	0,75	BU	+	24VDC	267	=-CN2	Welding 0,75	Welding 0,75	=	Verso l'alto	Verso l'alto	99.TEST1	1												
+=SSB+0001/31	QE	-10KA3:31	=SSB+0001/31	QE	-XC:10.1:a1	31.08	0,75	BU	+	24VDC	907	=-CN5;=-CN3;=-CN2	PUNTALINO 0,75	Welding 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/31	QE	-XC:9.2:a2	=SSB+0001/31	QE	-10KA3:34	31.07	0,75	BU	+	24VDC	917	=-CN2;=-CN3;=-CN5	PullOFF 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/35	QE	-XEXT:1.2:a2	=SSB+0001/43	QE	-41MOD2:X10:DIb.0	I1.0	0,75	BU	+	24VDC	1028	=-CN2;=-CN3;=-CN4	PullOFF 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/35	QE	-XEXT:2.1:a1	=SSB+0001/43	QE	-41MOD2:X10:DIb.1	I1.1	0,75	BU	+	24VDC	1051	=-CN2;=-CN3;=-CN4	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/35	QE	-XEXT:2.2:a2	=SSB+0001/43	QE	-41MOD2:X10:DIb.4	I1.4	0,75	BU	+	24VDC	1050	=-CN2;=-CN3;=-CN4	PullOFF 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/35	QE	-XEXT:3.1:a1	=SSB+0001/43	QE	-41MOD2:X10:DIb.5	I1.5	0,75	BU	+	24VDC	1073	=-CN2;=-CN3;=-CN4	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/35	QE	-XEXT:5.2:a2	=SSB+0001/43	QE	-41MOD2:X10:DIb.2	I1.2	0,75	BU	+	24VDC	1054	=-CN2;=-CN3;=-CN4	PullOFF 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/35	QE	-XEXT:6.1:a1	=SSB+0001/43	QE	-41MOD2:X10:DIb.3	I1.3	0,75	BU	+	24VDC	1077	=-CN2;=-CN3;=-CN4	Welding 0,75	PUNTALINO 0,75	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/44	QE	-41MOD2:X12:DQa.1	=SSB+0001/44	QE	-44KA1:A1	Q0.1	0,75	BU	+	24VDC	1122	=-CN2;=-CN3;=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/44	QE	-41MOD2:X12:DQa.6	=SSB+0001/44	QE	-44KA3:A1	Q0.6	0,75	BU	+	24VDC	1172	=-CN2;=-CN3;=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/44	QE	-41MOD2:X12:DQa.7	=SSB+0001/44	QE	-44KA4:A1	Q0.7	0,75	BU	+	24VDC	1191	=-CN2;=-CN3;=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/44	QE	-41MOD2:X12:DQb.0	=SSB+0001/44	QE	-44KA2:A1	Q1.0	0,75	BU	+	24VDC	1166	=-CN2;=-CN3;=-CN4	PUNTALINO 0,75	PUNTALINO 0,75	=	Verso il basso, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/44	QE	-41MOD2:X12:DQb.1	=SSB+0001/44	QE	-XEXT:23.1:a1	Q1.1	0,75	BU	+	24VDC	369	=-CN2	PUNTALINO 0,75	Welding 0,75	=	Verso il basso, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/35	QE	-XEXT:15.1:a1	=SSB+0001/35	QE	-44KA2:14	35.01	1	OG		FREE	1202	=-CN2;=-CN3;=-CN5	Welding 1	PUNTALINO 1	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/35	QE	-44KA2:11	=SSB+0001/35	QE	-XEXT:15.2:a2	35.02	1	OG		FREE	1156	=-CN5;=-CN3;=-CN2	PUNTALINO 1	PullOFF 1	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/35	QE	-XEXT:21.1:a1	=SSB+0001/35	QE	-44KA3:14	35.03	1	OG		FREE	1224	=-CN2;=-CN3;=-CN5	Welding 1	PUNTALINO 1	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/35	QE	-44KA3:11	=SSB+0001/35	QE	-XEXT:21.2:a2	35.04	1	OG		FREE	1177	=-CN5;=-CN3;=-CN2	PUNTALINO 1	PullOFF 1	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/35	QE	-XEXT:22.1:a1	=SSB+0001/35	QE	-44KA4:14	35.05	1	OG		FREE	1244	=-CN2;=-CN3;=-CN5	Welding 1	PUNTALINO 1	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/35	QE	-44KA4:11	=SSB+0001/35	QE	-XEXT:22.2:a2	35.06	1	OG		FREE	1198	=-CN5;=-CN3;=-CN2	PUNTALINO 1	PullOFF 1	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05Q1:2	=SSB+0001/5	QE	-05U2:L1	05.L02	1,5	BK	L	230V	645	=-CN4	PUNTALINO 1,5	PUNTALINO 1,5	=	Verso il basso, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05Q2:2	=SSB+0001/5	QE	-05X2:L1	05.L03	1,5	BK	L	230V	600	=-CN4;=-CN3;=-CN2	PUNTALINO 1,5	PUNTALINO 1,5	=	Verso il basso, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-10KA2:14	=SSB+0001/5	QE	-XP:1:a1	05.L06	1,5	BK	L	230V	304	=-CN2	PUNTALINO 1,5	Welding 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/5	QE	-10KA1:14	=SSB+0001/5	QE	-10KA2:13	05.L05	1,5	BK	L	230V	616	=-CN2;=-CN3;=-CN4	PUNTALINO 1,5	PUNTALINO 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05Q3:2	=SSB+0001/5	QE	-10KA1:13	05.L04	1,5	BK	L	230V	305	=-CN4	PUNTALINO 1,5	PUNTALINO 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/5	QE	-5Q12:2	=SSB+0001/8	QE	-X24V:1:a1	24V	1,5	BU	+	24VDC	878	=-CN4;=-CN3;=-CN2	PUNTALINO 1,5	Welding 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05U2:+	=SSB+0001/5	QE	-5Q12:1	05.01	1,5	BU	+	24VDC	933	=-CN4;=-CN3;=-CN5	PUNTALINO 1,5	PUNTALINO 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05U2:-	=SSB+0001/8	QE	-X0V:1:a1	0V	1,5	BU	-	0VDC	1156	=-CN4;=-CN3;=-CN2	PUNTALINO 1,5	Welding 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-X24V:99:b	=SSB+0001/5	QE	-05M1:+	05.02	1,5	BU	+	24VDC	988	=-CN1;=-CN3;=-22;=-20;=-25;=-18;=-17;=-28	Welding 1,5	PUNTALINO 1,5	=	Verso il basso, verso sinistra	Verso destra, verso il basso	99.TEST1	1												
+=SSB+0001/5	QE	-X24V:99:a	=SSB+0001/8	QE	-X24V:5:a2	24V	1,5	BU	+	24VDC	327	=-CN2	Welding 1,5	Welding 1,5	=	Verso l'alto, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/5	QE	-05M1:-	=SSB+0001/8	QE	-X0V:3:a2	0V	1,5	BU	-	0VDC	734	=-28;=-17;=-18;=-25;=-20;=-22;=-CN3;=-CN2	PUNTALINO 1,5	Welding 1,5	=	Verso destra, verso il basso	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05U2:-	=SSB+0001/5	QE	-XPE:3:a1	0001.01PE	1,5	GNYE	PE	PE	1269	=-CN4;=-CN3;=-CN2	PUNTALINO 1,5	Welding 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05U2:PE	=SSB+0001/5	QE	-XPE:1:a2	0001.04PE	1,5	GNYE	PE	PE	1326	=-CN4;=-CN3;=-CN2	PUNTALINO 1,5	Welding 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-XPE:4:a1	=SSB+0001/5	QE	-05X2:PE	0001.02PE	1,5	GNYE	PE	PE	970	=-CN2;=-CN3;=-CN4	Welding 1,5	PUNTALINO 1,5	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/33	QE	-33X1:1	=SSB+0001/5	QE	-XPE:4:a2	33.01PE	1,5	GNYE	PE	PE	906	=-CN1;=-CN3;=-CN2	PUNTALINO 1,5	Welding 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/40	QE	-XPE:2:a1	=SSB+0001/40	QE	-40A1:PE	40.02PE	1,5	GNYE	PE	PE	373	=-CN2	Welding 1,5	PUNTALINO 1,5	=	Verso l'alto, verso sinistra	Verso il basso, verso destra	99.TEST1	1												
+=SSB+0001/40	QE	-40I1:PE	=SSB+0001/40	QE	-XPE:2:a2	40.01PE	1,5	GNYE	PE	PE	819	=-37;=-38;=-CN10;=-11;=-12;=-13;=-10;=-9;=-CN2	Welding 1,5	Welding 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/5	QE	-XPE:3:a2	=SSB+0001/41	QE	-41MOD2:X10:PE	0041.01PE	1,5	GNYE	PE	PE	1179	=-CN2;=-CN3;=-CN4	Welding 1,5	PUNTALINO 1,5	=	Verso l'alto, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05Q1:4	=SSB+0001/5	QE	-05U2:N	05.N02	1,5	LHBU	N	0V	631	=-CN4	PUNTALINO 1,5	PUNTALINO 1,5	=	Verso il basso, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05Q2:4	=SSB+0001/5	QE	-05X2:N	05.N03	1,5	LHBU	N	0V	639	=-CN4;=-CN3;=-CN2	PUNTALINO 1,5	PUNTALINO 1,5	=	Verso il basso, verso sinistra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-10KA2:44	=SSB+0001/5	QE	-XP:2:a1	05.N06	1,5	LHBU	N	0V	324	=-CN2	PUNTALINO 1,5	Welding 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/5	QE	-10KA1:44	=SSB+0001/5	QE	-10KA2:43	05.N05	1,5	LHBU	N	0V	670	=-CN2;=-CN3;=-CN4	PUNTALINO 1,5	PUNTALINO 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05Q3:4	=SSB+0001/5	QE	-10KA1:43	05.N04	1,5	LHBU	N	0V	297	=-CN4	PUNTALINO 1,5	PUNTALINO 1,5	=	Verso il basso, verso sinistra	Verso l'alto, verso destra	99.TEST1	1												
+=SSB+0001/5	QE	-5QSG1:T1	=SSB+0001/5	QE	-05Q1:1	05.L01	2,5	BK	L	230V	1598	=-CN10;=-11;=-12;=-13;=-10;=-9;=-CN2;=-CN3;=-CN5	PUNTALINO 2,5	PUNTALINO 2,5	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05Q1:1	=SSB+0001/5	QE	-05Q2:1	05.L01	2,5	BK	L	230V	208	=-CN5	PUNTALINO 2,5	PUNTALINO 2,5	=	Verso l'alto, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05Q2:1	=SSB+0001/5	QE	-05Q3:1	05.L01	2,5	BK	L	230V	208	=-CN5	PUNTALINO 2,5	PUNTALINO 2,5	=	Verso l'alto, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-XPE:1:a1	=SSB+0001/5	QE	-PORTA:PE	0001.03PE	2,5	GNYE	PE	PE	655	=-CN2;=-9;=-10;=-13;=-12;=-11	Welding 2,5	Welding 2,5	=	Verso l'alto, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-XPE:1:b2	=SSB+0001/5	QE	-ARMADIO:PE	0001.04PE	2,5	GNYE	PE	PE	292	=-CN1;=-29;=-30	Welding 2,5	Welding 2,5	=	Verso il basso, verso destra	Verso destra, verso il basso	99.TEST1	1												
+=SSB+0001/5	QE	-XPE:3:b1	=SSB+0001/5	QE	-PIASTRA:PE	0001.05PE	2,5	GNYE	PE	PE	182	=-CN1	Welding 2,5	Welding 2,5	=	Verso il basso, verso destra	Verso il basso, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-5QSG1:T2	=SSB+0001/5	QE	-05Q1:3	05.N01	2,5	LHBU	N	0V	1605	=-CN10;=-11;=-12;=-13;=-10;=-9;=-CN2;=-CN3;=-CN5	PUNTALINO 2,5	PUNTALINO 2,5	=	Verso il basso, verso sinistra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05Q1:3	=SSB+0001/5	QE	-05Q2:3	05.N01	2,5	LHBU	N	0V	208	=-CN5	PUNTALINO 2,5	PUNTALINO 2,5	=	Verso l'alto, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-05Q2:3	=SSB+0001/5	QE	-05Q3:3	05.N01	2,5	LHBU	N	0V	208	=-CN5	PUNTALINO 2,5	PUNTALINO 2,5	=	Verso l'alto, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-XALG:L:a	=SSB+0001/5	QE	-5QSG1:L1	L	2,5	OG	L	230V	1317	=-CN2;=-9;=-10;=-13;=-12;=-11;=-CN10;=-38;=-37	Welding 2,5	PUNTALINO 2,5	=	Verso l'alto, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												
+=SSB+0001/5	QE	-XALG:N:a	=SSB+0001/5	QE	-5QSG1:L2	N	2,5	OG	N	0V	1300	=-CN2;=-9;=-10;=-13;=-12;=-11;=-CN10;=-38;=-37	Welding 2,5	PUNTALINO 2,5	=	Verso l'alto, verso destra	Verso l'alto, verso sinistra	99.TEST1	1												

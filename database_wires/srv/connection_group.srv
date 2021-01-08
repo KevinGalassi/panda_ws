@@ -1,0 +1,10 @@
+
+------------
+bool end
+bool missing_pin_data
+int32 list_position
+cad_pins origin
+cad_pins destination
+string wire
+string wire_path
+geometry_msgs/Pose[] path_keypoints
