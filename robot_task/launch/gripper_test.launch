@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <launch>
-	<node name="GripperControl" pkg="robot_task" type="gripper_test" output="screen" >
+	<node name="staticGrasp" pkg="robot_task" type="static_grasp" output="screen" >
 		<param name="velocity" 	value = "0.50" />
 		<param name="reference" value = "0.0040" />
 		<param name="force" 		value = "4.5"  />

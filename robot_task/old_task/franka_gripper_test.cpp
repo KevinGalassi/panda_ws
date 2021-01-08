@@ -133,9 +133,7 @@ int main(int argc, char** argv)
         move_client.sendGoal(move_goal);
     }
     
-    
-    
-    
+      
     
     while(ros::ok())
     {

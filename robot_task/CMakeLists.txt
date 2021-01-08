@@ -70,49 +70,13 @@ add_dependencies(cable_routing
   franka_gripper) 
 
 
-add_executable(force_test src/force_test.cpp)
-target_link_libraries(force_test ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-
-
-add_executable(test_correlazione_sensore src/test_correlazione_sensore.cpp)
-target_link_libraries(test_correlazione_sensore ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(test_correlazione_sensore 
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-  ${catkin_EXPORTED_TARGETS}
-  franka_gripper) 
-
-add_executable(velocity_test src/velocity_test)
-target_link_libraries(velocity_test ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 add_executable(active_control src/active_control)
 target_link_libraries(active_control ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
-add_executable(Prove_tattili src/Prove_tattili)
-target_link_libraries(Prove_tattili ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(Prove_tattili 
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-  ${catkin_EXPORTED_TARGETS}
-  franka_gripper) 
 
-add_executable(PID_test src/PID_test)
-target_link_libraries(PID_test ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(PID_test 
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-  ${catkin_EXPORTED_TARGETS}
-  franka_gripper) 
-
-
-add_executable(gripper_test src/gripper_test.cpp)
-target_link_libraries(gripper_test ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-add_dependencies(gripper_test 
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
-  ${catkin_EXPORTED_TARGETS}
-  franka_gripper) 
-
-
-
-
-
+#add_executable(static_grasp src/static_grasp.cpp)
+#target_link_libraries(static_grasp ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 
 
