@@ -60,4 +60,9 @@
     <arg name="moveit_warehouse_database_path" value="$(arg db_path)"/>
   </include>
 
+  <node pkg="tf2_ros" type="static_transform_publisher" name="virtual_joint_broadcaster_1" args="0 0 0 0 0 0 world panda_link0" >
+    <param name="rate" value="1000"/>
+  </node>
+
+
 </launch>

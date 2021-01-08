@@ -9,4 +9,8 @@
     <origin xyz="0 0 0" rpy="0 0 0.785" />
   </xacro:schunk_pg70>
 
+  <xacro:world_ref name="world" parent="panda_link0">
+    <origin xyz="-0.0 0.0 0.0" rpy=" 0.0 0.0 0.0" />
+  </xacro:world_ref>
+
 </robot>

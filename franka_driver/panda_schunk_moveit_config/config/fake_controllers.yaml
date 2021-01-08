@@ -11,6 +11,7 @@ controller_list:
   - name: fake_hand_controller
     joints:
       - schunk_pg70_finger_left_joint
+      - schunk_pg70_finger_right_joint
 initial:  # Define initial robot poses.
   - group: panda_arm
     pose: arm_ready_position

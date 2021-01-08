@@ -319,7 +319,6 @@ void TrajectoryPlanner::addFixPoint2(geometry_msgs::Pose fixing_point, geometry_
 
 }
 
-
 void TrajectoryPlanner::addFixPoint3(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints)
 {
     /**
@@ -634,7 +633,6 @@ void TrajectoryPlanner::addCornerFixPoint2(geometry_msgs::Pose fixing_point, geo
     waypoints.poses.push_back(target_pose);
 
 }
-
 
 void TrajectoryPlanner::addCornerRound(geometry_msgs::Pose Point1, geometry_msgs::Pose Point2, geometry_msgs::Pose Point3, double distance1, double distance2, geometry_msgs::PoseArray& waypoints)
 {

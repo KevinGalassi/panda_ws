@@ -1,0 +1,8 @@
+prefix=/home/kvn/ros/panda_ws/src/build/devel
+
+Name: planner
+Description: Description of planner
+Version: 0.0.0
+Cflags: -I/home/kvn/ros/panda_ws/src/build/devel/include -I/home/kvn/ros/panda_ws/src/planner/include
+Libs: -L${prefix}/lib 
+Requires: actionlib actionlib_msgs geometry_msgs message_runtime moveit_msgs moveit_core moveit_visual_tools moveit_ros_planning_interface roscpp rospy sensor_msgs std_msgs

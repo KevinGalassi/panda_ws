@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: schunk_pg70
+Description: Description of schunk_pg70
+Version: 1.3.7
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: roscpp serial tf

@@ -42,6 +42,21 @@ controller_list:
     type: FollowJointTrajectory
     joints:
       schunk_pg70_finger_left_joint
+  - name: position_joint_trajectory_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - panda_joint1
+      - panda_joint2
+      - panda_joint3
+      - panda_joint4
+      - panda_joint5
+      - panda_joint6
+      - panda_joint7
+
+
+
 arm_position_controller:
   type: position_controllers/JointPositionController
   joints:

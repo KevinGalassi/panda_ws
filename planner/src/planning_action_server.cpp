@@ -29,15 +29,15 @@ class TrajectoryActionServer
    }
 
 
-   void ComputeTrajectory_cb(const planner::ComputeTrajectoryGoal& goal_)
+   void ComputeTrajectory_cb(const planner::ComputeTrajectoryGoalConstPtr& goal)
    {
       TrajectoryPlanner new_traj;
 
 
-      for(int i=0; i< goal_.InputPoint.poses.size(); i++)
+      for(int i=0; i< goal->InputPoint.poses.size(); i++)
       {
-         new_traj.InitPoint.poses.push_back(goal_.InputPoint.poses[i]);
-         new_traj.InitLabel.push_back(goal_.InitLabel[i]);
+         new_traj.InitPoint.poses.push_back(goal->InputPoint.poses[i]);
+         new_traj.InitLabel.push_back(goal->InitLabel[i]);
       }
       feedback_.output = "Input point readen";
       as_.publishFeedback(feedback_);

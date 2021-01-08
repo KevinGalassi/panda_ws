@@ -1,0 +1,2 @@
+set(schunk_pg70_MESSAGE_FILES "")
+set(schunk_pg70_SERVICE_FILES "/home/kvn/ros/panda_ws/src/schunk_pg70/srv/reference.srv;/home/kvn/ros/panda_ws/src/schunk_pg70/srv/set_position.srv;/home/kvn/ros/panda_ws/src/schunk_pg70/srv/get_error.srv;/home/kvn/ros/panda_ws/src/schunk_pg70/srv/get_position.srv;/home/kvn/ros/panda_ws/src/schunk_pg70/srv/acknowledge_error.srv;/home/kvn/ros/panda_ws/src/schunk_pg70/srv/stop.srv")
