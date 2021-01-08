@@ -17,7 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   sensor_msgs
-  vision
+  
 )
 
 find_package(Eigen3 REQUIRED)
@@ -82,7 +82,7 @@ target_link_libraries(static_grasp ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 add_dependencies(static_grasp 
   ${${PROJECT_NAME}_EXPORTED_TARGETS}
   ${catkin_EXPORTED_TARGETS}
-  vision) 
+) 
 
 
 ## Tools

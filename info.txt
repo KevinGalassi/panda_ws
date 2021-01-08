@@ -1,0 +1,59 @@
+COMPILAZIONE WORKSPACE ROBOT: da terminale NON ROOT
+COMPILAZIONE WORKSPACE PERSONALE: da terminale NON ROOT con attivo: ->source devel/setup.bash del workspace del robot (non il personale)
+
+
+
+
+RUN DI NODI ROS: sempre da terminale ROOT
+--> sudo su
+--> password: sotomayor
+
+SE IL ROBOT SI BLOCCA ALL'AVVIO
+
+- colpa dei riflessi: ->recupero da errore
+-  altre cause: priva valuta la causa, poi elimina, poi ->recupero da errore
+
+RECUPERO DA ERRORE
+
+da terminale ROOT -> ctrl+r 
+-> error
+-> invio
+
+
+AGGIORNAMENTI MAI"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+SE LA LUCE é VIOLA il robot è in conflitto: spegni tutti i nodi, disattiva la sicurezza, verifica sia fermo, riattiva i nodi
+
+PER ACCENDERE IL ROBOT 
+vai su interfaccia di controllo da browser: https://172.16.0.2/desk/
+-> attiva "unlock joints" -> la luce dovrebbe diventare bianca /oppure blu se la protezione è disattivata
+
+PER SPEGNERE IL ROBOT
+vai su interfaccia
+->attiva "lock Joints"
+
+vai su menù in alto a destra
+->shutdown
+->quando spento stacca interruttore del pc di controllo
+
+
+
+Forum di Franka Emika per domande: ttps://www.franka-community.de/faq
+
+
+ERROR RECOVERY:
+rostopic pub -1 /franka_control/error_recovery/goal franka_control/ErrorRecoveryActionGoal "{}"
+
+
+catkin_make -DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/home/panda/libfranka/build
+
+
+
+
+ROBOT_IP
+172.16.0.2
+
+
+
+
+
