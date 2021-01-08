@@ -149,6 +149,7 @@ Visualization Manager:
         {}
       Queue Size: 100
       Value: true
+<<<<<<< HEAD
     - Class: rviz/TF
       Enabled: true
       Frame Timeout: 15
@@ -213,6 +214,8 @@ Visualization Manager:
                                 {}
       Update Interval: 0
       Value: true
+=======
+>>>>>>> Add database_wires
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -229,7 +232,11 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
+<<<<<<< HEAD
       Distance: 1.577075481414795
+=======
+      Distance: 2.3142189979553223
+>>>>>>> Add database_wires
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
