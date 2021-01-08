@@ -60,7 +60,7 @@ int main(int argc, char** argv)
     moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
     visual_tools.deleteAllMarkers();
 
-    std::string path1 = "/home/panda/ros/Franka-Kev/src/test/src/PointList/line";;
+    std::string path1 = "/home/panda/ros/Franka-Kev/src/robot_task/src/PointList/line";;
 
     actionlib::SimpleActionClient<franka_gripper::MoveAction> move_client("/franka_gripper/move", true);
     actionlib::SimpleActionClient<franka_gripper::GraspAction> grasp_client("/franka_gripper/grasp", true);

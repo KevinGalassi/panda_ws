@@ -1,6 +1,6 @@
 <launch>
 
-    <node pkg="test" type="active_control" name="Active"  output="screen" >
+    <node pkg="robot_task" type="active_control" name="Active"  output="screen" >
 
 
 	<param name="P" value = "0.03" />

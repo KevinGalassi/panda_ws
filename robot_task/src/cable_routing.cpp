@@ -50,7 +50,7 @@ int main(int argc, char** argv)
    std::string rviz_name;
 
    if (!(nh.getParam("/cableRouting/Offset", T_O))) T_O = 0.4;
-   if (!(nh.getParam("/cableRouting/filename", path1))) path1 = "/home/panda/ros/panda_ws/src/test/src/PointList/Routing";
+   if (!(nh.getParam("/cableRouting/filename", path1))) path1 = "/home/panda/ros/panda_ws/src/robot_task/src/PointList/Routing";
    if (!(nh.getParam("/cableRouting/velocity_fix", velocity_fix))) velocity_fix = 0.02;
    if (!(nh.getParam("/cableRouting/velocity_round", velocity_round))) velocity_round = 0.1;
    if (!(nh.getParam("/cableRouting/velocity_pass", velocity_pass))) velocity_pass = 0.05;;

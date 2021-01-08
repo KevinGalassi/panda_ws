@@ -90,7 +90,7 @@ int main(int argc, char** argv)
     int rate;
 
 
-    if (not (nh.getParam("/Active/PathName", path)))    path = "/home/panda/ros/Franka-Kev/src/test/src/PointList/Active";
+    if (not (nh.getParam("/Active/PathName", path)))    path = "/home/panda/ros/Franka-Kev/src/robot_task/src/PointList/Active";
     if (not (nh.getParam("/Active/P", P))) P = 0.01;
     if (not (nh.getParam("/Active/I", I))) I = 0.0;
     if (not (nh.getParam("/Active/D", D))) D = 0.001;
