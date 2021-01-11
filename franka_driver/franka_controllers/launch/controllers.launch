@@ -41,20 +41,15 @@
 
 
 <!-- Load MoveIt with pos_joint_trajectory_controller (ALWAYS LAUNCHED AS ACTIVE) -->
-  <include file="$(find panda_schunk_moveit_config)/launch/schunk_moveit.launch" />
-  <include file="$(find schunk_pg70)/launch/pg70_rs232_control.launch" />
-
-
-<!--
   <include file="$(find panda_moveit_config)/launch/panda_moveit.launch">
     <arg name="load_gripper" value="$(arg load_gripper)" />
-  </include
--->
+  </include>
+
 
   <node pkg="tf2_ros" type="static_transform_publisher" name="virtual_joint_broadcaster_1" args="0 0 0 0 0 0 world panda_link0" >
     <param name="rate" value="1000"/>
   </node>
 
 
-</launch>
 
+</launch>

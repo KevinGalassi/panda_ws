@@ -32,10 +32,12 @@ namespace rvt = rviz_visual_tools;
 
 // Robot known positions
 const std::vector<double> arm_ready_state       = {0, -0.785, 0, -2.356, 0, 1.571, 0.785};
-const std::vector<double> hand_ready_state      = {0.04, 0.04};
+const std::vector<double> hand_ready_state      = {0.03, 0.03};
 const std::vector<double> hand_open_position    = {0.037, 0.037};
-const std::vector<double> hand_closed_position  = {0.0, 0.0};
+const std::vector<double> hand_closed_position  = {0.01, 0.01};
 const std::vector<double> hand_grasp_position  = {0.004, 0.004};
+
+
 
 // Denavit-Hartenberg Parameters of Panda
 const float DH_param_a[8]       = {0, 0, 0, 0.0825, -0.0825, 0, 0.088, 0 };

@@ -34,6 +34,10 @@
     <param name="rate" value="1000"/>
   </node>
 
+  <node pkg="tf2_ros" type="static_transform_publisher" name="virtual_joint_broadcaster_ee" args="0 0 0 0 0 0 world panda_link0" >
+    <param name="rate" value="1000"/>
+  </node>
+
 
 
 </launch>

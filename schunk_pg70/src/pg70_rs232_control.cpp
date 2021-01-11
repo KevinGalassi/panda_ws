@@ -50,7 +50,7 @@ main(int argc, char *argv[])
   ros::ServiceServer stop_service              = nh.advertiseService("schunk_pg70/stop", &schunk_pg70::PG70_serial::stopCallback, &gripper);
   
   ros::Timer timer = nh.createTimer(ros::Duration(gripper.TF_UPDATE_PERIOD), &schunk_pg70::PG70_serial::timerCallback, &gripper);
-  gripper.joint_pub = nh.advertise<sensor_msgs::JointState>("joint_states", 1);  
+  gripper.joint_pub = nh.advertise<sensor_msgs::JointState>("schunk_pg70/joint_states", 1);  
   
   ros::spin();
 

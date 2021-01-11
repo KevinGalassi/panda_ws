@@ -23,6 +23,17 @@ find_package(Eigen3 REQUIRED)
 find_package(Franka 0.5.0 REQUIRED)
 
 
+add_service_files(
+  FILES
+    getGraspPose.srv
+)
+
+generate_messages(
+  DEPENDENCIES 
+    std_msgs
+    sensor_msgs
+    geometry_msgs
+)
 
 catkin_package(
   INCLUDE_DIRS include
@@ -75,8 +86,8 @@ add_executable(active_control src/active_control)
 target_link_libraries(active_control ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 
-#add_executable(static_grasp src/static_grasp.cpp)
-#target_link_libraries(static_grasp ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_executable(static_grasp src/static_grasp.cpp)
+target_link_libraries(static_grasp ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 
 
