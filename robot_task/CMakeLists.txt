@@ -17,23 +17,13 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   sensor_msgs
+  vision
 )
 
 find_package(Eigen3 REQUIRED)
 find_package(Franka 0.5.0 REQUIRED)
 
 
-add_service_files(
-  FILES
-    getGraspPose.srv
-)
-
-generate_messages(
-  DEPENDENCIES 
-    std_msgs
-    sensor_msgs
-    geometry_msgs
-)
 
 catkin_package(
   INCLUDE_DIRS include
@@ -69,6 +59,7 @@ include_directories(
 	${catkin_INCLUDE_DIRS}
 	moveit_core 
 	moveit_visual_tools
+  vision
 )
 
 
@@ -88,7 +79,10 @@ target_link_libraries(active_control ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 add_executable(static_grasp src/static_grasp.cpp)
 target_link_libraries(static_grasp ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-
+add_dependencies(static_grasp 
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+  vision) 
 
 
 ## Tools
