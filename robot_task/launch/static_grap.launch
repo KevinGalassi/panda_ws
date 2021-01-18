@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <launch>
 	<node name="StaticGrasp" pkg="robot_task" type="static_grasp" output="screen" >
-		<param name="velocity" 	value = "0.50" />
-		<param name="reference" value = "0.0040" />
-		<param name="force" 		value = "4.5"  />
-        <param name="pause1" 	value = "5"  />
-        <param name="pause2" 	value = "5"  />
-        <param name="inner" 		value = "0.03"  />
-        <param name="outer" 		value = "0.008"  />
+
+      <param name="gripper_width" value = "10" />
+      <param name="camera_x" value = "0.435" />
+      <param name="camera_y" value = "0.165" />
+      <param name="camera_z" value = "0.031" />
+
+      <param name="file_path" value = "/home/panda/" />
 	</node>
 
 

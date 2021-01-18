@@ -126,8 +126,6 @@ void addPreFixPoint2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray&
 void addPostFixPoint2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, double radius, double heigh, int res, double dis_init, double dist_final, bool orientation);
 
 
-
-
 void CornerFix2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& waypoints, geometry_msgs::Pose corner_point, geometry_msgs::Pose starting_point,
                              TrajectoryPlanner_param param, double dis_init, double dist_final, bool orientation);
 
