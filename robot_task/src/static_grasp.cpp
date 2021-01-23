@@ -208,11 +208,9 @@ int main(int argc, char** argv)
    camera_pose.position.x += 0.2;
    camera_pose.orientation = orientationConversion(camera_pose.orientation, -M_PI/2, 0, M_PI); 
    visual_tools.publishAxisLabeled(camera_pose, "Back to world orientation", rvt::SMALL);
-
    camera_pose.position.x += 0.2;
    camera_pose.orientation = orientationConversion(camera_pose.orientation, M_PI, 0, 0); 
    visual_tools.publishAxisLabeled(camera_pose, " Gripper Orientation", rvt::SMALL);
-
    visual_tools.trigger();
    visual_tools.prompt("CHeck correction");
 */

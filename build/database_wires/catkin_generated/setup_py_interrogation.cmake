@@ -1,0 +1,7 @@
+set(database_wires_SETUP_PY_SETUP_MODULE "distutils.core")
+set(database_wires_SETUP_PY_VERSION "0.0.0")
+set(database_wires_SETUP_PY_SCRIPTS "")
+set(database_wires_SETUP_PY_PACKAGES "database_wires")
+set(database_wires_SETUP_PY_PACKAGE_DIRS "scripts/database_wires")
+set(database_wires_SETUP_PY_MODULES "")
+set(database_wires_SETUP_PY_MODULE_DIRS "")
