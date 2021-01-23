@@ -3,12 +3,6 @@
 */
 
 #include "ros/ros.h"
-#include <eigen_conversions/eigen_msg.h>
-#include <tf2_ros/transform_listener.h>
-#include <tf2_ros/static_transform_broadcaster.h>
-#include <geometry_msgs/TransformStamped.h>
-
-
 #include "std_msgs/String.h"
 #include "std_msgs/Float32.h"
 #include <std_msgs/Float32MultiArray.h>
@@ -22,16 +16,9 @@
 #include <fstream>
 
 #include "geometry_msgs/Pose.h"
-#include "geometry_msgs/Point.h"
-#include "geometry_msgs/Accel.h"
-
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 
-#include <moveit_msgs/DisplayRobotState.h>
-#include <moveit_msgs/DisplayTrajectory.h>
-#include <moveit_msgs/AttachedCollisionObject.h>
-#include <moveit_msgs/CollisionObject.h>
 #include <moveit_visual_tools/moveit_visual_tools.h>
 #include <math.h>
 
@@ -70,7 +57,7 @@ int main(int argc, char** argv)
 
    namespace rvt = rviz_visual_tools;
 
-ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_state_request",100);
+   ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_state_request",100);
    ros::Publisher width_pub = nh.advertise<std_msgs::Float32>("/gripper_width_request", 100);
 
    std_msgs::Float32 width_msg;
@@ -98,45 +85,35 @@ ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_state_request
    std::string file_path;
    nh.getParam("/StaticGrasp/file_path", file_path);
 
-   float gripper_width;
-   nh.getParam("/StaticGrasp/gripper_width", gripper_width);
-
-
-   ros::ServiceClient getGraspPoseImage_client = nh.serviceClient<vision::getGraspPoseImage>("/get_grasp_pose_image");
-   vision::getGraspPoseImage graspIm_srv;
 
  //  ros::ServiceClient getGraspPose_client = nh.serviceClient<vision::getGraspPose>("/get_grasp_pose");
    vision::getGraspPose grasp_srv;
-   ros::ServiceClient gripper_client = nh.serviceClient<schunk_pg70::set_position>("schunk_pg70/set_position");     
+   //ros::ServiceClient gripper_client = nh.serviceClient<schunk_pg70::set_position>("schunk_pg70/set_position");     
 
 
    schunk_pg70::set_position schunk_pos_srv;
-   schunk_pos_srv.request.goal_position = gripper_width; // 69
-   schunk_pos_srv.request.goal_velocity = gripper_speed; // 82
-   schunk_pos_srv.request.goal_acceleration = gripper_acc; // 320
+   schunk_pos_srv.request.goal_position = gripper_width;          // 69
+   schunk_pos_srv.request.goal_velocity = gripper_speed;          // 82
+   schunk_pos_srv.request.goal_acceleration = gripper_acc;        // 320
 
    schunk_pg70::set_position schunk_open_pos_srv;
-   schunk_open_pos_srv.request.goal_position = 60; // 69
-   schunk_open_pos_srv.request.goal_velocity = gripper_speed; // 82
-   schunk_open_pos_srv.request.goal_acceleration = 200; // 320
+   schunk_open_pos_srv.request.goal_position = 60;                // 69
+   schunk_open_pos_srv.request.goal_velocity = gripper_speed;     // 82
+   schunk_open_pos_srv.request.goal_acceleration = 200;           // 320
 
    schunk_pg70::set_position schunk_closed_pos_srv;
-   schunk_closed_pos_srv.request.goal_position = 10; // 69
-   schunk_closed_pos_srv.request.goal_velocity = gripper_speed; // 82
+   schunk_closed_pos_srv.request.goal_position = 10;              // 69
+   schunk_closed_pos_srv.request.goal_velocity = gripper_speed;   // 82
    schunk_closed_pos_srv.request.goal_acceleration = gripper_acc; // 320
     
    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
-   //moveit::planning_interface::MoveGroupInterface hand_group("hand");
    moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
-   moveit_visual_tools::MoveItVisualTools camera_tools("camera_link");
-   camera_tools.deleteAllMarkers();
    visual_tools.deleteAllMarkers();
-
 
    ROS_INFO("Reach Ready Position");
    move_group.setMaxVelocityScalingFactor(0.2);
    
-   gripper_client.call(schunk_open_pos_srv);
+   //gripper_client.call(schunk_open_pos_srv);
    move_group.setJointValueTarget(arm_ready_state);
    move_group.move();
 
@@ -147,15 +124,15 @@ ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_state_request
    geometry_msgs::Pose ee_pose;
    geometry_msgs::Pose camera_pose;
 
-
-   // Service to get point
+/*
+   // REAL Service to get point
    getGraspPose_client.call(grasp_srv);
    picture_pose = grasp_srv.response.target_pose;
 	std::cout <<"Dal servizio" << picture_pose << "\n";
-
+*/
 
    // Fake point generate
-   /*
+   
 	picture_pose.position.x = 0.05;
    picture_pose.position.y = -0.03;
    picture_pose.position.z = 0.2;
@@ -163,7 +140,7 @@ ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_state_request
    picture_pose.orientation.y = 0.0;
    picture_pose.orientation.z = 0.0;
    picture_pose.orientation.w = 1.0;
-	*/
+	
    //picture_pose.orientation = orientationConversion(picture_pose.orientation, -M_PI/2, 0, M_PI); 
 	picture_pose = PointConversion(picture_pose, -M_PI/2, 0, M_PI); 
 	std::cout <<"Conversione" << picture_pose << "\n";
@@ -173,16 +150,13 @@ ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_state_request
    visual_tools.prompt("Next to convert the orientation");
 
 
-
-
    // Conversion to Gripper position
-
    target_pose.position.x = picture_pose.position.x + camera_position.x;
    target_pose.position.y = picture_pose.position.y + camera_position.y;
    target_pose.position.z = picture_pose.position.z + camera_position.z;
    target_pose.orientation = orientationConversion(picture_pose.orientation, -M_PI/2, 0, M_PI); 
    target_pose.orientation = orientationConversion(target_pose.orientation, M_PI, 0, 0); 
-	std::cout <<"Final Point" << target_pose << "\n";
+	std::cout <<"Final Point: \n" << target_pose << "\n";
 
    // pre-Avvicinamento
    visual_tools.publishAxisLabeled(target_pose, "Point to grasp", rvt::SMALL);
@@ -201,58 +175,80 @@ ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_state_request
    move_group.move();
 
 	ros::Duration(1).sleep();
-   if(gripper_client.call(schunk_closed_pos_srv));
+   //gripper_client.call(schunk_closed_pos_srv);
+
+   // Apertura Gripper
+   visual_tools.prompt("Next to open the gripepr");
+   //gripper_client.call(schunk_open_pos_srv);
+   
+   visual_tools.prompt("Alzo");
+   target_pose.position.z += 0.1;
+   move_group.setPoseTarget(target_pose, "schunk_pg70_object_link");
+   move_group.move();
+
 
    // Lettura dati
+   std_msgs::Float32MultiArray fo_params;
+   std_msgs::Float32MultiArray so_params;
+   std_msgs::Float32MultiArray fo_flag;
+   std_msgs::Float32MultiArray so_flag;
 
-   std_msgs::Float32MultiArray fo_param;, so_params, fo_flag, so_flag;
    fo_params.data.resize(2);
-   fo_flag.data.resize
+   fo_flag.data.resize(2);
    so_params.data.resize(3);
+   so_flag.data.resize(3);
 
    float c, m;
+   /*
    try
    {
       fo_params = *(ros::topic::waitForMessage<std_msgs::Float32MultiArray>(topic_name1, ros::Duration(5)));
+      c = fo_params.data[1];
+      m = fo_params[0]
    }
    catch
    {
       ROS_WARN("Error in receiving topic: %s", topic_name1)
    }
-   c = fo_params.data[1];
-   m = fo_params[0]
+
    try
    {
       fo_params = *(ros::topic::waitForMessage<std_msgs::Float32MultiArray>(topic_name2, ros::Duration(5)));
+      c += fo_params.data[1]
+      m += fo_params[0]
+      c = c/2;
+      m = m/2;
    } 
       catch
    {
       ROS_WARN("Error in receiving topic: %s", topic_name1)
    }
-   c += fo_params.data[1]
-   m += fo_params[0]
-   c = c/2;
-   m = m/2;
+   */
+
+   nh.getParam("StaticGrasp/test_m", m);
+   nh.getParam("StaticGrasp/test_c", c);
+   ROS_INFO("Parameter c: %f", c);
+   ROS_INFO("Parameter m: %f", m);
 
    // Cambio della target_pose
+   ROS_INFO("Calc. of correction parameter");
    target_pose.position.z += c;
-   float rotation = atan(m)
-   target_pose.quaternion = orientationConversion(target, 0, rotation, 0);
-   	
+   float rotation = atan(m);
+   target_pose.orientation = orientationConversion(target_pose.orientation, 0, rotation, 0);
+   std::cout << "New position to reach: \n" << target_pose << "\n";
 
-   // Apertura Gripper
-   visual_tools.prompt("Next to open the gripepr");
-   gripper_client.call(schunk_open_pos_srv);
-
+   visual_tools.deleteAllMarkers();
+   visual_tools.publishAxisLabeled(target_pose, "New_point", rvt::SMALL);
+   visual_tools.trigger();
 
    // Riposizionamento
-   visual_tools.promtp("Riposizionamento");
+   visual_tools.prompt("Riposizionamento");
    move_group.setPoseTarget(target_pose, "schunk_pg70_object_link");
    move_group.move();
 
    // Chiusura Gripper
    visual_tools.prompt("Next to close the gripper");
-   gripper_client.call(schunk_closed_pos_srv);
+   //gripper_client.call(schunk_closed_pos_srv);
 
    // Alzare
 	visual_tools.prompt("Next to raise");

@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <launch>
-	<node name="StaticGrasp" pkg="robot_task" type="static_grasp" output="screen" >
+	<node name="StaticGrasp" pkg="robot_task" type="static_grasp_orientamento" output="screen" >
 
       <param name="gripper_width" value = "10" />
       <param name="camera_x" value = "0.435" />
@@ -8,6 +8,17 @@
       <param name="camera_z" value = "0.031" />
 
       <param name="file_path" value = "/home/panda/" />
+
+      <param name="topic_name1" value = "" />
+      <param name="topic_name2" value = "" />
+
+      <param name="gripper_width" value = "10" />
+      <param name="gripper_speed" value = "30" />
+      <param name="gripper_acc" value = "60" />
+
+      <param name="test_c" value = "0.01" />
+      <param name="test_m" value = "0.26" />
+
 	</node>
 
 

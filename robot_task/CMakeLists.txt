@@ -84,6 +84,13 @@ add_dependencies(static_grasp
   ${catkin_EXPORTED_TARGETS}
 ) 
 
+add_executable(static_grasp_orientamento src/static_grasp_orientamento.cpp)
+target_link_libraries(static_grasp_orientamento ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(static_grasp_orientamento 
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+) 
+
 
 ## Tools
 include(${CMAKE_CURRENT_LIST_DIR}/../cmake/ClangTools.cmake OPTIONAL
