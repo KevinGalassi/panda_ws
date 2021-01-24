@@ -1,0 +1,16 @@
+<?xml version="2.0"?>
+<launch>
+    <node pkg="tf" type="static_transform_publisher" name="gearbox_rf" args="0.2 -0.3 0.0 0 0 -1.57 panda_link0 gearbox_rf 10" />
+    <node name="gearbox_handler_wires" pkg="database_wires" type="gearbox_handler_cabling.py" output="screen">
+        <param name="demo_type" value="wires"/>
+        <param name="output_stl" value="false" />
+        <param name="gearbox_display" value="true" />
+        <param name="files_path" value="$(find database_wires)/data/gearbox_demo/" />
+        <param name="cad_name" value="gearbox_demo" />
+        <param name="component_file" value="Component_tf.xml" />
+        <param name="wiring_file" value="cablaggio.csv" />
+        <param name="terminal_file" value="PROGETTO_WIRES_SCHEMA_MORSETTI.ods" />
+        <param name="terminal_sheet" value="IEMA_HILL_Schema_Morsetti_00" />
+    </node>
+</launch>  
+
