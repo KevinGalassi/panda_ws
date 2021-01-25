@@ -1,23 +1,36 @@
 <?xml version="1.0" ?>
 <launch>
-	<node name="StaticGrasp" pkg="robot_task" type="static_grasp_orientamento" output="screen" >
+	<node name="StaticGrasp" pkg="robot_task" type="static_grasp_orientamento_cyclic" output="screen" >
 
-      <param name="gripper_width" value = "10" />
+<!--
       <param name="camera_x" value = "0.435" />
       <param name="camera_y" value = "0.165" />
       <param name="camera_z" value = "0.031" />
+-->
+      <param name="camera_x" value = "0.0" />
+      <param name="camera_y" value = "0.0" />
+      <param name="camera_z" value = "0.0" />
+
+      <param name="wire_x" value="0.50" />
+      <param name="wire_z" value="0.115" />
 
       <param name="file_path" value = "/home/panda/" />
 
-      <param name="topic_name1" value = "" />
-      <param name="topic_name2" value = "" />
+      <param name="topic_name1" value = "/TactileData_dev_ttyUSB4_F102" />
+      <param name="topic_name2" value = "/TactileData_dev_ttyUSB2_F101" />
 
-      <param name="gripper_width" value = "10" />
-      <param name="gripper_speed" value = "30" />
-      <param name="gripper_acc" value = "60" />
+      <param name="gripper_width" value = "7.0" />
+      <param name="gripper_speed" value = "20.0" />
+      <param name="gripper_acc" value = "20.0" />
 
       <param name="test_c" value = "0.01" />
       <param name="test_m" value = "0.26" />
+
+      <param name="FileName" value = "/home/panda/ros/panda_kevin_ws/src/robot_task/src/Prova_angolo5.txt"/>
+      <param name="test_no" value = "10" />
+
+      <param name="offset_min" value="-0.0060" />
+      <param name="offset_max" value="0.0060" />
 
 	</node>
 

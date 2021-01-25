@@ -17,7 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   sensor_msgs
-  
+  read_sensor
 )
 
 find_package(Eigen3 REQUIRED)
@@ -90,6 +90,26 @@ add_dependencies(static_grasp_orientamento
   ${${PROJECT_NAME}_EXPORTED_TARGETS}
   ${catkin_EXPORTED_TARGETS}
 ) 
+
+add_executable(static_grasp_orientamento_cyclic src/static_grasp_orientamento_cyclic.cpp)
+target_link_libraries(static_grasp_orientamento_cyclic ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(static_grasp_orientamento_cyclic 
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+) 
+
+add_executable(static_grasp_cyclic src/static_grasp_cyclic.cpp)
+target_link_libraries(static_grasp_cyclic ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(static_grasp_cyclic 
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+) 
+
+
+
+
+
+
 
 
 ## Tools
