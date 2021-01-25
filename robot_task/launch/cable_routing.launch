@@ -3,11 +3,11 @@
 
 	<param name="Rescale" value = "6" />
 	<param name="Offset" value = "1.2" />
-    <param name="filename" value = "/home/kvn/ros/panda_ws/src/robot_task/src/PointList/Routing"/>
+    <param name="filename" value = "/home/panda/ros/panda_kevin_ws/src/robot_task/src/PointList/Routing"/>
     
-    <param name="velocity_fix" value = "0.10" /> 
+    <param name="velocity_fix" value = "0.02" /> 
     <param name="velocity_round" value = "0.10" />
-    <param name="velocity_pass" value = "0.70" />
+    <param name="velocity_pass" value = "0.05" />
     
     <param name="move_group" value = "panda_arm" />
     <param name="hand_group" value = "hand" />
