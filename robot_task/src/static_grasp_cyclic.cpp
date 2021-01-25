@@ -2,16 +2,7 @@
     Test program to grasp a wire recognized by a camera running on another node
 */
 
-
-
-
 #include "ros/ros.h"
-#include <eigen_conversions/eigen_msg.h>
-#include <tf2_ros/transform_listener.h>
-#include <tf2_ros/static_transform_broadcaster.h>
-#include <geometry_msgs/TransformStamped.h>
-
-
 #include "std_msgs/String.h"
 #include "std_msgs/Float32.h"
 #include <std_msgs/Float32MultiArray.h>
@@ -20,21 +11,16 @@
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/Image.h>
 
-#include <stdio.h>
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 #include <iostream>
 #include <fstream>
 
 #include "geometry_msgs/Pose.h"
-#include "geometry_msgs/Point.h"
-#include "geometry_msgs/Accel.h"
-
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 
-#include <moveit_msgs/DisplayRobotState.h>
-#include <moveit_msgs/DisplayTrajectory.h>
-#include <moveit_msgs/AttachedCollisionObject.h>
-#include <moveit_msgs/CollisionObject.h>
 #include <moveit_visual_tools/moveit_visual_tools.h>
 #include <math.h>
 
@@ -50,6 +36,8 @@
 
 #include "vision/getGraspPose.h"
 
+#include "read_sensor/tactile_sensor_data.h"
+
 #include <schunk_pg70/set_position.h>
 
 
@@ -61,6 +49,8 @@ geometry_msgs::Pose PointConversion(geometry_msgs::Pose input_quat, float roll, 
    world to camera  -> M_PI 0 -M_PI/2
    camera to world  -> -M_PI/2 0 M_PI
    */
+
+
 
 
 int main(int argc, char** argv)
@@ -86,143 +76,190 @@ int main(int argc, char** argv)
    const std::vector<double> hand_grasp_position   = {0.004, 0.004};
 
    geometry_msgs::Point camera_position;
+   std::string topic_name1, topic_name2;
+   float gripper_width, gripper_speed, gripper_acc;
+   std::string file_path, FileName;
+   int test_no;
+   float offset, offset_min, offset_max;
+
    nh.getParam("/StaticGrasp/camera_x", camera_position.x);
    nh.getParam("/StaticGrasp/camera_y", camera_position.y);
    nh.getParam("/StaticGrasp/camera_z", camera_position.z);
-
-   std::string file_path;
-   nh.getParam("/StaticGrasp/file_path", file_path);
-
-   float gripper_width;
+   nh.getParam("/StaticGrasp/topic_name1", topic_name1);
+   nh.getParam("/StaticGrasp/topic_name2", topic_name2);
    nh.getParam("/StaticGrasp/gripper_width", gripper_width);
+   nh.getParam("/StaticGrasp/gripper_speed", gripper_speed);
+   nh.getParam("/StaticGrasp/gripper_acc", gripper_acc);
+   nh.getParam("/StaticGrasp/file_path", file_path);
+   nh.getParam("/StaticGrasp/FileName", FileName);
+   nh.getParam("/StaticGrasp/test_no", test_no);
+   nh.getParam("/StaticGrasp/offset_min", offset_min);
+   nh.getParam("/StaticGrasp/offset_max", offset_max);
 
 
-   geometry_msgs::TransformStamped transform;
-   tf2_ros::Buffer tfBuffer;
-
-
-
-   ros::ServiceClient getGraspPose_client = nh.serviceClient<vision::getGraspPose>("/get_grasp_pose");
+ //  ros::ServiceClient getGraspPose_client = nh.serviceClient<vision::getGraspPose>("/get_grasp_pose");
    vision::getGraspPose grasp_srv;
    ros::ServiceClient gripper_client = nh.serviceClient<schunk_pg70::set_position>("schunk_pg70/set_position");     
 
-
    schunk_pg70::set_position schunk_pos_srv;
-   schunk_pos_srv.request.goal_position = 60; // 69
-   schunk_pos_srv.request.goal_velocity = 60; // 82
-   schunk_pos_srv.request.goal_acceleration = 200; // 320
+   schunk_pos_srv.request.goal_position = gripper_width;          // 69
+   schunk_pos_srv.request.goal_velocity = gripper_speed;          // 82
+   schunk_pos_srv.request.goal_acceleration = gripper_acc;        // 320
 
    schunk_pg70::set_position schunk_open_pos_srv;
-   schunk_open_pos_srv.request.goal_position = 60; // 69
-   schunk_open_pos_srv.request.goal_velocity = 60; // 82
-   schunk_open_pos_srv.request.goal_acceleration = 200; // 320
+   schunk_open_pos_srv.request.goal_position = 60;                // 69
+   schunk_open_pos_srv.request.goal_velocity = gripper_speed;     // 82
+   schunk_open_pos_srv.request.goal_acceleration = 200;           // 320
 
    schunk_pg70::set_position schunk_closed_pos_srv;
-   schunk_closed_pos_srv.request.goal_position = 10; // 69
-   schunk_closed_pos_srv.request.goal_velocity = 60; // 82
-   schunk_closed_pos_srv.request.goal_acceleration = 200; // 320
-
+   schunk_closed_pos_srv.request.goal_position = 10;              // 69
+   schunk_closed_pos_srv.request.goal_velocity = gripper_speed;   // 82
+   schunk_closed_pos_srv.request.goal_acceleration = gripper_acc; // 320
     
    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
-   //moveit::planning_interface::MoveGroupInterface hand_group("hand");
    moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
-   moveit_visual_tools::MoveItVisualTools camera_tools("camera_link");
-   camera_tools.deleteAllMarkers();
    visual_tools.deleteAllMarkers();
-
 
    ROS_INFO("Reach Ready Position");
    move_group.setMaxVelocityScalingFactor(0.2);
-   
    gripper_client.call(schunk_open_pos_srv);
-   move_group.setJointValueTarget(arm_ready_state);
-   move_group.move();
+   ros::Duration(2).sleep();
 
-   std::cout << "Exec compelted \n";
+   geometry_msgs::Pose start_pose;
+   start_pose.position.x = 0.45;
+   start_pose.position.y = 0;
+   start_pose.position.z = 0.166343;
+   start_pose.orientation.x = -1;
+   start_pose.orientation.y = -4.37114e-08;
+   start_pose.orientation.z = -4.37114e-08;
+   start_pose.orientation.w = 4.37114e-08;
+
+   move_group.setPoseTarget(start_pose, "schunk_pg70_object_link");
+   move_group.move();
 
    geometry_msgs::Pose target_pose;
    geometry_msgs::Pose picture_pose;
-   geometry_msgs::Pose ee_pose;
-   geometry_msgs::Pose camera_pose;
-
-
-   // Service to get point
-  /*
-   getGraspPose_client.call(grasp_srv);
-   picture_pose = grasp_srv.response.target_pose;
-	std::cout <<"Dal servizio" << picture_pose << "\n";
-   */
 
    // Fake point generate
-   
 	picture_pose.position.x = 0.45;
    picture_pose.position.y = 0.0;
-   picture_pose.position.z = 0.055;
+   picture_pose.position.z = 0.0455;
    picture_pose.orientation.x = 0.0;
    picture_pose.orientation.y = 0.0;
    picture_pose.orientation.z = 0.0;
    picture_pose.orientation.w = 1.0;
-
-   picture_pose.orientation = orientationConversion(picture_pose.orientation, -M_PI/2, 0, M_PI);
-	//picture_pose = PointConversion(picture_pose, -M_PI/2, 0, M_PI); 
-	std::cout <<"Conversione" << picture_pose << "\n";
-
-   visual_tools.publishAxisLabeled(picture_pose, "Target Point in camera frame", rvt::SMALL);
-   visual_tools.trigger();
-   visual_tools.prompt("Next to convert the orientation");
-
-/*
-   // TEST ORIENTATION
-   camera_pose.position = picture_pose.position; 
-   camera_pose.position.x += 0.2;
-   camera_pose.orientation = orientationConversion(picture_pose.orientation, -M_PI/2, 0, M_PI); 
-   visual_tools.publishAxisLabeled(camera_pose, "Camera orientation", rvt::SMALL);
-   
-   camera_pose.position.x += 0.2;
-   camera_pose.orientation = orientationConversion(camera_pose.orientation, -M_PI/2, 0, M_PI); 
-   visual_tools.publishAxisLabeled(camera_pose, "Back to world orientation", rvt::SMALL);
-   camera_pose.position.x += 0.2;
-   camera_pose.orientation = orientationConversion(camera_pose.orientation, M_PI, 0, 0); 
-   visual_tools.publishAxisLabeled(camera_pose, " Gripper Orientation", rvt::SMALL);
-   visual_tools.trigger();
-   visual_tools.prompt("CHeck correction");
-*/
-
+   picture_pose.orientation = orientationConversion(picture_pose.orientation, -M_PI/2, 0, M_PI); 
 
    // Conversion to Gripper position
-
    target_pose.position.x = picture_pose.position.x + camera_position.x;
    target_pose.position.y = picture_pose.position.y + camera_position.y;
    target_pose.position.z = picture_pose.position.z + camera_position.z;
    target_pose.orientation = orientationConversion(picture_pose.orientation, -M_PI/2, 0, M_PI); 
    target_pose.orientation = orientationConversion(target_pose.orientation, M_PI, 0, 0); 
-	std::cout <<"Final Point" << target_pose << "\n";
+   geometry_msgs::Pose grasp_pose = target_pose;
 
-   visual_tools.publishAxisLabeled(target_pose, "Point to grasp", rvt::SMALL);
-   visual_tools.trigger();
-   visual_tools.prompt("Next to pre-grasp");
+   visual_tools.prompt("Calcolo per riconfigurazione");
 
-	target_pose.position.z += 0.1;
-	move_group.setPoseTarget(target_pose, "schunk_pg70_object_link");
-   move_group.move();
+   // Lettura dati
+   std_msgs::Float32MultiArray::ConstPtr fo_params;
+   std_msgs::Float32MultiArray::ConstPtr so_params;
+   std_msgs::Float32MultiArray::ConstPtr fo_flag;
+   std_msgs::Float32MultiArray::ConstPtr so_flag;
+   float c0, m0,cf, mf, c_error, m_error;
 
-	visual_tools.prompt("Next to grasp");
-	target_pose.position.z -= 0.1;
-	move_group.setPoseTarget(target_pose, "schunk_pg70_object_link");
-   move_group.move();
+   std::ofstream myfile;
+   myfile.open(FileName);
 
-	ros::Duration(1).sleep();
-   gripper_client.call(schunk_closed_pos_srv);
+   float random;
+   
+   
+   for(int i=0; i<test_no; i++)
+   {
+      std::cout << "Test ciclico no: " << i << "\n";
+      myfile << i << " ";
+      ros::Duration(3).sleep();
+      gripper_client.call(schunk_open_pos_srv);
+      ros::Duration(3).sleep();
 
-   //hand_group.setJointValueTarget(hand_closed_position);
-   //hand_group.move();
-	visual_tools.prompt("Next to raise");
-	target_pose.position.z += 0.1;
-	move_group.setPoseTarget(target_pose, "schunk_pg70_object_link");
-   move_group.move();
+      target_pose = grasp_pose;
+      target_pose.position.z += 0.1;
+      move_group.setPoseTarget(target_pose, "schunk_pg70_object_link");
+      move_group.move();
 
-    ros::shutdown();
-    return 0;
+      myfile << target_pose.position.z << " ";
+
+      ros::Duration(1).sleep();
+
+      target_pose.position.z -= 0.1;
+
+         
+
+      random = (float)rand()/RAND_MAX;
+      offset = offset_min + (offset_max - offset_min)*(float)random;
+      target_pose.position.z += offset;
+
+      move_group.setPoseTarget(target_pose, "schunk_pg70_object_link");
+      move_group.move();
+
+      ros::Duration(1).sleep();
+      gripper_client.call(schunk_pos_srv);
+      ros::Duration(4).sleep();
+   
+      fo_params = ros::topic::waitForMessage<std_msgs::Float32MultiArray>("/first_order_params_F101", ros::Duration(5));
+      c0 = fo_params->data[1]/1000;
+      m0 = fo_params->data[0];
+      fo_params = ros::topic::waitForMessage<std_msgs::Float32MultiArray>("/first_order_params_F102", ros::Duration(5));
+      c0 += fo_params->data[1]/1000;
+      m0 -= fo_params->data[0];
+      c0 = c0/2;
+      m0 = m0/2;
+      myfile << c0 << " ";
+      myfile << m0 << " ";
+
+
+
+      // Cambio della target_pose
+      ROS_INFO("Calc. of correction parameter");
+      target_pose.position.z = target_pose.position.z - c0;
+      float rotation = atan(m0);
+      //target_pose.orientation = orientationConversion(target_pose.orientation, 0, rotation, 0);
+      std::cout << "New position to reach: \n" << target_pose << "\n";
+
+      ros::Duration(1).sleep();
+      gripper_client.call(schunk_open_pos_srv);
+      ros::Duration(4).sleep();
+
+      // Riposizionamento
+      move_group.setPoseTarget(target_pose, "schunk_pg70_object_link");
+      move_group.move();
+
+      myfile << target_pose.position.z  << " ";
+
+      // Chiusura Gripper
+      ros::Duration(1).sleep();
+      gripper_client.call(schunk_pos_srv);
+      ros::Duration(4).sleep();
+
+         
+      fo_params = ros::topic::waitForMessage<std_msgs::Float32MultiArray>("/first_order_params_F101", ros::Duration(5));
+      cf = fo_params->data[1]/1000;
+      mf = fo_params->data[0];
+      fo_params = ros::topic::waitForMessage<std_msgs::Float32MultiArray>("/first_order_params_F102", ros::Duration(5));
+      cf += fo_params->data[1]/1000;
+      mf -= fo_params->data[0];
+      cf = cf/2;
+      mf = mf/2;
+      myfile << cf << " ";
+      myfile << mf << " ";
+      myfile << "\n";
+   }
+
+   myfile.close();
+
+   ros::shutdown();
+   return 0;
+
+
 }
 
 
@@ -231,13 +268,7 @@ geometry_msgs::Quaternion orientationConversion(geometry_msgs::Quaternion input_
 
    tf2::Quaternion quat_rot, quat_out;
    tf2::Quaternion quat_in(input_quat.x, input_quat.y, input_quat.z, input_quat.w);
-   
-   /*
-   quat_in.x = input_quat.x;
-   quat_in.y = input_quat.y;
-   quat_in.z = input_quat.z;
-   quat_in.w = input_quat.w;
-   */
+
 
    quat_rot.setRPY(roll, pitch, yaw);
 
@@ -253,14 +284,7 @@ geometry_msgs::Pose PointConversion(geometry_msgs::Pose input_quat, float roll, 
 
    tf2::Quaternion quat_rot, quat_out;
    tf2::Quaternion quat_in(input_quat.orientation.x, input_quat.orientation.y, input_quat.orientation.z, input_quat.orientation.w);
-   
-   /*
-   quat_in.x = input_quat.x;
-   quat_in.y = input_quat.y;
-   quat_in.z = input_quat.z;
-   quat_in.w = input_quat.w;
-   */
-
+ 
    quat_rot.setRPY(roll, pitch, yaw);
 
    quat_out = quat_in * quat_rot;
@@ -276,3 +300,5 @@ geometry_msgs::Pose PointConversion(geometry_msgs::Pose input_quat, float roll, 
 
    return output_pose;
 }
+
+

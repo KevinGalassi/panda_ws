@@ -93,6 +93,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        schunk_pg70_flange_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         schunk_pg70_object_link:
           Alpha: 1
           Show Axes: false
@@ -105,18 +110,18 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/Axes
-      Enabled: true
+      Enabled: false
       Length: 0.10000000149011612
       Name: Axes
-      Radius: 0.009999999776482582
+      Radius: 0.0010000000474974513
       Reference Frame: schunk_pg70_finger_left_link
-      Value: true
+      Value: false
     - Class: rviz/Axes
       Enabled: true
       Length: 0.10000000149011612
       Name: Axes
-      Radius: 0.009999999776482582
-      Reference Frame: schunk_pg70_fingertip_left_link
+      Radius: 0.0010000000474974513
+      Reference Frame: schunk_pg70_object_link
       Value: true
   Enabled: true
   Global Options:
@@ -146,25 +151,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.5106819868087769
+      Distance: 0.305425226688385
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.06491216272115707
-        Y: 0.029921026900410652
-        Z: 0.0982464998960495
+        X: 0.04766557365655899
+        Y: -0.11811854690313339
+        Z: 0.11776725947856903
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.41539818048477173
+      Pitch: -0.15479689836502075
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.423596382141113
+      Yaw: 3.018583059310913
     Saved: ~
 Window Geometry:
   Displays:

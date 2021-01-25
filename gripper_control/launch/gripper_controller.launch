@@ -1,8 +1,24 @@
 <?xml version="1.0" ?>
+		<launch>
+			<node name="GripperControl" pkg="gripper_control" type="gripper_controller_schunk" output="screen" >
+				<param name="P" value = "0.00075" />
+				<param name="I" value = "0" />
+				<param name="D" value = "0" />
+				<param name="velocity" value = "0.50" />
+				<param name="reference" value = "7" />
+				<param name="offset" value = "0.005"  />
+				<param name="upper_bound" value = "0.007" />
+				<param name="lower_bound" value = "0.003" />
+				<param name="topic" value = "/franka_state_controller/External_Wrench_Filter" />
+				<param name="tactile_ref" value = "0.065" />
+			</node>
+		</launch>
 
+
+<!--
 	<arg name="schunk" 			default="true"/>
 	<arg name="franka_gripper" default="false" />
-  	<arg name="P" 					default = "0.00075" />
+  	<arg name="P" 				default = "0.00075" />
 	<arg name="I" 					default = "0" />
 	<arg name="D" 					default = "0" />
 	<arg name="velocity" 		default = "0.50" />
@@ -25,7 +41,8 @@
 		</launch>
 	</group>
 
-
+</launch>
+-->
 <!--
 	<group if="$(arg schunk)">
 		<launch>
