@@ -11,8 +11,6 @@
 #include <MyFunc.h>
 
 
-
-
 #define PLANNING_ATTEMPTS_NO 500
 #define INPUT_RPY 1
 
@@ -34,8 +32,8 @@ int main(int argc, char** argv)
       
    schunk_pg70::set_position schunk_pos_srv;
 
-   schunk_pos_srv.request.goal_position = 60; // 69
-   schunk_pos_srv.request.goal_velocity = 60; // 82
+   schunk_pos_srv.request.goal_position = 60;      // 69
+   schunk_pos_srv.request.goal_velocity = 60;      // 82
    schunk_pos_srv.request.goal_acceleration = 200; // 320
 
    namespace rvt = rviz_visual_tools;
@@ -59,20 +57,19 @@ int main(int argc, char** argv)
    nh.getParam(node_name + "/ctrl_pt_1", param.Ctrl_pt_d1);
    nh.getParam(node_name + "/ctrl_pt_2",  param.Ctrl_pt_d2);
    nh.getParam(node_name + "/corner_points",  param.corner_points);
-   nh.getParam(node_name + "/fix_init_dist", param.fix_init_dist);
-   nh.getParam(node_name + "/fix_final_dist", param.fix_final_dist);
-   nh.getParam(node_name + "/dcornerfix_init_dist", param.cornerfix_init_dist);
-   nh.getParam(node_name + "/cornerfix_final_dist", param.cornerfix_final_dist);
-   nh.getParam(node_name + "/cornerfix_lateral_shift", param.cornerfix_lateral_shift);
-   nh.getParam(node_name + "/cornerfix_round_height", param.cornerfix_round_height);
-
+   
+   //nh.getParam(node_name + "/fix_init_dist", param.fix_init_dist);
+   //nh.getParam(node_name + "/fix_final_dist", param.fix_final_dist);
+ //  nh.getParam(node_name + "/cornerfix_init_dist", param.cornerfix_init_dist);
+   //nh.getParam(node_name + "/cornerfix_final_dist", param.cornerfix_final_dist);
+   //nh.getParam(node_name + "/cornerfix_lateral_shift", param.cornerfix_lateral_shift);
+   //nh.getParam(node_name + "/cornerfix_round_height", param.cornerfix_round_height);
 
    ros::Duration T_offset = ros::Duration(0.4);
    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
    moveit::planning_interface::MoveGroupInterface hand_group("hand");
    moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
    visual_tools.deleteAllMarkers();
-
 
    ROS_INFO("Reach Ready Position");
    move_group.setMaxVelocityScalingFactor(0.2);
@@ -89,6 +86,7 @@ int main(int argc, char** argv)
  
 /**************** COMPUTE TRAJECTORY PARTS     ******************/
 
+
    path1 = "/home/kevin/ros/panda_ws/src/robot_task/src/PointList/CableA";
    geometry_msgs::Pose grasp1;
    ReadFileTxt(INPUT_RPY, waypointsA.point, waypointsA.pt_label, path1, grasp1);
@@ -96,10 +94,14 @@ int main(int argc, char** argv)
    visual_tools.deleteAllMarkers();
    
    for(int i=0; i<waypointsA.SecondaryTrajectory.size(); i++)
-   {
       visual_tools.publishPath(waypointsA.SecondaryTrajectory[i].poses, rvt::BLUE, rvt::XXXSMALL);
+
+   for(int i=0; i<waypointsA.pt_label.size(); ++i)
+   {
+      std::cout << i <<" : " << waypointsA.pt_label[i] << "\n";
    }
-   
+
+
    visual_tools.trigger();
    visual_tools.prompt("next to B");
 

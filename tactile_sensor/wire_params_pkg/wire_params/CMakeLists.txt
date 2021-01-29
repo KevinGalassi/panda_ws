@@ -64,6 +64,7 @@ include_directories(
 #############
 
 catkin_install_python(PROGRAMS
-  scripts/plotter.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+   scripts/plotter.py
+   scripts/plotter_k.py
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

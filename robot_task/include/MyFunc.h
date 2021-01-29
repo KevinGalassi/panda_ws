@@ -106,13 +106,6 @@ struct TrajectoryPlanner_param
 */
 
 
-/*
-    pass
-    corner
-    fix
-    patch
-*/
-
 void MyTrajectoryPlanner(TrajectoryPlanner_param param, TrajectoryVector& waypoints);
 
 void FromEE2Link8(geometry_msgs::PoseArray& waypoints);
@@ -546,7 +539,7 @@ void CornerDetection_3(geometry_msgs::PoseArray point, std::vector<std::string>&
 
     for(int i = 1; i < (point.poses.size()-1); i++)
     {
-        if(label[i] == "pass" && label[i-1] != "grasp")
+        if(label[i] == "pass")
         {
             AB = ComputeDistance(point.poses[i], point.poses[i-1]);
             AC = ComputeDistance(point.poses[i+1], point.poses[i-1]);
@@ -901,12 +894,12 @@ void MyTrajectoryPlanner4(TrajectoryPlanner_param param, TrajectoryVector& waypo
                 }
                 else
                 {
-                    addPreFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.06, 0.04, false);
+                    addPreFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.02, 0.02, false);
                     Trajectories_list.push_back(Trajectory_part);
                     Trajectory_part.poses.clear();
                     Trajectory_id.push_back("pre-fix");
 
-                    addPostFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.06, 0.04, false);
+                    addPostFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.02, 0.02, false);
                     Trajectories_list.push_back(Trajectory_part);
                     Trajectory_part.poses.clear();
                     Trajectory_id.push_back("fix");
@@ -914,12 +907,12 @@ void MyTrajectoryPlanner4(TrajectoryPlanner_param param, TrajectoryVector& waypo
             }
             else
             {
-                addPreFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.06, 0.04, false);
+                addPreFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.02, 0.02, false);
                 Trajectories_list.push_back(Trajectory_part);
                 Trajectory_part.poses.clear();
                 Trajectory_id.push_back("pre-fix");
 
-                addPostFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.06, 0.04, false);
+                addPostFixPoint2(waypoints.point.poses[i], Trajectory_part, param.radius, param.heigh, param.circ_point, 0.02, 0.02, false);
                 Trajectories_list.push_back(Trajectory_part);
                 Trajectory_part.poses.clear();
                 Trajectory_id.push_back("fix");
@@ -1696,10 +1689,6 @@ void CornerFix2(geometry_msgs::Pose fixing_point, geometry_msgs::PoseArray& wayp
     target_pose.position.z = fixing_point.position.z + Rot[2][0]*dist_final_vector[0] + Rot[2][1]*dist_final_vector[1] + Rot[2][2]*dist_final_vector[2];
     waypoints.poses.push_back(target_pose);
 
-
-
-
-
 }
 
 void CornerDetection(geometry_msgs::PoseArray waypoints, std::vector<std::string>& id_list)
@@ -1798,6 +1787,7 @@ void CornerRounding(geometry_msgs::Pose Point1, geometry_msgs::Pose Point2, geom
     tf2::fromMsg(Point3.orientation, Tg_Pose_Orientation2);
 
     // Cornering function using bèzier quadratic function
+    std::cout << "points = : " <<res << "\n"; 
     for (int i = 0; i < res; i++)
     {
         t = 1/res*i;
@@ -1805,11 +1795,9 @@ void CornerRounding(geometry_msgs::Pose Point1, geometry_msgs::Pose Point2, geom
         target_point.position.x = Point2.position.x + (1-t)*(1-t)*(point1_shift.position.x - Point2.position.x) + t*t*(point2_shift.position.x - Point2.position.x);
         target_point.position.y = Point2.position.y + (1-t)*(1-t)*(point1_shift.position.y - Point2.position.y) + t*t*(point2_shift.position.y - Point2.position.y);
         target_point.position.z = Point2.position.z + (1-t)*(1-t)*(point1_shift.position.z - Point2.position.z) + t*t*(point2_shift.position.z - Point2.position.z);
-//        target_point.orientation = slerp(Point1.orientation, Point2.orientation,t); 
         target_point.orientation = tf2::toMsg(Tg_Pose_Orientation1.slerp(Tg_Pose_Orientation2,t));
         waypoints.poses.push_back(target_point);
     }
-
 
     if (norm_2 > d2)
     {

@@ -107,6 +107,13 @@ add_dependencies(static_grasp_cyclic
 
 
 
+add_executable(point_plot src/point_plot.cpp)
+target_link_libraries(point_plot ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_dependencies(point_plot 
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+) 
+
 
 
 
