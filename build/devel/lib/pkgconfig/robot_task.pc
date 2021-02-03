@@ -1,8 +1,0 @@
-prefix=/home/kvn/ros/panda_ws/src/build/devel
-
-Name: robot_task
-Description: Description of robot_task
-Version: 0.0.0
-Cflags: -I/home/kvn/ros/panda_ws/src/robot_task/include -I/opt/ros/melodic/include/libfranka
-Libs: -L${prefix}/lib -lactionlib -lactionlib_msgs -lgeometry_msgs -lfranka_gripper -lmessage_runtime -lmoveit_msgs -lmoveit_core -lmoveit_visual_tools -lmoveit_ros_planning_interface -lroscpp -lrospy -lsensor_msgs -lstd_msgs /opt/ros/melodic/lib/libfranka.so.0.8.0
-Requires: 
