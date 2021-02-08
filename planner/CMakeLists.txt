@@ -70,7 +70,7 @@ include_directories(
 #add_dependencies(TrajectoryPlanner ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS}  ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} )
 # 
 
-add_executable(test_planner src/test.cpp)
+add_executable(test_planner src/test_planner.cpp)
 target_link_libraries(test_planner TrajectoryPlanner ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 add_dependencies(test_planner TrajectoryPlanner
   ${${PROJECT_NAME}_EXPORTED_TARGETS}

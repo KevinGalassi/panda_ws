@@ -26,28 +26,11 @@ int main(int argc, char** argv)
     ros::AsyncSpinner spinner(1);
     spinner.start();
 
-    ros::Publisher cmd_pub = nh.advertise<std_msgs::Float32>("/gripper_command",100);
-    ros::Publisher width_pub = nh.advertise<std_msgs::Float32>("/My_new_input", 100);
-
     std_msgs::Float32 width_msg;
     std_msgs::Float32 cmd_msg;
 
     namespace rvt = rviz_visual_tools;
 
-    float T_O;
-    if (not (nh.getParam("/TrajectoryTest/Offset", T_O)))
-        T_O = 0.4;
-    ros::Duration T_offset = ros::Duration(0.4);
-    ros::Duration T_round = ros::Duration(0.4);
-
-    float scaling_factor = 6;
-    float scaling_round =  8;
-    float scaling_fix = 10;
-
-    float velocity_fix = 0.02;
-    float velocity_round = 0.1;
-    float velocity_pass = 0.05;
-   
 
     moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
     moveit::planning_interface::MoveGroupInterface hand_group("hand");
@@ -55,14 +38,17 @@ int main(int argc, char** argv)
     moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
     visual_tools.deleteAllMarkers();
 
-    std::string path = "/home/kevin/ros/panda_ws/src/planner/src/PointList/Test";
-    std::string Log_Path = "/home/kevin/Panda_log";
+    std::string path =  "/home/kvn/ros/panda_ws/src/robot_task/src/PointList/Routing";
     std::ofstream plan_output_c;
+
+    nh.getParam("test_launch/filename", path);
+    
 
     ros::Duration(3).sleep();
 
     ROS_INFO("Reach Ready Position");
     move_group.setMaxVelocityScalingFactor(0.2);
+
 
     hand_group.setJointValueTarget(hand_ready_state);
     hand_group.move();
